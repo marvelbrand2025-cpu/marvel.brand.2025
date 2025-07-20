@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Male_Fashion Template">
+    <meta name="keywords" content="Male_Fashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Male-Fashion | Checkout</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        // Initialize EmailJS with your user ID
+        emailjs.init('fO90K87OHLInuKOxT'); // استبدل YOUR_USER_ID بمعرفك من EmailJS
+        document.getElementById('checkout-governorate').value = localStorage.getItem('selectedGovernorate') || '';
+
+    </script>
+
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    
+    <style>
+        .payment-method {
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .payment-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .payment-option:hover {
+            border-color: #e53637;
+        }
+        .payment-option.active {
+            border-color: #e53637;
+            background-color: #f9f9f9;
+        }
+        .payment-option input[type="radio"] {
+            margin-right: 15px;
+        }
+        .payment-details {
+            display: none;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .payment-option.active + .payment-details {
+            display: block;
+        }
+        .order-summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .product-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .product-image {
+            width: 70px;
+            height: 70px;
+            margin-right: 15px;
+        }
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .product-info {
+            flex: 1;
+        }
+        .product-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .product-variant {
+            color: #666;
+            font-size: 14px;
+        }
+        .product-price {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Section (Same as cart.html) -->
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-7">
+                        <div class="header__top__left">
+                            <p>Free shipping, 30-day return or refund guarantee.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-5">
+                        <div class="header__top__right">
+                            <div class="header__top__links">
+                                <a href="#">Sign in</a>
+                                <a href="#">FAQs</a>
+                            </div>
+                            <div class="header__top__hover">
+                                <span>Usd <i class="arrow_carrot-down"></i></span>
+                                <ul>
+                                    <li>USD</li>
+                                    <li>EUR</li>
+                                    <li>USD</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__logo">
+                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <nav class="header__menu mobile-menu">
+                        <ul>
+                            <li><a href="./index.html">Home</a></li>
+                            <li class="active"><a href="./shop.html">Shop</a></li>
+                            <li><a href="#">Pages</a>
+                                <ul class="dropdown">
+                                    <li><a href="./about.html">About Us</a></li>
+                                    <li><a href="./shop-details.html">Shop Details</a></li>
+                                    <li><a href="./shopping-cart.html">Shopping Cart</a></li>
+                                    <li><a href="./checkout.html">Check Out</a></li>
+                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./blog.html">Blog</a></li>
+                            <li><a href="./contact.html">Contacts</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__nav__option">
+                        <a href=""></a>
+    <a href=""></a>
+                        <a href=""><img src="img/icon/cart.png" alt=""> <span>0</span></a>
+                        <div class="price">LE 0.00</div>
+                    </div>
+                </div>
+            </div>
+            <div class="canvas__open"><i class="fa fa-bars"></i></div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Check Out</h4>
+                        <div class="breadcrumb__links">
+                            <a href="./index.html">Home</a>
+                            <a href="./shop.html">Shop</a>
+                            <span>Check Out</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Checkout Section Begin -->
+    <section class="checkout spad">
+        <div class="container">
+            <div class="checkout__form">
+                <form action="#">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-6">
+                            <h6 class="checkout__title">Billing Details</h6>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>First Name<span>*</span></p>
+                                        <input type="text" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Last Name<span>*</span></p>
+                                        <input type="text" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkout__input">
+                                <p>Phone Number<span>*</span></p>
+                                <input type="text" required>
+                            </div>
+                            <div class="checkout__input">
+                                <p>Address<span>*</span></p>
+                                <input type="text" placeholder="Street Address" class="checkout__input__add" required>
+                            </div>
+                            <div class="checkout__input">
+                                <p>Governorate<span>*</span></p>
+                                <input type="text" id="checkout-governorate" readonly>
+                            </div>
+                            
+                            <div class="payment-method">
+                                <h6>Payment Method</h6>
+                                <div class="payment-option">
+                                    <input type="radio" id="cash-on-delivery" name="payment" value="cash-on-delivery" checked>
+                                    <label for="cash-on-delivery">Cash on Delivery</label>
+                                </div>
+                                
+                                <div class="payment-option">
+                                    <input type="radio" id="vodafone-cash" name="payment" value="vodafone-cash">
+                                    <label for="vodafone-cash">Vodafone Cash</label>
+                                </div>
+                                <div class="payment-details" id="vodafone-details">
+                                    <p>Please send payment to Vodafone Cash number: 01012345678</p>
+                                    <p>Include your order number in the payment note.</p>
+                                </div>
+                                
+                                <div class="payment-option">
+                                    <input type="radio" id="insta-pay" name="payment" value="insta-pay">
+                                    <label for="insta-pay">InstaPay</label>
+                                </div>
+                                <div class="payment-details" id="insta-pay-details">
+                                    <p>Please send payment to InstaPay number: 01087654321</p>
+                                    <p>Include your order number in the payment note.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+    <div class="checkout__order">
+        <h4 class="order__title">Your Order</h4>
+        <div class="checkout__order__products">Product <span>Total</span></div>
+        <div id="order-products-list">
+            <!-- سيتم ملؤه بواسطة JavaScript -->
+        </div>
+        <ul class="checkout__total__all">
+            <li>Subtotal <span id="checkout-subtotal">LE 0.00</span></li>
+            <li class="discount-row" style="display:none;">
+                Discount (<span id="discount-percentage">0</span>%) <span id="checkout-discount">-LE 0.00</span>
+            </li>
+            <li>Shipping <span id="checkout-shipping">LE 0.00</span></li>
+            <li>Total <span id="checkout-total">LE 0.00</span></li>
+        </ul>
+        <button type="submit" class="site-btn">PLACE ORDER</button>
+    </div>
+</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- Checkout Section End -->
+
+    <!-- Footer Section (Same as cart.html) -->
+        <!-- Footer Section Begin -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__logo">
+                            <a href="#"><img src="img/footer-logo.png" alt=""></a>
+                        </div>
+                        <p>The customer is at the heart of our unique business model, which includes design.</p>
+                        <a href="#"><img src="img/payment.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>Shopping</h6>
+                        <ul>
+                            <li><a href="#">Clothing Store</a></li>
+                            <li><a href="#">Trending Shoes</a></li>
+                            <li><a href="#">Accessories</a></li>
+                            <li><a href="#">Sale</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>Shopping</h6>
+                        <ul>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Payment Methods</a></li>
+                            <li><a href="#">Delivary</a></li>
+                            <li><a href="#">Return & Exchanges</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>NewLetter</h6>
+                        <div class="footer__newslatter">
+                            <p>Be the first to know about new arrivals, look books, sales & promos!</p>
+                            <form action="#">
+                                <input type="text" placeholder="Your email">
+                                <button type="submit"><span class="icon_mail_alt"></span></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="footer__copyright__text">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        <p>Copyright ©
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script>2020
+                            All rights reserved | This template is made with <i class="fa fa-heart-o"
+                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        </p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+
+
+    
+
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Load cart data from localStorage
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const shippingCost = localStorage.getItem('shippingCost') || 0;
+        const governorate = localStorage.getItem('selectedGovernorate') || '';
+        const discount = localStorage.getItem('discount') || 0;
+        const couponCode = localStorage.getItem('couponCode') || '';
+        
+        // Calculate order summary
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const discountAmount = subtotal * (discount / 100);
+        const total = subtotal - discountAmount + parseFloat(shippingCost);
+        
+        // Update order summary
+        document.getElementById('checkout-subtotal').textContent = `LE ${subtotal.toFixed(2)}`;
+        document.getElementById('checkout-shipping').textContent = `LE ${parseFloat(shippingCost).toFixed(2)}`;
+        document.getElementById('checkout-total').textContent = `LE ${total.toFixed(2)}`;
+        document.getElementById('checkout-governorate').value = governorate;
+        
+        // Show discount if applied
+        if (discount > 0) {
+            document.querySelector('.discount-row').style.display = 'flex';
+            document.getElementById('discount-percentage').textContent = discount;
+            document.getElementById('checkout-discount').textContent = `-LE ${discountAmount.toFixed(2)}`;
+        }
+
+        
+        
+        const productsList = document.getElementById('order-products-list');
+        productsList.innerHTML = '';
+        
+        
+        cart.forEach(item => {
+            const productItem = document.createElement('div');
+            productItem.className = 'product-item';
+            productItem.innerHTML = `
+                 <div class="product-image">
+                    <img src="${item.image}" alt="${item.name}">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">${item.name}</div>
+                    <div class="product-variant">
+                        ${item.color ? `<span style="display:inline-block;width:15px;height:15px;border-radius:50%;background-color:${item.color};margin-right:5px;"></span>` : ''}
+                        ${item.size ? `<span>Size: ${item.size}</span>` : ''}
+                        <span> | Qty: <strong>${item.quantity}</strong></span>
+                    </div>
+                </div>
+                <div class="product-price">LE ${(item.price * item.quantity).toFixed(2)}</div>
+            `;
+            productsList.appendChild(productItem);
+        });
+        
+        document.querySelectorAll('.payment-option input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.querySelectorAll('.payment-details').forEach(details => {
+                    details.style.display = 'none';
+                });
+                
+                // Show selected payment details
+                if (this.id === 'vodafone-cash') {
+                    document.getElementById('vodafone-details').style.display = 'block';
+                } else if (this.id === 'insta-pay') {
+                    document.getElementById('insta-pay-details').style.display = 'block';
+                }
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+const governorate = localStorage.getItem('selectedGovernorate') || '';
+const discount = parseFloat(localStorage.getItem('discount')) || 0;
+const couponCode = localStorage.getItem('couponCode') || '';
+const shippingCost = parseFloat(localStorage.getItem('shippingCost')) || 0;
+
+            });
+        });
+        
+        // Function to send email
+        async function sendOrderEmail() {
+    try {
+        // Get form values
+        const firstName = document.querySelector('input[type="text"]:nth-of-type(1)').value;
+        const lastName = document.querySelector('input[type="text"]:nth-of-type(2)').value;
+        const phone = document.querySelector('input[type="text"]:nth-of-type(3)').value;
+        const address = document.querySelector('input[type="text"]:nth-of-type(4)').value;
+        const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+        
+        // Prepare products list for email
+        let productsHtml = '';
+        cart.forEach(item => {
+            productsHtml += `
+                <div style="margin-bottom:15px;border-bottom:1px solid #eee;padding-bottom:10px;">
+                    <h4 style="margin:0 0 5px 0;">${item.name}</h4>
+                    <p style="margin:5px 0;">
+                        ${item.color ? `<span style="display:inline-block;width:15px;height:15px;border-radius:50%;background-color:${item.color};margin-right:5px;"></span>` : ''}
+                        ${item.size ? `<span>Size: ${item.size}</span>` : ''}
+                        <span> | Quantity: ${item.quantity}</span>
+                    </p>
+                    <p style="margin:5px 0;">Price: LE ${(item.price * item.quantity).toFixed(2)}</p>
+                </div>
+            `;
+        });
+        
+        // Prepare email parameters
+        const templateParams = {
+            customer_name: `${firstName} ${lastName}`,
+            customer_phone: phone,
+            customer_address: `${address}, ${governorate}`,
+            payment_method: paymentMethod,
+            products: productsHtml,
+            subtotal: `LE ${subtotal.toFixed(2)}`,
+            discount: discount > 0 ? `${discount}% (LE ${discountAmount.toFixed(2)})` : 'No discount',
+            shipping: `LE ${parseFloat(shippingCost).toFixed(2)}`,
+            total: `LE ${total.toFixed(2)}`,
+            coupon_code: couponCode || 'No coupon used'
+        };
+        
+        // Send email (won't wait for response to redirect)
+        emailjs.send('service_kpggdfp', 'template_0dm7sdq', templateParams)
+            .then(response => {
+                console.log('Email sent successfully:', response);
+            })
+            .catch(error => {
+    alert("🚫 فشل إرسال الإيميل:\n" + JSON.stringify(error));
+    console.error('EmailJS error:', error);
+});
+
+        
+        // Clear cart immediately
+        localStorage.removeItem('cart');
+        localStorage.removeItem('shippingCost');
+        localStorage.removeItem('selectedGovernorate');
+        localStorage.removeItem('discount');
+        localStorage.removeItem('couponCode');
+        
+        // Redirect to thank you page immediately
+        window.location.href = 'thank-you.html';
+        
+    } catch (error) {
+        console.error('Error in sendOrderEmail:', error);
+        alert('An error occurred. Please try again or contact support.');
+    }
+}
+        
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate form
+            const requiredFields = document.querySelectorAll('input[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.style.borderColor = 'red';
+                } else {
+                    field.style.borderColor = '';
+                }
+            });
+            
+            if (!isValid) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Here you would typically send the order to your server
+            // Then send the email
+            sendOrderEmail();
+        });
+    });
+    </script>
+
+</body>
+
+</html>

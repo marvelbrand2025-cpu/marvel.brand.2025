@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Male_Fashion Template">
+    <meta name="keywords" content="Male_Fashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Male-Fashion | Template</title>
+
+
+    <style>/* أنماط عربة التسوق الجديدة */
+#cart-items tr {
+    transition: all 0.3s;
+}
+
+#cart-items tr:hover {
+    background-color: #f9f9f9;
+}
+
+#shipping-slider {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #f9f9f9;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+.product__cart__item {
+    display: flex;
+    align-items: center;
+}
+
+.product__cart__item__pic {
+    width: 80px;
+    height: 80px;
+    margin-right: 15px;
+}
+
+.product__cart__item__pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cart__close {
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.cart__close:hover {
+    color: #e53637;
+}
+
+.cart__discount {
+    margin-bottom: 20px;
+}
+
+.cart__discount form {
+    display: flex;
+}
+
+.cart__discount input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+}
+
+.cart__discount button {
+    padding: 10px 15px;
+    background: #111;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+.coupon-message {
+    margin-top: 10px;
+    font-size: 14px;
+    min-height: 20px;
+}
+
+.cart__shipping {
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 5px;
+}
+
+.cart__shipping select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.shipping-fee {
+    font-weight: bold;
+}
+
+.discount-applied {
+    color: #28a745;
+}
+
+.discount-error {
+    color: #dc3545;
+}
+
+/* أنماط للكمية */
+.quantity-control {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* أنماط جديدة لقسم الشحن */
+.cart__shipping {
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+}
+
+.cart__shipping h6 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #111;
+    font-weight: 700;
+}
+
+.shipping-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.shipping-option {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-radius: 8px;
+    background: #f9f9f9;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #eee;
+}
+
+.shipping-option:hover {
+    background: #f1f1f1;
+}
+
+.shipping-option.active {
+    border-color: #e53637;
+    background: #fff;
+    box-shadow: 0 0 0 1px #e53637;
+}
+
+.shipping-radio {
+    margin-right: 15px;
+    position: relative;
+}
+
+.shipping-radio input[type="radio"] {
+    opacity: 0;
+    position: absolute;
+}
+
+.shipping-radio label {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.shipping-radio input[type="radio"]:checked + label {
+    border-color: #e53637;
+}
+
+.shipping-radio input[type="radio"]:checked + label:after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: #e53637;
+    position: absolute;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.shipping-info {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.shipping-region {
+    font-weight: 600;
+    color: #333;
+}
+
+.shipping-price {
+    font-weight: 700;
+    color: #e53637;
+}
+
+.shipping-summary {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.shipping-selected, .shipping-total {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.shipping-total {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+#selected-region {
+    font-weight: 600;
+    color: #e53637;
+}
+
+#shipping-fee {
+    font-weight: 700;
+    color: #e53637;
+}
+
+/* أنماط جديدة لقسم الشحن */
+.cart__shipping {
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+}
+
+.cart__shipping h6 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #111;
+    font-weight: 700;
+}
+
+.shipping-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.shipping-option {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-radius: 8px;
+    background: #f9f9f9;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #eee;
+}
+
+.shipping-option:hover {
+    background: #f1f1f1;
+}
+
+.shipping-option.active {
+    border-color: #e53637;
+    background: #fff;
+    box-shadow: 0 0 0 1px #e53637;
+}
+
+.shipping-radio {
+    margin-right: 15px;
+    position: relative;
+}
+
+.shipping-radio input[type="radio"] {
+    opacity: 0;
+    position: absolute;
+}
+
+.shipping-radio label {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.shipping-radio input[type="radio"]:checked + label {
+    border-color: #e53637;
+}
+
+.shipping-radio input[type="radio"]:checked + label:after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: #e53637;
+    position: absolute;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.shipping-info {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.shipping-region {
+    font-weight: 600;
+    color: #333;
+}
+
+.shipping-price {
+    font-weight: 700;
+    color: #e53637;
+}
+
+.shipping-summary {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.shipping-selected, .shipping-total {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.shipping-total {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+#selected-region {
+    font-weight: 600;
+    color: #e53637;
+}
+
+#shipping-fee {
+    font-weight: 700;
+    color: #e53637;
+}
+
+td {
+  padding: 5px 10px !important; /* يقلل المسافة داخل كل خانة */
+}
+
+.quantity__item {
+  width: 3px; /* يحدد عرض عمود الكمية */
+}
+
+.cart__price, .cart__close {
+  white-space: nowrap; /* يمنع التفاف السعر أو العلامة */
+}
+
+table {
+  table-layout: auto;
+  width: 100%;
+}
+
+
+.fancy-remove {
+    background: linear-gradient(135deg, #ff6b6b, #e53637);
+    color: white;
+    padding: 10px 12px;
+    border-radius: 50%;
+    transition: 0.3s ease;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(229, 54, 55, 0.4);
+    cursor: pointer;
+    position: relative;
+}
+
+.product__cart__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 1px 10px rgba(0,0,0,0.05);
+    gap: 15px;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.product-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+    text-decoration: none;
+}
+
+.product__cart__item__pic {
+    width: 70px;
+    height: 70px;
+    border-radius: 6px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.product__cart__item__pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product__cart__item__text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.product__name {
+    font-size: 15px;
+    font-weight: bold;
+    color: #222;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.product__details span {
+    font-size: 13px;
+    color: #666;
+    margin-right: 6px;
+}
+
+.product__price {
+    font-weight: bold;
+    font-size: 14px;
+    color: #e53637;
+}
+
+.fancy-remove {
+    background: linear-gradient(135deg, #ff6b6b, #e53637);
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    transition: 0.3s ease;
+    font-size: 14px;
+    box-shadow: 0 4px 10px rgba(229, 54, 55, 0.4);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+}
+
+.fancy-remove:hover {
+    background: linear-gradient(135deg, #ff1e1e, #b90000);
+    transform: scale(1.1);
+}
+
+.color-circle {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    border-radius: 50%;
+    border: 1px solid #aaa;
+}
+
+@media (max-width: 768px) {
+    .product__name {
+        font-size: 14px;
+    }
+    .product__cart__wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .fancy-remove {
+        align-self: flex-end;
+        margin-top: 10px;
+    }
+}
+
+
+.fancy-remove:hover {
+    background: linear-gradient(135deg, #ff1e1e, #b90000);
+    transform: scale(1.1) rotate(6deg);
+    box-shadow: 0 6px 20px rgba(255, 0, 0, 0.5);
+}
+
+.fancy-remove i {
+    pointer-events: none;
+}
+
+
+
+
+
+.quantity-input {
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-left: none;
+    border-right: none;
+}</style>
+
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Offcanvas Menu Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="offcanvas__option">
+            <div class="offcanvas__links">
+                <a href="#">Sign in</a>
+                <a href="#">FAQs</a>
+            </div>
+            <div class="offcanvas__top__hover">
+                <span>Usd <i class="arrow_carrot-down"></i></span>
+                <ul>
+                    <li>USD</li>
+                    <li>EUR</li>
+                    <li>USD</li>
+                </ul>
+            </div>
+        </div>
+        <div class="offcanvas__nav__option">
+            <a href=""></a>
+    <a href=""></a>
+            <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
+            <div class="price">LE 0.00</div>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+        <div class="offcanvas__text">
+            <p>Free shipping, 30-day return or refund guarantee.</p>
+        </div>
+    </div>
+    <!-- Offcanvas Menu End -->
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-7">
+                        <div class="header__top__left">
+                            <p>Free shipping, 30-day return or refund guarantee.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-5">
+                        <div class="header__top__right">
+                            <div class="header__top__links">
+                                <a href="#">Sign in</a>
+                                <a href="#">FAQs</a>
+                            </div>
+                            <div class="header__top__hover">
+                                <span>Usd <i class="arrow_carrot-down"></i></span>
+                                <ul>
+                                    <li>USD</li>
+                                    <li>EUR</li>
+                                    <li>USD</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__logo">
+                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <nav class="header__menu mobile-menu">
+                        <ul>
+                            <li><a href="./index.html">Home</a></li>
+                            <li class="active"><a href="./shop.html">Shop</a></li>
+                            <li><a href="#">Pages</a>
+                                <ul class="dropdown">
+                                    <li><a href="./about.html">About Us</a></li>
+                                    <li><a href="./shop-details.html">Shop Details</a></li>
+                                    <li><a href="./shopping-cart.html">Shopping Cart</a></li>
+                                    <li><a href="./checkout.html">Check Out</a></li>
+                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./blog.html">Blog</a></li>
+                            <li><a href="./contact.html">Contacts</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__nav__option">
+                        <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
+                        <a href="#"><img src="img/icon/heart.png" alt=""></a>
+                        <a href=""><img src="img/icon/cart.png" alt=""> <span>0</span></a>
+                        <div class="price">LE 0.00</div>
+                    </div>
+                </div>
+            </div>
+            <div class="canvas__open"><i class="fa fa-bars"></i></div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Shopping Cart</h4>
+                        <div class="breadcrumb__links">
+                            <a href="./index.html">Home</a>
+                            <a href="./shop.html">Shop</a>
+                            <span>Shopping Cart</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Shopping Cart Section Begin -->
+   <!-- Shopping Cart Section Begin -->
+<section class="shopping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="shopping__cart__table">
+                    <table>
+                        <thead>
+                            <tr>
+                               
+                            </tr>
+                        </thead>
+                        <tbody id="cart-items">
+                            <!-- سيتم ملؤها ديناميكيًا بالجافاسكريبت -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="continue__btn">
+                            <a href="./shop.html">Continue Shopping</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="continue__btn update__btn">
+                            <a href="#" id="update-cart"><i class="fa fa-spinner"></i> Update cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="cart__discount">
+                    <h6>Discount codes</h6>
+                    <form id="discount-form">
+                        <input type="text" id="coupon-code" placeholder="Coupon code">
+                        <button type="submit">Apply</button>
+                    </form>
+                    <div class="coupon-message" id="coupon-message"></div>
+                </div>
+                
+                <div class="cart__shipping">
+    <h6>اختار المحافظة</h6>
+    <select id="shipping-slider" onchange="updateShippingCost()" class="form-control">
+        <option disabled selected>اختر المحافظة</option>
+        <option value="60">مترو</option>
+        <option value="70">القاهرة</option>
+        <option value="70">الجيزة</option>
+        <option value="75">المرج</option>
+        <option value="80">العبور</option>
+        <option value="85">الإسكندرية</option>
+        <option value="90">الشرقية</option>
+        <option value="100">الفيوم</option>
+        <option value="110">مرسى مطروح</option>
+        <option value="125">شرم الشيخ</option>
+        <option value="130">سفاجا</option>
+    </select>
+</div>
+                
+                <div class="cart__total">
+    <h6>Cart total</h6>
+    <ul>
+        <li>Subtotal <span id="subtotal">LE 0.00</span></li>
+        <li class="discount-row" style="display:none;">
+            Discount <span id="discount-amount">LE 0.00</span>
+        </li>
+        <li>Shipping <span id="shipping-cost-cart">LE 0.00</span></li>
+        <li>Total <span id="total">LE 0.00</span></li>
+    </ul>
+   <div>
+    <button id="checkout-btn" class="primary-btn" type="button">Proceed to checkout</button>
+    <p id="shipping-error" style="color: #e53637; font-size: 14px; margin-top: 8px; display: none;">
+        Please select your governorate before proceeding to checkout.
+    </p>
+</div>
+
+</div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Shopping Cart Section End -->
+    <!-- Shopping Cart Section End -->
+
+    <!-- Footer Section Begin -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__logo">
+                            <a href="#"><img src="img/footer-logo.png" alt=""></a>
+                        </div>
+                        <p>The customer is at the heart of our unique business model, which includes design.</p>
+                        <a href="#"><img src="img/payment.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>Shopping</h6>
+                        <ul>
+                            <li><a href="#">Clothing Store</a></li>
+                            <li><a href="#">Trending Shoes</a></li>
+                            <li><a href="#">Accessories</a></li>
+                            <li><a href="#">Sale</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>Shopping</h6>
+                        <ul>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Payment Methods</a></li>
+                            <li><a href="#">Delivary</a></li>
+                            <li><a href="#">Return & Exchanges</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>NewLetter</h6>
+                        <div class="footer__newslatter">
+                            <p>Be the first to know about new arrivals, look books, sales & promos!</p>
+                            <form action="#">
+                                <input type="text" placeholder="Your email">
+                                <button type="submit"><span class="icon_mail_alt"></span></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="footer__copyright__text">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        <p>Copyright ©
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script>2020
+                            All rights reserved | This template is made with <i class="fa fa-heart-o"
+                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        </p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Search Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search End -->
+
+    <script>
+// أكواد الخصم
+const discountCodes = {
+        "SALE10": 10,
+        "SALE5": 5
+    };
+
+    
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let discount = 0;
+    let shippingCost = 0;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        renderCartItems();
+        updateCartSummary();
+
+        document.getElementById('discount-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            applyDiscount();
+        });
+
+        document.getElementById('update-cart').addEventListener('click', function(e) {
+            e.preventDefault();
+            updateQuantities();
+        });
+    });
+    
+    function updateShippingCost() {
+    const shippingSelect = document.getElementById("shipping-slider");
+    const cost = parseFloat(shippingSelect.value) || 0;
+
+    // خزّن القيمة
+    shippingCost = cost;
+
+    // تحديث عرض تكلفة الشحن في Cart total
+    const shippingCostCart = document.getElementById("shipping-cost-cart");
+    if (shippingCostCart) {
+        shippingCostCart.textContent = `${cost.toFixed(2)} EGP`;
+    }
+
+    // إعادة حساب التوتال
+    updateCartSummary();
+}
+
+
+
+
+
+// دالة اختيار الشحن
+function selectShipping(cost, region) {
+    shippingCost = cost;
+    document.getElementById('shipping-fee').textContent = cost + ' EGP';
+    document.getElementById('selected-region').textContent = region;
+    document.getElementById('shipping-cost-cart').textContent = cost + ' EGP';
+    updateCartSummary();
+}
+
+// تعديل دالة عرض العناصر لإضافة رابط المنتج
+function renderCartItems() {
+    const cartItemsContainer = document.getElementById('cart-items');
+    cartItemsContainer.innerHTML = '';
+    
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<tr><td colspan="7" class="text-center">Your cart is empty</td></tr>';
+        return;
+    }
+    
+    cart.forEach((item, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+<td colspan="7" style="padding: 0;">
+    <div class="product__cart__wrapper">
+        <a href="#" class="product-link" data-index="${index}">
+            <div class="product__cart__item__pic">
+                <img src="${item.image}" alt="${item.name}">
+            </div>
+            <div class="product__cart__item__text">
+                <h6 class="product__name">${item.name}</h6>
+                <div class="product__details">
+                    <span>Color:</span>
+                    <span class="color-circle" style="background-color: ${item.color};"></span>
+                    <span>Size: ${item.size}</span>
+                </div>
+                <div class="product__quantity">Quantity: ${item.quantity}</div>
+                <div class="product__price">LE ${(item.price * item.quantity).toFixed(2)}</div>
+            </div>
+        </a>
+        <div class="cart__close fancy-remove" data-index="${index}" title="Remove">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        </div>
+    </div>
+</td>
+`;
+
+        cartItemsContainer.appendChild(row);
+    });
+
+    // إضافة event listeners للروابط
+    document.querySelectorAll('.product-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const index = this.getAttribute('data-index');
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const product = cart[index];
+            
+            if (product) {
+                // إضافة بيانات المخزون الافتراضية إذا لم تكن موجودة
+                if (!product.stock) {
+                    product.stock = {
+                        [product.color]: {
+                            [product.size]: 10 // قيمة افتراضية للمخزون
+                        }
+                    };
+                }
+                
+                localStorage.setItem("selectedProduct", JSON.stringify(product));
+                window.location.href = "product-view.html";
+            } else {
+                alert("❌ خطأ: المنتج غير موجود.");
+            }
+        });
+    });
+}   
+
+
+
+
+document.getElementById('checkout-btn').addEventListener('click', function () {
+    const shippingSelect = document.getElementById("shipping-slider");
+    const errorMessage = document.getElementById("shipping-error");
+
+    if (shippingSelect.value === "اختر المحافظة" || shippingSelect.selectedIndex === 0) {
+        errorMessage.style.display = "block";
+        shippingSelect.scrollIntoView({ behavior: "smooth", block: "center" });
+    } else {
+        errorMessage.style.display = "none";
+        window.location.href = "./checkout.html";
+    }
+});
+
+
+
+    
+    document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            cart[index].quantity++;
+            renderCartItems();
+            updateCartSummary();
+            saveCart();
+        });
+    });
+    
+    document.querySelectorAll('.quantity-input').forEach(input => {
+        input.addEventListener('change', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            const newQuantity = parseInt(this.value) || 1;
+            cart[index].quantity = newQuantity;
+            updateCartSummary();
+            saveCart();
+        });
+    });
+    
+    document.querySelectorAll('.cart__close i').forEach(icon => {
+        icon.addEventListener('click', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            cart.splice(index, 1);
+            renderCartItems();
+            updateCartSummary();
+            saveCart();
+        });
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+    renderCartItems();
+    updateCartSummary();
+
+    // استخدام event delegation لأزرار الحذف
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.fancy-remove') || e.target.closest('.cart__close')) {
+            e.preventDefault();
+            const removeButton = e.target.closest('.fancy-remove') || e.target.closest('.cart__close');
+            const index = parseInt(removeButton.getAttribute('data-index'));
+            cart.splice(index, 1);
+            renderCartItems();
+            updateCartSummary();
+            saveCart();
+        }
+    });
+
+    document.getElementById('discount-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        applyDiscount();
+    });
+
+    document.getElementById('update-cart').addEventListener('click', function(e) {
+        e.preventDefault();
+        updateQuantities();
+    });
+});
+   
+
+
+    
+    document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            cart[index].quantity++;
+            renderCartItems();
+            updateCartSummary();
+            saveCart();
+        });
+    });
+    
+    document.querySelectorAll('.quantity-input').forEach(input => {
+        input.addEventListener('change', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            const newQuantity = parseInt(this.value) || 1;
+            cart[index].quantity = newQuantity;
+            renderCartItems();
+            updateCartSummary();
+            saveCart();
+        });
+    });
+    
+    document.querySelectorAll('.cart__close i').forEach(icon => {
+        icon.addEventListener('click', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            cart.splice(index, 1);
+            renderCartItems();
+            updateCartSummary();
+            saveCart();
+        });
+    });
+
+
+// تطبيق الخصم
+function applyDiscount() {
+    const couponCode = document.getElementById('coupon-code').value.trim();
+    const messageElement = document.getElementById('coupon-message');
+    
+    if (couponCode in discountCodes) {
+        discount = discountCodes[couponCode];
+        messageElement.textContent = `Discount ${discount}% applied!`;
+        messageElement.className = 'coupon-message discount-applied';
+        updateCartSummary();
+    } else {
+        messageElement.textContent = 'Invalid coupon code';
+        messageElement.className = 'coupon-message discount-error';
+    }
+}
+
+// تحديث الكميات
+function updateQuantities() {
+    const inputs = document.querySelectorAll('.quantity-input');
+    inputs.forEach((input, index) => {
+        cart[index].quantity = parseInt(input.value) || 1;
+    });
+    saveCart();
+    updateCartSummary();
+}
+
+// تحديث الشحن
+function updateShipping() {
+    const governorate = document.getElementById('shipping-governorate').value;
+    shippingCost = shippingRates[governorate] || 0;
+    document.getElementById('shipping-fee').textContent = `Shipping: LE ${shippingCost.toFixed(2)}`;
+    updateCartSummary();
+}
+
+// تحديث ملخص السلة
+function updateCartSummary() {
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const discountAmount = subtotal * (discount / 100);
+    const total = subtotal - discountAmount + shippingCost;
+    
+    document.getElementById('subtotal').textContent = `LE ${subtotal.toFixed(2)}`;
+    document.getElementById('total').textContent = `LE ${total.toFixed(2)}`;    
+    const discountRow = document.querySelector('.discount-row');
+    const discountAmountElement = document.getElementById('discount-amount');
+    
+    if (discount > 0) {
+        discountRow.style.display = 'flex';
+        discountAmountElement.textContent = `-LE ${discountAmount.toFixed(2)}`;
+    } else {
+        discountRow.style.display = 'none';
+    }
+    
+    // تحديث العداد في الهيدر
+    const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    
+    document.querySelector('.header__nav__option a:nth-child(3) span').textContent = cartCount;
+    document.querySelector('.header__nav__option .price').textContent = `LE ${cartTotal.toFixed(2)}`;
+}
+
+// حفظ السلة في localStorage
+function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+// دالة لتحميل السلة من صفحة المنتج (يتم استدعاؤها من صفحة المنتج)
+function addToCart(product) {
+    // البحث إذا كان المنتج موجود بالفعل بنفس اللون والمقاس
+    const existingItemIndex = cart.findIndex(item => 
+        item.id === product.id && 
+        item.color === product.color && 
+        item.size === product.size
+    );
+    
+    if (existingItemIndex >= 0) {
+        // زيادة الكمية إذا كان المنتج موجود
+        cart[existingItemIndex].quantity += product.quantity;
+    } else {
+        // إضافة منتج جديد
+        cart.push(product);
+    }
+    
+    saveCart();
+    renderCartItems();
+    updateCartSummary();
+}
+</script>
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

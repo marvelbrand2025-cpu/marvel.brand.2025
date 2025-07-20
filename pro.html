@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Details</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <style>
+    body {
+      font-family: 'Nunito Sans', sans-serif;
+      margin: 0;
+      background: #f7f7f7;
+      color: #111;
+    }
+    header {
+      background: #fff;
+      
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    header nav ul {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    header nav ul li a {
+      text-decoration: none;
+      color: #111;
+      font-weight: bold;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      padding: 0 20px;
+    }
+    .product-gallery {
+      flex: 1 1 45%;
+    }
+    .main-img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: 0.5s;
+    }
+    .thumbs {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .thumbs img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 6px;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+    .thumbs img.active {
+      border-color: #e53637;
+    }
+    .product-details {
+      flex: 1 1 45%;
+    }
+    .product-details h1 {
+      font-size: 36px;
+      margin-bottom: 15px;
+    }
+    .price {
+      font-size: 26px;
+      color: #e53637;
+      margin-bottom: 20px;
+    }
+    .colors {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .color-circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1px #ccc;
+    }
+    .color-circle.active {
+      box-shadow: 0 0 0 2px #e53637;
+    }
+    .desc {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.7;
+      margin-top: 30px;
+    }
+    .add-btn {
+      background: linear-gradient(45deg, #e53637, #111);
+      color: white;
+      padding: 16px 40px;
+      border: none;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 50px;
+      margin-top: 25px;
+      transition: 0.3s;
+    }
+    .add-btn:hover {
+      transform: scale(1.05);
+    }
+    footer {
+      margin-top: 80px;
+      background: #111;
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    /* أنماط جديدة */
+.colors h4, .sizes h4 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.color-circles, .size-options {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.color-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px #ccc;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.color-circle.active {
+  box-shadow: 0 0 0 2px #e53637;
+}
+
+.stock-info {
+  position: absolute;
+  bottom: -25px;
+  font-size: 12px;
+  white-space: nowrap;
+  color: #555;
+}
+
+.color-circle.out-of-stock {
+  opacity: 0.5;
+  cursor: not-allowed;
+  position: relative;
+}
+
+.color-circle.out-of-stock::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: #e53637;
+  top: 50%;
+  left: 0;
+  transform: rotate(-45deg);
+}
+
+.size-option {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.size-option.active {
+  border-color: #e53637;
+  color: #e53637;
+}
+
+.size-option.out-of-stock {
+  opacity: 0.5;
+  cursor: not-allowed;
+  position: relative;
+}
+
+.size-option.out-of-stock::after {
+  content: "";
+  position: absolute;
+  width: 80%;
+  height: 2px;
+  background: #e53637;
+  top: 50%;
+  left: 10%;
+  transform: rotate(-45deg);
+}
+
+/* أنماط جديدة */
+.price-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.total-price {
+  font-size: 18px;
+  color: #333;
+  font-weight: bold;
+}
+
+.quantity-selector {
+  margin: 25px 0;
+}
+
+.quantity-selector h4 {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.quantity-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: #f0f0f0;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.quantity-btn:hover {
+  background: #e53637;
+  color: white;
+}
+
+.quantity-input {
+  width: 60px;
+  height: 40px;
+  text-align: center;
+  font-size: 18px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.add-btn i {
+  transition: transform 0.3s;
+}
+
+.add-btn.added i {
+  transform: scale(1.5);
+}
+
+/* تأثيرات للزر عند النقر */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.add-btn:active {
+  animation: pulse 0.3s;
+}
+
+/* تأثيرات للعداد */
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.quantity-btn:active {
+  animation: bounce 0.3s;
+}
+
+    @media(max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .product-gallery, .product-details {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+    <header>
+        <div class="header__top">
+
+    
+
+
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__logo">
+                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <nav class="header__menu mobile-menu">
+                        <ul>
+                            <li class="active"><a href="./index.html">Home</a></li>
+                            <li><a href="./shop.html">Shop</a></li>
+                            <li><a href="#">Pages</a>
+                                <ul class="dropdown">
+                                    <li><a href="./about.html">About Us</a></li>
+                                    <li><a href="./shop-details.html">Shop Details</a></li>
+                                    <li><a href="./shopping-cart.html">Shopping Cart</a></li>
+                                    <li><a href="./checkout.html">Check Out</a></li>
+                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./blog.html">Blog</a></li>
+                            <li><a href="./contact.html">Contacts</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__nav__option">
+                        <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
+                        <a href="#"><img src="img/icon/heart.png" alt=""></a>
+                        <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
+                        <div class="price">$0.00</div>
+                    </div>
+                </div>
+            </div>
+            <div class="canvas__open"><i class="fa fa-bars"></i></div>
+        </div>
+    </header>
+
+  <div class="container">
+    <div class="product-gallery">
+      <img id="mainImg" class="main-img" src="img/product/product-1.jpg" alt="Main Product Image" />
+      <div class="thumbs">
+        <img src="img/product/product-1.jpg" class="active" onclick="setImage(this)"/>
+        <img src="img/product/product-2.jpg" onclick="setImage(this)"/>
+        <img src="img/product/product-3.jpg" onclick="setImage(this)"/>
+      </div>
+    </div>
+<div class="product-details">
+  <h1>Piqué Biker Jacket</h1>
+  <div class="price-container">
+    <span class="price">$6.24</span>
+    <span class="total-price">Total: $6.24</span>
+  </div>
+
+  <div class="colors">
+    <h4>Colors <small>(Available: <span id="available-count">3</span>)</small></h4>
+    <div class="color-circles">
+      <div class="color-circle active" style="background:#404a47" data-img="img/product/product-1.jpg" data-stock="5">
+        <span class="stock-info">5 left</span>
+      </div>
+      <div class="color-circle" style="background:#d5a667" data-img="img/product/product-2.jpg" data-stock="2">
+        <span class="stock-info">2 left</span>
+      </div>
+      <div class="color-circle" style="background:#5e64d1" data-img="img/product/product-3.jpg" data-stock="0">
+        <span class="stock-info">Sold out</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sizes">
+    <h4>Sizes</h4>
+    <div class="size-options">
+      <div class="size-option" data-size="S">S</div>
+      <div class="size-option active" data-size="M">M</div>
+      <div class="size-option" data-size="L">L</div>
+      <div class="size-option" data-size="XL">XL</div>
+      <div class="size-option out-of-stock" data-size="XXL">XXL</div>
+    </div>
+  </div>
+
+  <div class="quantity-selector">
+    <h4>Quantity</h4>
+    <div class="quantity-control">
+      <button class="quantity-btn minus">-</button>
+      <input type="number" class="quantity-input" value="1" min="1" max="10">
+      <button class="quantity-btn plus">+</button>
+    </div>
+  </div>
+
+  <button class="add-btn" id="add-to-cart">
+    <span>Add to Cart</span>
+    <i class="fa fa-shopping-cart"></i>
+  </button>
+
+  <audio id="cart-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3" preload="auto"></audio>
+
+  <div class="desc">
+    A premium quality biker jacket designed with elegance and bold style. It fits perfectly with any look and is available in multiple trendy colors.
+    Made from eco-leather and durable lining materials.
+  </div>
+</div>
+</div>
+
+     <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__logo">
+                            <a href="#"><img src="img/footer-logo.png" alt=""></a>
+                        </div>
+                        <p>The customer is at the heart of our unique business model, which includes design.</p>
+                        <a href="#"><img src="img/payment.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>Shopping</h6>
+                        <ul>
+                            <li><a href="#">Clothing Store</a></li>
+                            <li><a href="#">Trending Shoes</a></li>
+                            <li><a href="#">Accessories</a></li>
+                            <li><a href="#">Sale</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>Shopping</h6>
+                        <ul>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Payment Methods</a></li>
+                            <li><a href="#">Delivary</a></li>
+                            <li><a href="#">Return & Exchanges</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>NewLetter</h6>
+                        <div class="footer__newslatter">
+                            <p>Be the first to know about new arrivals, look books, sales & promos!</p>
+                            <form action="#">
+                                <input type="text" placeholder="Your email">
+                                <button type="submit"><span class="icon_mail_alt"></span></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="footer__copyright__text">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        <p>Copyright ©
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script>
+                            All rights reserved | This template is made with <i class="fa fa-heart-o"
+                            aria-hidden="true"></i> by <a href="" target="_blank">Mina Samuel</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+  <script>
+    // العناصر الأساسية
+const mainImg = document.getElementById('mainImg');
+const thumbs = document.querySelectorAll('.thumbs img');
+const colors = document.querySelectorAll('.color-circle');
+const sizes = document.querySelectorAll('.size-option');
+const minusBtn = document.querySelector('.quantity-btn.minus');
+const plusBtn = document.querySelector('.quantity-btn.plus');
+const quantityInput = document.querySelector('.quantity-input');
+const priceElement = document.querySelector('.price');
+const totalPriceElement = document.querySelector('.total-price');
+const addToCartBtn = document.getElementById('add-to-cart');
+const cartSound = document.getElementById('cart-sound');
+
+// المتغيرات
+let current = 0;
+let autoSwitchInterval;
+let unitPrice = 6.24;
+let currentQuantity = 1;
+
+// بدء التبديل التلقائي
+startAutoSwitch();
+
+// تحديث السعر الإجمالي
+function updateTotalPrice() {
+  const totalPrice = (unitPrice * currentQuantity).toFixed(2);
+  totalPriceElement.textContent = `Total: $${totalPrice}`;
+}
+
+// تعيين الصورة
+function setImage(el) {
+  thumbs.forEach(img => img.classList.remove('active'));
+  el.classList.add('active');
+  mainImg.src = el.src;
+  stopAutoSwitch();
+}
+
+// الألوان
+colors.forEach(circle => {
+  circle.addEventListener('click', function() {
+    if (this.classList.contains('out-of-stock')) return;
+    
+    colors.forEach(c => c.classList.remove('active'));
+    this.classList.add('active');
+    mainImg.src = this.dataset.img;
+    updateAvailableCount();
+    stopAutoSwitch();
+  });
+});
+
+// المقاسات
+sizes.forEach(size => {
+  size.addEventListener('click', function() {
+    if (this.classList.contains('out-of-stock')) return;
+    
+    sizes.forEach(s => s.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// تحديث العدد المتاح
+function updateAvailableCount() {
+  const activeColor = document.querySelector('.color-circle.active');
+  const availableCount = document.getElementById('available-count');
+  availableCount.textContent = activeColor.dataset.stock;
+  
+  // تحديث الكمية القصوى المسموح بها
+  const maxQuantity = parseInt(activeColor.dataset.stock);
+  quantityInput.max = maxQuantity;
+  if (currentQuantity > maxQuantity) {
+    currentQuantity = maxQuantity;
+    quantityInput.value = currentQuantity;
+    updateTotalPrice();
+  }
+}
+
+// التحكم في الكمية
+minusBtn.addEventListener('click', () => {
+  if (currentQuantity > 1) {
+    currentQuantity--;
+    quantityInput.value = currentQuantity;
+    updateTotalPrice();
+  }
+});
+
+plusBtn.addEventListener('click', () => {
+  const maxQuantity = parseInt(quantityInput.max);
+  if (currentQuantity < maxQuantity) {
+    currentQuantity++;
+    quantityInput.value = currentQuantity;
+    updateTotalPrice();
+  }
+});
+
+quantityInput.addEventListener('change', () => {
+  const value = parseInt(quantityInput.value);
+  const maxQuantity = parseInt(quantityInput.max);
+  
+  if (isNaN(value)) {
+    quantityInput.value = currentQuantity;
+    return;
+  }
+
+  
+  if (value < 1) {
+    currentQuantity = 1;
+  } else if (value > maxQuantity) {
+    currentQuantity = maxQuantity;
+  } else {
+    currentQuantity = value;
+  }
+  
+  quantityInput.value = currentQuantity;
+  updateTotalPrice();
+});
+
+
+// إضافة إلى السلة
+addToCartBtn.addEventListener('click', () => {
+    // تشغيل صوت الإضافة
+    cartSound.currentTime = 0;
+    cartSound.play();
+    
+    // تأثير مرئي
+    addToCartBtn.classList.add('added');
+    setTimeout(() => {
+        addToCartBtn.classList.remove('added');
+    }, 300);
+    
+    // جمع بيانات المنتج
+    const selectedColor = document.querySelector('.color-circle.active').style.backgroundColor;
+    const selectedSize = document.querySelector('.size-option.active').dataset.size;
+    const quantity = parseInt(quantityInput.value);
+    
+    const product = {
+        id: 'product-1', // يجب استبدالها بمعرف المنتج الفعلي
+        name: 'Piqué Biker Jacket',
+        price: unitPrice,
+        color: selectedColor,
+        size: selectedSize,
+        quantity: quantity,
+        image: 'img/product/product-1.jpg' // يجب استبدالها بالصورة الصحيحة
+    };
+    
+    // إضافة إلى السلة
+    addToCart(product);
+    
+    // توجيه المستخدم إلى صفحة السلة (اختياري)
+    window.location.href = 'cart.html';
+});
+
+// دالة إضافة إلى السلة
+function addToCart(product) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    // البحث إذا كان المنتج موجود بالفعل بنفس اللون والمقاس
+    const existingItemIndex = cart.findIndex(item => 
+        item.id === product.id && 
+        item.color === product.color && 
+        item.size === product.size
+    );
+    
+    if (existingItemIndex >= 0) {
+        // زيادة الكمية إذا كان المنتج موجود
+        cart[existingItemIndex].quantity += product.quantity;
+    } else {
+        // إضافة منتج جديد
+        cart.push(product);
+    }
+    
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    // عرض تنبيه
+    alert(`${product.quantity} ${product.name} added to cart!`);
+}
+
+// التبديل التلقائي
+function startAutoSwitch() {
+  autoSwitchInterval = setInterval(() => {
+    current = (current + 1) % thumbs.length;
+    setImage(thumbs[current]);
+  }, 3000);
+}
+
+function stopAutoSwitch() {
+  clearInterval(autoSwitchInterval);
+}
+
+// التهيئة الأولية
+updateAvailableCount();
+updateTotalPrice();
+  </script>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>تعديل المنتج</title>
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <style>
+    body {
+      font-family: 'Nunito Sans', sans-serif;
+      background: #f6f6f6;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .product {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+      position: relative;
+    }
+
+    .product img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      font-size: 22px;
+      color: #222;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    /* أنماط الألوان */
+    .color-circles {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .color-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1px #ccc;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .color-circle.active {
+      box-shadow: 0 0 0 2px #e53637;
+      transform: scale(1.1);
+    }
+
+    /* أنماط المقاسات */
+    .size-options {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .size-option {
+      width: 45px;
+      height: 45px;
+      border: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 6px;
+      transition: all 0.3s;
+    }
+
+    .size-option.active {
+      border-color: #e53637;
+      color: #e53637;
+      background: rgba(229, 54, 55, 0.1);
+    }
+
+    /* الكمية */
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .quantity-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: #f0f0f0;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .quantity-btn:hover {
+      background: #e53637;
+      color: white;
+    }
+
+    .quantity-input {
+      width: 70px;
+      height: 40px;
+      text-align: center;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+
+    /* زر الرجوع المميز */
+    .back-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e53637, #ff6b6b);
+      color: white;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(229, 54, 55, 0.3);
+      transition: all 0.3s;
+      font-size: 18px;
+    }
+
+    .back-btn:hover {
+      transform: rotate(-90deg) scale(1.1);
+      box-shadow: 0 6px 20px rgba(229, 54, 55, 0.4);
+    }
+
+    .back-btn i {
+      transition: transform 0.3s;
+    }
+
+    .back-btn:hover i {
+      transform: translateX(-3px);
+    }
+
+    /* رسالة الخطأ */
+    #error-msg {
+      text-align: center;
+      color: #e53637;
+      font-weight: bold;
+      margin-top: 100px;
+      font-size: 18px;
+    }
+
+    /* المخزون المتاح */
+    .stock-info {
+      font-size: 14px;
+      color: #666;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="product-container" class="product" style="display: none;">
+    <button class="back-btn" id="back-btn" title="رجوع">
+      <i class="fa fa-arrow-left"></i>
+    </button>
+    
+    <h2 id="product-name"></h2>
+    <img id="product-image" src="" alt="صورة المنتج">
+    <p style="text-align: center; font-size: 18px; color: #e53637; font-weight: bold;">
+      <span id="product-price"></span>
+    </p>
+
+    <label>اللون:</label>
+    <div class="color-circles" id="color-circles"></div>
+
+    <label>المقاس:</label>
+    <div class="size-options" id="size-options"></div>
+
+    <label>الكمية:</label>
+    <div class="quantity-control">
+      <button class="quantity-btn minus">-</button>
+      <input type="number" id="product-quantity" class="quantity-input" min="1" value="1">
+      <button class="quantity-btn plus">+</button>
+    </div>
+
+    <div class="stock-info">
+      المتاح: <span id="available-stock">0</span>
+    </div>
+  </div>
+
+  <div id="error-msg"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const product = JSON.parse(localStorage.getItem("selectedProduct"));
+        const productContainer = document.getElementById("product-container");
+        const errorMsg = document.getElementById("error-msg");
+
+        if (!product) {
+            errorMsg.innerText = "❌ المنتج غير موجود. الرجاء العودة إلى سلة التسوق.";
+            return;
+        }
+
+        // عرض بيانات المنتج
+        productContainer.style.display = "block";
+        document.getElementById("product-name").textContent = product.name || "منتج بدون اسم";
+        document.getElementById("product-image").src = product.image || "";
+        document.getElementById("product-price").textContent = "LE " + (product.price || 0).toFixed(2);
+        document.getElementById("product-quantity").value = product.quantity || 1;
+
+        const colorCircles = document.getElementById("color-circles");
+        const sizeOptions = document.getElementById("size-options");
+        const stockSpan = document.getElementById("available-stock");
+        const quantityInput = document.getElementById("product-quantity");
+
+        // بيانات افتراضية إذا لم تكن موجودة
+        if (!product.colors) {
+            product.colors = [
+                { name: product.color, value: product.color, stock: 10 }
+            ];
+        }
+
+        if (!product.sizes) {
+            product.sizes = [
+                { name: product.size, value: product.size, stock: 10 }
+            ];
+        }
+
+        // عرض ألوان المنتج
+        product.colors.forEach(color => {
+            const circle = document.createElement("div");
+            circle.className = "color-circle";
+            if (color.value === product.color) circle.classList.add("active");
+            circle.style.backgroundColor = color.value;
+            circle.dataset.color = color.value;
+            circle.dataset.stock = color.stock || 10;
+            
+            circle.addEventListener("click", function() {
+                document.querySelectorAll(".color-circle").forEach(c => c.classList.remove("active"));
+                this.classList.add("active");
+                product.color = this.dataset.color;
+                updateSizeOptions();
+                updateCart();
+            });
+            
+            colorCircles.appendChild(circle);
+        });
+
+        // عرض مقاسات المنتج
+        function updateSizeOptions() {
+            sizeOptions.innerHTML = "";
+            const selectedColor = product.color;
+            
+            product.sizes.forEach(size => {
+                const option = document.createElement("div");
+                option.className = "size-option";
+                if (size.value === product.size) option.classList.add("active");
+                option.textContent = size.value;
+                option.dataset.size = size.value;
+                
+                option.addEventListener("click", function() {
+                    document.querySelectorAll(".size-option").forEach(s => s.classList.remove("active"));
+                    this.classList.add("active");
+                    product.size = this.dataset.size;
+                    updateStockInfo();
+                    updateCart();
+                });
+                
+                sizeOptions.appendChild(option);
+            });
+            
+            updateStockInfo();
+        }
+
+        // تحديث معلومات المخزون
+        function updateStockInfo() {
+            const selectedColor = product.color;
+            const selectedSize = product.size;
+            
+            // هنا يمكنك إضافة منطق للتحقق من المخزون الفعلي
+            const availableStock = 10; // قيمة افتراضية
+            stockSpan.textContent = availableStock;
+            quantityInput.max = availableStock;
+            
+            if (quantityInput.value > availableStock) {
+                quantityInput.value = availableStock;
+                product.quantity = availableStock;
+                updateCart();
+            }
+        }
+
+        // التحكم في الكمية
+        document.querySelector(".quantity-btn.minus").addEventListener("click", function() {
+            if (product.quantity > 1) {
+                product.quantity--;
+                quantityInput.value = product.quantity;
+                updateCart();
+            }
+        });
+
+        document.querySelector(".quantity-btn.plus").addEventListener("click", function() {
+            const max = parseInt(quantityInput.max);
+            if (product.quantity < max) {
+                product.quantity++;
+                quantityInput.value = product.quantity;
+                updateCart();
+            }
+        });
+
+        quantityInput.addEventListener("change", function() {
+            const value = parseInt(this.value);
+            const max = parseInt(this.max);
+            
+            if (isNaN(value) || value < 1) {
+                product.quantity = 1;
+            } else if (value > max) {
+                product.quantity = max;
+            } else {
+                product.quantity = value;
+            }
+            
+            this.value = product.quantity;
+            updateCart();
+        });
+
+        // تحديث السلة تلقائياً
+        function updateCart() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const index = cart.findIndex(item => 
+                item.id === product.id && 
+                item.color === product.color && 
+                item.size === product.size
+            );
+
+            if (index >= 0) {
+                cart[index] = {...product};
+                localStorage.setItem("cart", JSON.stringify(cart));
+            }
+        }
+
+        // زر الرجوع
+        document.getElementById("back-btn").addEventListener("click", function() {
+            window.location.href = "cart.html";
+        });
+
+        // التهيئة الأولية
+        updateSizeOptions();
+    });
+</script>
+
+</body>
+</html>

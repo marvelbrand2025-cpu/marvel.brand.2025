@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+  <meta charset="UTF-8">
+  <title>Shopping Cart Fixed</title>
+  <script>
+    const discountCodes = {
+        "SALE10": 10,
+        "SALE5": 5
+    };
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let discount = 0;
+    let shippingCost = 0;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        renderCartItems();
+        updateCartSummary();
+
+        document.getElementById('discount-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            applyDiscount();
+        });
+
+        document.getElementById('update-cart').addEventListener('click', function(e) {
+            e.preventDefault();
+            updateQuantities();
+        });
+    });
+
+    function updateShippingCost() {
+        const shippingSelect = document.getElementById("shipping-slider");
+        const cost = parseFloat(shippingSelect.value) || 0;
+
+        shippingCost = cost;
+
+        const shippingCostCart = document.getElementById("shipping-cost-cart");
+        if (shippingCostCart) {
+            shippingCostCart.textContent = `${cost.toFixed(2)} EGP`;
+        }
+
+        updateCartSummary();
+    }
+
+    function renderCartItems() {
+        const cartItemsContainer = document.getElementById('cart-items');
+        cartItemsContainer.innerHTML = '';
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '<tr><td colspan="7" class="text-center">Your cart is empty</td></tr>';
+            return;
+        }
+
+        cart.forEach((item, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${item.name}</td>
+                <td>${item.color}</td>
+                <td>${item.size}</td>
+                <td>${item.quantity}</td>
+                <td>$${item.price.toFixed(2)}</td>
+                <td>$${(item.price * item.quantity).toFixed(2)}</td>
+                <td><button onclick="removeItem(${index})">Remove</button></td>
+            `;
+            cartItemsContainer.appendChild(row);
+        });
+    }
+
+    function applyDiscount() {
+        const couponCode = document.getElementById('coupon-code').value.trim();
+        const messageElement = document.getElementById('coupon-message');
+
+        if (couponCode in discountCodes) {
+            discount = discountCodes[couponCode];
+            messageElement.textContent = `Discount ${discount}% applied!`;
+            messageElement.className = 'discount-applied';
+        } else {
+            messageElement.textContent = 'Invalid coupon code';
+            messageElement.className = 'discount-error';
+        }
+
+        updateCartSummary();
+    }
+
+    function updateQuantities() {
+        const inputs = document.querySelectorAll('.quantity-input');
+        inputs.forEach((input, index) => {
+            cart[index].quantity = parseInt(input.value) || 1;
+        });
+        saveCart();
+        updateCartSummary();
+    }
+
+    function updateCartSummary() {
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const discountAmount = subtotal * (discount / 100);
+        const total = subtotal - discountAmount + shippingCost;
+
+        document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+        document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+        document.getElementById('shipping-cost-cart').textContent = `${shippingCost.toFixed(2)} EGP`;
+
+        const discountRow = document.querySelector('.discount-row');
+        const discountAmountElement = document.getElementById('discount-amount');
+
+        if (discount > 0) {
+            discountRow.style.display = 'flex';
+            discountAmountElement.textContent = `-$${discountAmount.toFixed(2)}`;
+        } else {
+            discountRow.style.display = 'none';
+        }
+    }
+
+    function saveCart() {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function removeItem(index) {
+        cart.splice(index, 1);
+        saveCart();
+        renderCartItems();
+        updateCartSummary();
+    }
+  </script>
+</head>
+<body>
+  <h1>Shopping Cart</h1>
+
+  <div>
+    <label for="shipping-slider">اختار المحافظة</label>
+    <select id="shipping-slider" onchange="updateShippingCost()">
+      <option disabled selected>اختر المحافظة</option>
+      <option value="60">مترو</option>
+      <option value="70">القاهرة</option>
+      <option value="75">المرج</option>
+      <option value="80">العبور</option>
+    </select>
+  </div>
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Color</th>
+        <th>Size</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="cart-items"></tbody>
+  </table>
+
+  <div>
+    <form id="discount-form">
+      <input type="text" id="coupon-code" placeholder="Coupon code" />
+      <button type="submit">Apply</button>
+    </form>
+    <div id="coupon-message"></div>
+  </div>
+
+  <div>
+    <p>Subtotal: <span id="subtotal">$0.00</span></p>
+    <p class="discount-row" style="display:none;">Discount: <span id="discount-amount">-$0.00</span></p>
+    <p>Shipping: <span id="shipping-cost-cart">$0.00</span></p>
+    <p>Total: <span id="total">$0.00</span></p>
+  </div>
+</body>
+</html>
