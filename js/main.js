@@ -68,9 +68,7 @@ function updateCartSummary() {
         });
     });
 
-    /*------------------
-		Navigation
-	--------------------*/
+  
     $(".mobile-menu").slicknav({
         prependTo: '#mobile-menu-wrap',
         allowParentLinks: true
@@ -85,7 +83,6 @@ function updateCartSummary() {
         $(this).prev().removeClass('active');
     });
 
-    //Canvas Menu
     $(".canvas__open").on('click', function () {
         $(".offcanvas-menu-wrapper").addClass("active");
         $(".offcanvas-menu-overlay").addClass("active");
