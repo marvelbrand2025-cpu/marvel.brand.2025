@@ -76,7 +76,7 @@ h6 {
 p {
 	font-size: 15px;
 	font-family: "Nunito Sans", sans-serif;
-	color: #3d3d3d;
+	color: #473b09d9;
 	font-weight: 400;
 	line-height: 25px;
 	margin: 0 0 15px 0;
@@ -316,7 +316,7 @@ ol {
 -----------------------*/
 
 .header {
-	background: #ffffff;
+	background: #ece5c8;
 }
 
 .header__top {
@@ -338,7 +338,7 @@ ol {
 }
 
 .header__top__links a {
-	color: #ffffff;
+	color: #ece5c8;
 	font-size: 13px;
 	text-transform: uppercase;
 	letter-spacing: 2px;
@@ -362,7 +362,7 @@ ol {
 }
 
 .header__top__hover span {
-	color: #ffffff;
+	color: #ece5c8;
 	font-size: 13px;
 	text-transform: uppercase;
 	letter-spacing: 2px;
@@ -378,7 +378,7 @@ ol {
 }
 
 .header__top__hover ul {
-	background: #ffffff;
+	background: #ece5c8;
 	display: inline-block;
 	padding: 2px 0;
 	position: absolute;
@@ -403,7 +403,7 @@ ol {
 }
 
 .header__logo {
-	padding: 30px 0;
+	padding: 3px 0;
 }
 
 .header__logo a {
@@ -548,12 +548,12 @@ ol {
 -----------------------*/
 
 .hero__slider.owl-carousel .owl-item.active .hero__text h6 {
-	top: 0;
+	top: -75px;
 	opacity: 1;
 }
 
 .hero__slider.owl-carousel .owl-item.active .hero__text h2 {
-	top: 0;
+	top: -93px;
 	opacity: 1;
 }
 
@@ -3800,13 +3800,13 @@ ol {
 		padding: 35px 30px 40px;
 	}
 	.hero__items {
-		height: auto;
+		height: 200px;
 		padding-top: 130px;
 		padding-bottom: 40px;
 	}
 	.hero__text h2 {
-		font-size: 36px;
-		line-height: 48px;
+		font-size: 27px;
+		line-height: 40px;
 	}
 	.hero__social {
 		margin-top: 145px;

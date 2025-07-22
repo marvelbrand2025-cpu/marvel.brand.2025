@@ -7,7 +7,7 @@
     <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Male-Fashion | Template</title>
+    <title>marvil | Template</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
@@ -24,115 +24,294 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 
+<style>
+  /* تنسيقات الهيدر العامة */
+  .header {
+    background: #ece5c8;
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+  }
+
+  .header__logo img {
+    max-height: 85px;
+  }
+
+  /* تنسيقات نسخة الكمبيوتر */
+  .desktop-header {
+    display: block;
+  }
+
+  /* القائمة الرئيسية للكمبيوتر */
+  .header__menu ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .header__menu ul li {
+    position: relative;
+  }
+
+  .header__menu ul li ul.dropdown {
+    display: none;
+    position: absolute;
+    background: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  .header__menu ul li:hover ul.dropdown {
+    display: block;
+  }
+
+  /* تنسيقات الكارت */
+  .cart-link {
+    position: relative;
+    display: inline-block;
+    margin-right: 15px;
+  }
+
+  .cart-link img {
+    width: 20px;
+    height: auto;
+  }
+
+  .cart-link span {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #111;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* تنسيقات نسخة الموبايل */
+  .mobile-header {
+    display: none;
+    background: #ece5c8;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  /* القائمة الجانبية للموبايل */
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80%;
+    height: 100%;
+    background: white;
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .mobile-nav.active {
+    transform: translateX(0);
+  }
+
+  .mobile-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .mobile-nav li {
+    margin-bottom: 15px;
+  }
+
+  .mobile-nav li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+  }
+
+  /* أضف ده في الـ CSS */
+.mobile-nav {
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  display: block; /* مهم جدًا! */
+}
+
+.mobile-nav.active {
+  transform: translateX(0);
+}
+
+.mobile-overlay.active {
+  display: block;
+}
+
+
+  /* زر القائمة الموبايل */
+  .menu-toggle {
+    width: 30px;
+    height: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+
+  .menu-toggle span {
+    display: block;
+    height: 3px;
+    background: #111;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  /* الـ Overlay للقائمة الجانبية */
+  .mobile-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+  }
+
+  .mobile-overlay.active {
+    display: block;
+  }
+
+  /* ميديا كويريز */
+  @media (max-width: 991px) {
+    .desktop-header {
+      display: none;
+    }
+
+      * {
+    cursor: none !important;
+  }
+  
+  .liquid-cursor {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+    filter: blur(1px);
+    animation: liquid 4s infinite alternate;
+  }
+  
+  @keyframes liquid {
+    0% { border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; }
+    25% { border-radius: 50% 50% 40% 60% / 60% 40% 60% 40%; }
+    50% { border-radius: 60% 40% 40% 60% / 40% 60% 40% 60%; }
+    75% { border-radius: 60% 40% 60% 40% / 60% 40% 60% 40%; }
+    100% { border-radius: 40% 60% 40% 60% / 40% 60% 40% 60%; }
+  }
+    
+    .mobile-header {
+      display: block;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .menu-toggle {
+      display: none;
+    }
+  }
+</style>
+
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
-
-    <!-- Offcanvas Menu Begin -->
-    <div class="offcanvas-menu-overlay"></div>
-    <div class="offcanvas-menu-wrapper">
-        <div class="offcanvas__option">
-            <div class="offcanvas__links">
-                <a href="#">Sign in</a>
-                <a href="#">FAQs</a>
-            </div>
-            <div class="offcanvas__top__hover">
-                <span>Usd <i class="arrow_carrot-down"></i></span>
-                <ul>
-                    <li>USD</li>
-                    <li>EUR</li>
-                    <li>USD</li>
-                </ul>
-            </div>
-        </div>
-        <div class="offcanvas__nav__option">
-            <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
-            <a href="#"><img src="img/icon/heart.png" alt=""></a>
-            <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
-            <div class="price">$0.00</div>
-        </div>
-        <div id="mobile-menu-wrap"></div>
-        <div class="offcanvas__text">
-            <p>Free shipping, 30-day return or refund guarantee.</p>
-        </div>
-    </div>
-    <!-- Offcanvas Menu End -->
-
-    <!-- Header Section Begin -->
-    <header class="header">
-        <div class="header__top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-7">
-                        <div class="header__top__left">
-                            <p>Free shipping, 30-day return or refund guarantee.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-5">
-                        <div class="header__top__right">
-                            <div class="header__top__links">
-                                <a href="#">Sign in</a>
-                                <a href="#">FAQs</a>
-                            </div>
-                            <div class="header__top__hover">
-                                <span>Usd <i class="arrow_carrot-down"></i></span>
-                                <ul>
-                                    <li>USD</li>
-                                    <li>EUR</li>
-                                    <li>USD</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+ <!-- Header Section Begin -->
+<header class="header desktop-header">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-3">
+            <div class="row align-items-center">
+                <!-- Logo -->
+                <div class="col-6 col-md-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                        <a href="index.html"><img src="img/987.png" alt="Logo"></a>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
-                    <nav class="header__menu mobile-menu">
-                        <ul>
-                            <li><a href="./index.html">Home</a></li>
+
+                <!-- Navigation -->
+                <div class="col-6 col-md-6 d-none d-md-block">
+                    <nav class="header__menu">
+                        <ul class="d-flex justify-content-center gap-4 list-unstyled mb-0">
+                            <li class="active"><a href="./index.html">Home</a></li>
                             <li><a href="./shop.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./about.html">About Us</a></li>
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shopping-cart.html">Shopping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li class="active"><a href="./contact.html">Contacts</a></li>
+                              
+                            <li><a href="./contact.html">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
-                <div class="col-lg-3 col-md-3">
-                    <div class="header__nav__option">
-                        <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
-                        <a href="#"><img src="img/icon/heart.png" alt=""></a>
-                        <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
-                        <div class="price">$0.00</div>
-                    </div>
+
+                <!-- Cart -->
+                <div class="col-6 col-md-3 d-flex justify-content-end align-items-center">
+                    <a href="cart.html" class="cart-link position-relative me-3">
+                        <img src="img/icon/cart.png" alt="Cart" style="width: 22px;">
+                        <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark text-white">0</span>
+                    </a>
                 </div>
             </div>
-            <div class="canvas__open"><i class="fa fa-bars"></i></div>
         </div>
     </header>
+
+    <!-- نسخة الموبايل -->
+    <header class="mobile-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-6">
+                    <div class="header__logo">
+                        <a href="index.html"><img src="img/987.png" alt="Logo"></a>
+                    </div>
+                </div>
+                <div class="col-6 d-flex justify-content-end">
+                    <a href="cart.html" class="cart-link position-relative me-3">
+                        <img src="img/icon/cart.png" alt="Cart" style="width: 22px;">
+                        <span id="mobile-cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark text-white">0</span>
+                    </a>
+                    <!-- Toggle Button (Hamburger) -->
+<div class="menu-toggle d-md-none" id="mobile-menu-toggle">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+<nav class="mobile-nav" id="mobile-nav">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        </li>
+        <li><a href="./contact.html">Contact</a></li>
+    </ul>
+</nav>
     <!-- Header Section End -->
 
     <!-- Map Begin -->
     <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d111551.9926412813!2d-90.27317134641879!3d38.606612219170856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sUnited%20States!5e0!3m2!1sen!2sbd!4v1597926938024!5m2!1sen!2sbd" height="500" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d330.25075976212014!2d31.25544385858884!3d30.530506943665177!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1z2LTYsdi32Kkg2KjYp9mE2YLYsdioINmF2YYg2KXYs9mG2YrYqtiMINij2LPZhtmK2KrYjCDZhdix2YPYsiDZg9mB2LEg2LTZg9ix!5e1!3m2!1sar!2seg!4v1753128771556!5m2!1sar!2seg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
+    <div class="liquid-cursor"></div>
+    
     <!-- Map End -->
 
     <!-- Contact Section Begin -->
@@ -144,18 +323,14 @@
                         <div class="section-title">
                             <span>Information</span>
                             <h2>Contact Us</h2>
-                            <p>As you might expect of a company that began as a high-end interiors contractor, we pay
-                                strict attention.</p>
+                            <p>Contact us if you have any problems</p>
                         </div>
                         <ul>
                             <li>
-                                <h4>America</h4>
-                                <p>195 E Parker Square Dr, Parker, CO 801 <br />+43 982-314-0958</p>
+                                <h4>Banha, Egypt</h4>
+                                <p>Egypt, Banha, Qalyubia, asnait<br />+20 12 07566339</p>
                             </li>
-                            <li>
-                                <h4>France</h4>
-                                <p>109 Avenue Léon, 63 Clermont-Ferrand <br />+12 345-423-9893</p>
-                            </li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -246,6 +421,8 @@
                 </div>
             </div>
         </div>
+        <div class="liquid-cursor"></div>
+
     </footer>
     <!-- Footer Section End -->
 
@@ -259,6 +436,246 @@
         </div>
     </div>
     <!-- Search End -->
+
+        <script>
+
+
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let discount = 0;
+let shippingCost = 0;
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.canvas__open');
+    const mobileMenuClose = document.querySelector('.mobile-menu-close');
+    const mobileMenuWrapper = document.querySelector('.mobile-menu-wrapper');
+    const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+    
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', function() {
+            mobileMenuWrapper.classList.add('show');
+            mobileMenuOverlay.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+    
+    if (mobileMenuClose) {
+        mobileMenuClose.addEventListener('click', function() {
+            mobileMenuWrapper.classList.remove('show');
+            mobileMenuOverlay.classList.remove('show');
+            document.body.style.overflow = '';
+        });
+    }
+    
+    if (mobileMenuOverlay) {
+        mobileMenuOverlay.addEventListener('click', function() {
+            mobileMenuWrapper.classList.remove('show');
+            mobileMenuOverlay.classList.remove('show');
+            document.body.style.overflow = '';
+        });
+    }
+    
+    // Initialize Slicknav for mobile menu
+    if (typeof $.fn.slicknav !== 'undefined') {
+        $('.header__menu').slicknav({
+            prependTo: '.mobile-menu',
+            label: '',
+            allowParentLinks: true,
+            closeOnClick: true
+        });
+    }
+    
+    
+    // Cart functionality
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    function updateCartSummary() {
+        const cartCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+        const cartTotal = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+        
+        // Update counters
+        document.querySelectorAll('#cart-count, #mobile-cart-count').forEach(el => {
+            if (el) el.textContent = cartCount;
+        });
+        
+        // Update total price
+        const priceDiv = document.getElementById('cart-total');
+        if (priceDiv) priceDiv.textContent = `LE ${cartTotal.toFixed(2)}`;
+    }
+    
+    // Add to cart function
+    window.addToCart = function(product) {
+        const existingItem = cart.find(item => item.id === product.id);
+        
+        if (existingItem) {
+            existingItem.quantity = (existingItem.quantity || 1) + 1;
+        } else {
+            product.quantity = 1;
+            cart.push(product);
+        }
+        
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartSummary();
+        
+        // Optional: Show added to cart message
+        alert('تمت إضافة المنتج إلى السلة');
+    };
+    
+    // Initial cart update
+    updateCartSummary();
+});
+</script>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggleBtn = document.getElementById('mobile-menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    const overlay = document.getElementById('mobile-overlay');
+
+    toggleBtn.addEventListener('click', function () {
+      mobileNav.classList.toggle('active');
+      overlay.classList.toggle('active');
+      document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+    });
+
+    overlay.addEventListener('click', function () {
+      mobileNav.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.querySelector('.canvas__open');
+    const closeBtn = document.querySelector('.mobile-menu-close');
+    const menu = document.querySelector('.mobile-menu-wrapper');
+    const overlay = document.querySelector('.mobile-menu-overlay');
+
+    toggle.addEventListener('click', () => {
+      menu.classList.add('show');
+      overlay.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    });
+
+    const closeMenu = () => {
+      menu.classList.remove('show');
+      overlay.classList.remove('show');
+      document.body.style.overflow = '';
+    };
+
+    closeBtn.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+  });
+</script>
+
+
+
+<script>
+    $(document).ready(function(){
+        // تهيئة القائمة المتنقلة
+        $('.header__menu').slicknav({
+            prependTo: '.header',
+            label: '',
+            allowParentLinks: true
+        });
+
+        function updateCartSummary() {
+    const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    
+    // تحديث العداد والسعر في الـ header
+    document.querySelectorAll('#cart-count, #mobile-cart-count').forEach(el => {
+        el.textContent = cartCount;
+    });
+    
+    const priceDiv = document.querySelector('.header__nav__option .price');
+    if (priceDiv) priceDiv.textContent = `LE ${cartTotal.toFixed(2)}`;
+}
+
+// تأكد من أن هذا الكود موجود في ملف JavaScript الخاص بك
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+function updateCartSummary() {
+    const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    
+    // تحديث العداد في كل من نسخة الكمبيوتر والموبايل
+    document.querySelectorAll('#cart-count, #mobile-cart-count').forEach(el => {
+        el.textContent = cartCount;
+    });
+    
+    // تحديث السعر في نسخة الكمبيوتر
+    const priceDiv = document.getElementById('cart-total');
+    if (priceDiv) {
+        priceDiv.textContent = `LE ${cartTotal.toFixed(2)}`;
+    }
+}
+
+// تحديث حالة الكارت عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', function() {
+    updateCartSummary();
+});
+
+// دالة إضافة منتج إلى السلة
+function addToCart(product) {
+    // البحث إذا كان المنتج موجود بالفعل في السلة
+    const existingItem = cart.find(item => item.id === product.id);
+    
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        product.quantity = 1;
+        cart.push(product);
+    }
+    
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartSummary();
+}
+
+        // فتح/إغلاق القائمة الجانبية عند الضغط على الأيقونة
+        $('.canvas__open').on('click', function() {
+            $('.offcanvas-menu-wrapper').addClass('active');
+            $('.offcanvas-menu-overlay').addClass('active');
+        });
+
+        $('.offcanvas-menu-overlay, .offcanvas-menu-close').on('click', function() {
+            $('.offcanvas-menu-wrapper').removeClass('active');
+            $('.offcanvas-menu-overlay').removeClass('active');
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // فتح القائمة الجانبية
+        document.querySelector('.canvas__open').addEventListener('click', function() {
+            document.querySelector('.header__menu').classList.toggle('active');
+        });
+    });
+
+    const cursor = document.querySelector('.liquid-cursor');
+  
+  document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  
+  // تأثير عند النقر
+  document.addEventListener('mousedown', () => {
+    cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
+    cursor.style.background = 'linear-gradient(45deg, #fd79a8, #e84393)';
+  });
+  
+  document.addEventListener('mouseup', () => {
+    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+    cursor.style.background = 'linear-gradient(45deg, #6c5ce7, #a29bfe)';
+  });
+</script>
 
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>

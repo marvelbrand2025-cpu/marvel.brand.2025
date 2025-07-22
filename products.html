@@ -7,7 +7,7 @@
     <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Male-Fashion | Product Details</title>
+    <title>marvil | Product Details</title>
     <style>
         :root {
             --primary-color: hsl(239, 44%, 58%);
@@ -642,6 +642,261 @@
             color: var(--primary-color);
             transform: rotate(90deg);
         }
+
+
+
+    /* تأكيد إضافة إلى السلة - النسخة المبهرة */
+    .cart-confirmation {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.5);
+        background: linear-gradient(135deg, #6e45e2, #88d3ce);
+        border-radius: 20px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), 0 0 0 15px rgba(255, 255, 255, 0.1);
+        padding: 40px;
+        z-index: 2000;
+        text-align: center;
+        max-width: 500px;
+        width: 90%;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        color: white;
+        overflow: hidden;
+        perspective: 1000px;
+    }
+
+    .cart-confirmation::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+        transform: rotate(0deg);
+        animation: rotateGlow 20s linear infinite;
+    }
+
+    .cart-confirmation.active {
+        opacity: 1;
+        pointer-events: all;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .cart-confirmation h3 {
+        font-size: 28px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        position: relative;
+        z-index: 2;
+    }
+
+    .cart-confirmation p {
+        font-size: 18px;
+        margin-bottom: 30px;
+        line-height: 1.6;
+        position: relative;
+        z-index: 2;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .confirmation-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        position: relative;
+        z-index: 2;
+    }
+
+    .confirmation-btn {
+        padding: 15px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: none;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .continue-btn {
+        background-color: rgba(255,255,255,0.9);
+        color: #6e45e2;
+    }
+
+    .continue-btn:hover {
+        background-color: white;
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .view-cart-btn {
+        background: linear-gradient(135deg, #ff6b6b, #ffa3a3);
+        color: white;
+    }
+
+    .view-cart-btn:hover {
+        background: linear-gradient(135deg, #ff5252, #ff7b7b);
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .confirmation-timer {
+        margin-top: 30px;
+        height: 6px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 3px;
+        overflow: hidden;
+        position: relative;
+        z-index: 2;
+    }
+
+    .timer-progress {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(90deg, #ffd166, #ff6b6b);
+        transition: width 0.1s linear;
+        box-shadow: 0 0 10px rgba(255,107,107,0.5);
+    }
+
+    .confirmation-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 1999;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.6s ease;
+        backdrop-filter: blur(10px);
+    }
+
+    .confirmation-overlay.active {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    /* تأثيرات الحركة */
+    @keyframes bounceIn {
+        0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+        50% { transform: translate(-50%, -50%) scale(1.1); }
+        70% { transform: translate(-50%, -50%) scale(0.95); }
+        100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+    }
+
+    @keyframes rotateGlow {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    @keyframes buttonPulse {
+        0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+        70% { box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+    }
+
+    .cart-confirmation.active {
+        animation: bounceIn 0.8s ease-out forwards;
+    }
+
+    .confetti {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: #f00;
+        opacity: 0;
+        z-index: 1;
+    }
+
+    /* تأثيرات إضافية للأيقونات */
+    .fa-check-circle {
+        animation: float 3s ease-in-out infinite;
+        text-shadow: 0 5px 15px rgba(255,255,255,0.4);
+    }
+
+    /* تأثيرات خاصة للأزرار */
+    .confirmation-btn::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 5px;
+        height: 5px;
+        background: rgba(255, 255, 255, 0.5);
+        opacity: 0;
+        border-radius: 100%;
+        transform: scale(1, 1) translate(-50%, -50%);
+        transform-origin: 50% 50%;
+    }
+
+    .confirmation-btn:focus:not(:active)::after {
+        animation: buttonPulse 1s ease-out;
+    }
+
+    /* تأثيرات دخول وخروج */
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeOutDown {
+        from { opacity: 1; transform: translateY(0); }
+        to { opacity: 0; transform: translateY(20px); }
+    }
+
+      * {
+    cursor: none !important;
+  }
+  
+  .liquid-cursor {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+    filter: blur(1px);
+    animation: liquid 4s infinite alternate;
+  }
+  
+  @keyframes liquid {
+    0% { border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; }
+    25% { border-radius: 50% 50% 40% 60% / 60% 40% 60% 40%; }
+    50% { border-radius: 60% 40% 40% 60% / 40% 60% 40% 60%; }
+    75% { border-radius: 60% 40% 60% 40% / 60% 40% 60% 40%; }
+    100% { border-radius: 40% 60% 40% 60% / 40% 60% 40% 60%; }
+  }
     </style>
 
     <!-- Google Font -->
@@ -649,6 +904,9 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
+<div class="liquid-cursor"></div>
+
 
 <body>
     <button class="back-button" onclick="window.history.back()">
@@ -736,6 +994,31 @@
         </div>
     </div>
 
+   <div class="confirmation-overlay" id="confirmation-overlay"></div>
+<div class="cart-confirmation" id="cart-confirmation">
+    <h3>
+        <i class="fas fa-check-circle"></i>
+        تمت الإضافة بنجاح!
+    </h3>
+    <p>تمت إضافة المنتج إلى سلة التسوق الخاصة بك. هل ترغب في مواصلة التسوق أو عرض السلة؟</p>
+    
+    <div class="confirmation-buttons">
+        <button class="confirmation-btn continue-btn" id="continue-shopping">
+            <i class="fas fa-shopping-bag"></i>
+            مواصلة التسوق
+        </button>
+        <button class="confirmation-btn view-cart-btn" id="view-cart">
+            <i class="fas fa-shopping-cart"></i>
+            عرض السلة
+        </button>
+    </div>
+    
+    <div class="confirmation-timer">
+        <div class="timer-progress" id="timer-progress"></div>
+    </div>
+    <div id="confetti-container"></div>
+</div>
+
     <!-- عنصر تكبير الصورة -->
     <div class="zoom-overlay" id="zoom-overlay" onclick="closeZoom()">
         <span class="close-zoom"><i class="fas fa-times"></i></span>
@@ -767,6 +1050,24 @@
 
         // بدء التبديل التلقائي
         startAutoSwitch();
+
+        const cursor = document.querySelector('.liquid-cursor');
+  
+  document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  
+  // تأثير عند النقر
+  document.addEventListener('mousedown', () => {
+    cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
+    cursor.style.background = 'linear-gradient(45deg, #fd79a8, #e84393)';
+  });
+  
+  document.addEventListener('mouseup', () => {
+    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+    cursor.style.background = 'linear-gradient(45deg, #6c5ce7, #a29bfe)';
+  });
 
         // تحديث السعر الإجمالي
         function updateTotalPrice() {
@@ -983,5 +1284,183 @@
         updateAvailableCount();
         updateTotalPrice();
     </script>
+
+
+<script>
+    // العناصر الجديدة
+    const cartConfirmation = document.getElementById('cart-confirmation');
+    const confirmationOverlay = document.getElementById('confirmation-overlay');
+    const continueShoppingBtn = document.getElementById('continue-shopping');
+    const viewCartBtn = document.getElementById('view-cart');
+    const timerProgress = document.getElementById('timer-progress');
+    const confettiContainer = document.getElementById('confetti-container');
+    
+    let confirmationTimer;
+    let timeLeft = 15; // 15 ثانية للاختيار
+    let confettiInterval;
+
+    // دالة عرض تأكيد السلة
+    function showCartConfirmation() {
+        cartConfirmation.classList.add('active');
+        confirmationOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // بدء العد التنازلي
+        startConfirmationTimer();
+        
+        // إطلاق الألعاب النارية
+        startConfetti();
+        
+        // تشغيل صوت التأثير
+        playSuccessSound();
+    }
+
+    // دالة إخفاء تأكيد السلة
+    function hideCartConfirmation() {
+        cartConfirmation.classList.remove('active');
+        confirmationOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+        clearInterval(confirmationTimer);
+        clearInterval(confettiInterval);
+        confettiContainer.innerHTML = '';
+    }
+
+    // بدء العد التنازلي
+    function startConfirmationTimer() {
+        timeLeft = 15;
+        updateTimerDisplay();
+        
+        confirmationTimer = setInterval(() => {
+            timeLeft--;
+            updateTimerDisplay();
+            
+            if (timeLeft <= 0) {
+                hideCartConfirmation();
+            }
+        }, 1000);
+    }
+
+    // تحديث شريط التقدم
+    function updateTimerDisplay() {
+        const percentage = (timeLeft / 15) * 100;
+        timerProgress.style.width = `${percentage}%`;
+        
+        // تغيير لون الشريط حسب الوقت المتبقي
+        if (timeLeft < 5) {
+            timerProgress.style.background = 'linear-gradient(90deg, #ff6b6b, #ff0000)';
+            timerProgress.style.boxShadow = '0 0 10px rgba(255,0,0,0.5)';
+        } else if (timeLeft < 10) {
+            timerProgress.style.background = 'linear-gradient(90deg, #ffd166, #ff6b6b)';
+        }
+    }
+
+    // تأثير الألعاب النارية
+    function startConfetti() {
+        const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+        
+        confettiInterval = setInterval(() => {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.top = -10 + 'px';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.width = Math.random() * 10 + 5 + 'px';
+            confetti.style.height = confetti.style.width;
+            confetti.style.opacity = Math.random() + 0.5;
+            confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+            
+            confettiContainer.appendChild(confetti);
+            
+            // حركة القطع
+            let pos = -10;
+            let angle = Math.random() * 360;
+            let speed = Math.random() * 3 + 2;
+            let spin = Math.random() > 0.5 ? 1 : -1;
+            
+            const confettiMove = setInterval(() => {
+                pos += 2;
+                angle += spin;
+                
+                confetti.style.top = pos + 'px';
+                confetti.style.left = parseFloat(confetti.style.left) + Math.sin(angle * Math.PI / 180) * 2 + 'px';
+                confetti.style.transform = 'rotate(' + angle + 'deg)';
+                
+                if (pos > window.innerHeight) {
+                    clearInterval(confettiMove);
+                    confetti.remove();
+                }
+            }, 20);
+            
+            // إزالة القطع بعد فترة
+            setTimeout(() => {
+                confetti.style.transition = 'opacity 1s';
+                confetti.style.opacity = '0';
+                setTimeout(() => confetti.remove(), 1000);
+            }, 3000);
+        }, 100);
+    }
+
+    // تشغيل صوت التأثير
+    function playSuccessSound() {
+        const successSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3');
+        successSound.play();
+    }
+
+    // أحداث الأزرار
+    continueShoppingBtn.addEventListener('click', function() {
+        hideCartConfirmation();
+        // تأثير النقر
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => this.style.transform = 'scale(1)', 200);
+    });
+
+    viewCartBtn.addEventListener('click', function() {
+        hideCartConfirmation();
+        // تأثير النقر
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            this.style.transform = 'scale(1)';
+            window.location.href = 'cart.html';
+        }, 200);
+    });
+
+    // إخفاء التأكيد عند النقر خارج الصندوق
+    confirmationOverlay.addEventListener('click', hideCartConfirmation);
+
+    // تعديل دالة addToCart لاستدعاء عرض التأكيد
+    function addToCart() {
+        // الكود الأصلي لإضافة المنتج إلى السلة
+        const selectedColor = document.querySelector('.color-circle.active').style.backgroundColor;
+        const selectedSize = document.querySelector('.size-option.active').dataset.size;
+        const quantity = parseInt(quantityInput.value);
+        const productName = document.querySelector('h1').textContent;
+        const productPrice = unitPrice;
+        const productImage = mainImg.src;
+        
+        const product = {
+            id: 'product-1',
+            name: productName,
+            price: productPrice,
+            color: selectedColor,
+            size: selectedSize,
+            quantity: quantity,
+            image: productImage
+        };
+        
+        addToCartToStorage(product);
+        
+        // تأثير الزر
+        addToCartBtn.classList.add('added');
+        addToCartBtn.innerHTML = '<span>تمت الإضافة!</span> <i class="fas fa-check"></i>';
+        
+        setTimeout(() => {
+            addToCartBtn.classList.remove('added');
+            addToCartBtn.innerHTML = '<span>أضف إلى السلة</span> <i class="fas fa-shopping-cart"></i>';
+        }, 2000);
+        
+        // عرض رسالة التأكيد الجديدة
+        showCartConfirmation();
+    }
+</script>
 </body>
 </html>

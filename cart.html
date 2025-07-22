@@ -7,7 +7,7 @@
     <meta name="keywords" content="Male_Fashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Male-Fashion | Cart</title>
+    <title>marvil | Cart</title>
     <style>
         :root {
             --primary-color: hsl(239, 44%, 58%);
@@ -615,7 +615,7 @@
         @keyframes fadeOut {
             from { opacity: 1; transform: translateY(0); }
             to { opacity: 0; transform: translateY(20px); }
-        }
+        } 
     </style>
 
     <!-- Google Font -->
@@ -645,6 +645,8 @@
                 </button>
             </div>
         </div>
+        <div class="liquid-cursor"></div>
+
 
         <div class="left-section">
             <div class="payment-section">
@@ -708,16 +710,21 @@
     let couponCode = localStorage.getItem('couponCode') || '';
 
     document.addEventListener('DOMContentLoaded', function() {
-        displayCartItems();
-        updateCartSummary();
-        updateHeaderCart();
-        
-        // تطبيق أي خصم محفوظ عند تحميل الصفحة
-        if (couponCode) {
-            document.getElementById('discount-code').value = couponCode;
-            applyDiscount();
+    // تحقق من أن السلة موجودة وصالحة
+    try {
+        cart = JSON.parse(localStorage.getItem('cart')) || [];
+        if (!Array.isArray(cart)) {
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
         }
-    });
+    } catch (e) {
+        cart = [];
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+    
+    displayCartItems();
+    updateCartSummary();
+});
 
     // عرض عناصر السلة
     function displayCartItems() {
@@ -788,6 +795,24 @@
         
         // يمكنك تحديث الهيدر هنا إذا كان موجودًا في الصفحة
     }
+
+    const cursor = document.querySelector('.liquid-cursor');
+  
+  document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  
+  // تأثير عند النقر
+  document.addEventListener('mousedown', () => {
+    cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
+    cursor.style.background = 'linear-gradient(45deg, #fd79a8, #e84393)';
+  });
+  
+  document.addEventListener('mouseup', () => {
+    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+    cursor.style.background = 'linear-gradient(45deg, #6c5ce7, #a29bfe)';
+  });
 
     // تطبيق الخصم المعدل
     function applyDiscount() {
@@ -887,19 +912,26 @@
 
     // زيادة كمية المنتج
     function increaseQuantity(index) {
+    if (index >= 0 && index < cart.length) {
         cart[index].quantity++;
         saveCart();
-        displayCartItems();
-        updateCartSummary();
-        updateHeaderCart();
-        
-        // تأثير للزيادة
-        const input = document.getElementById(`quantity-${index}`);
-        input.style.transform = 'scale(1.2)';
-        setTimeout(() => {
-            input.style.transform = 'scale(1)';
-        }, 200);
+        updateCartDisplay();
     }
+}
+
+function decreaseQuantity(index) {
+    if (index >= 0 && index < cart.length && cart[index].quantity > 1) {
+        cart[index].quantity--;
+        saveCart();
+        updateCartDisplay();
+    }
+}
+
+function updateCartDisplay() {
+    displayCartItems();
+    updateCartSummary();
+    updateHeaderCart();
+}
 
     // تقليل كمية المنتج
     function decreaseQuantity(index) {
