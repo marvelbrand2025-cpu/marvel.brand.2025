@@ -665,7 +665,7 @@
                 <div class="shipping-container">
                     <h2>اختر طريقة الشحن</h2>
                     <select id="shipping-slider" onchange="updateShippingCost()">
-                        <option value="60">مترو</option>
+                        <option value="0.00">اختر محافظتك</option>
                         <option value="70">القاهرة</option>
                         <option value="70">الجيزة</option>
                         <option value="75">المرج</option>
@@ -705,7 +705,7 @@
 
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let discount = 0;
-    let shippingCost = 60; // القيمة الافتراضية
+    let shippingCost = 0.00; // القيمة الافتراضية
     let shippingDiscount = 0; // تخفيض الشحن
     let couponCode = localStorage.getItem('couponCode') || '';
 
