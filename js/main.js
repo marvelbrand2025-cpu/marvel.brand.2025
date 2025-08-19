@@ -122,6 +122,8 @@ function updateCartSummary() {
         $(this).addClass('active');
     });
 
+    
+
     /*-------------------
 		Scroll
 	--------------------- */
@@ -226,3 +228,5 @@ function updateCartSummary() {
     });
 
 })(jQuery);
+
+

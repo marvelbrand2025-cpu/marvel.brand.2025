@@ -547,147 +547,147 @@
 
 <body>
     <button class="back-button" onclick="window.history.back()">
-        <i class="fas fa-arrow-left"></i> رجوع
+        <i class="fas fa-arrow-left"></i> Back
     </button>
 
     <div class="checkout-container">
         <div class="left-section">
-            <h1>إتمام الطلب</h1>
+            <h1>Complete Order</h1>
 
             <div class="billing-section">
-                <h2>معلومات العميل</h2>
+                <h2>Customer Information</h2>
                 <div class="input-group">
-                    <label for="first-name">الاسم الأول</label>
+                    <label for="first-name">First Name</label>
                     <input type="text" id="first-name" required>
-                    <div class="error-message" id="first-name-error">الرجاء إدخال الاسم الأول</div>
+                    <div class="error-message" id="first-name-error">Please enter your first name</div>
                 </div>
 
                 <div class="input-group">
-                    <label for="last-name">الاسم الأخير</label>
+                    <label for="last-name">Last Name</label>
                     <input type="text" id="last-name" required>
-                    <div class="error-message" id="last-name-error">الرجاء إدخال الاسم الأخير</div>
+                    <div class="error-message" id="last-name-error">Please enter your last name</div>
                 </div>
 
                 <div class="input-group">
-                    <label for="phone">رقم الهاتف</label>
+                    <label for="phone">Phone Number</label>
                     <input type="tel" id="phone" required>
-                    <div class="error-message" id="phone-error">الرجاء إدخال رقم هاتف صحيح</div>
+                    <div class="error-message" id="phone-error">Please enter a valid phone number</div>
                 </div>
 
                 <div class="input-group">
-                    <label for="address">العنوان بالتفصيل</label>
+                    <label for="address">Detailed Address</label>
                     <textarea id="address" required></textarea>
-                    <div class="error-message" id="address-error">الرجاء إدخال العنوان</div>
+                    <div class="error-message" id="address-error">Please enter your address</div>
                 </div>
 
                 <div class="input-group">
-                    <label for="governorate">المحافظة</label>
+                    <label for="governorate">Governorate</label>
                     <select id="governorate" required>
-                        <option value="">اختر المحافظة</option>
-                        <option value="القاهرة">القاهرة</option>
-                        <option value="الجيزة">الجيزة</option>
-                        <option value="المرج">المرج</option>
-                        <option value="الخانكة">الخانكة</option>
-                        <option value="الخصوص">الخصوص</option>
-                        <option value="بدريس">بدريس</option>
-                        <option value="أكتوبر">أكتوبر</option>
-                        <option value="التجمع">التجمع</option>
-                        <option value="طامية">طامية</option>
-                        <option value="المقطم">المقطم</option>
-                        <option value="حلوان">حلوان</option>
-                        <option value="حدائق الأهرام">حدائق الأهرام</option>
-                        <option value="السلام">السلام</option>
-                        <option value="الشيخ زايد">الشيخ زايد</option>
-                        <option value="الحوامدية">الحوامدية</option>
-                        <option value="الرحاب">الرحاب</option>
-                        <option value="أبو زعبل">أبو زعبل</option>
-                        <option value="هنشور">هنشور</option>
-                        <option value="بسيون">بسيون</option>
-                        <option value="طما">طما</option>
-                        <option value="المنصورية">المنصورية</option>
-                        <option value="كرداسة">كرداسة</option>
-                        <option value="الزراعل">الزراعل</option>
-                        <option value="أنوراسي">أنوراسي</option>
-                        <option value="مساء الفطار">مساء الفطار</option>
-                        <option value="المينب">المينب</option>
-                        <option value="أبو النمرس">أبو النمرس</option>
-                        <option value="شرامانت">شرامانت</option>
-                        <option value="سمنام">سمنام</option>
-                        <option value="كيلة">كيلة</option>
-                        <option value="العثور">العثور</option>
-                        <option value="مدينتي">مدينتي</option>
-                        <option value="الشروق">الشروق</option>
-                        <option value="دار السلام">دار السلام</option>
-                        <option value="رمضان">رمضان</option>
-                        <option value="العياط">العياط</option>
-                        <option value="الصف">الصف</option>
-                        <option value="أطفيح">أطفيح</option>
-                        <option value="هليوبليس الجديدة">هليوبليس الجديدة</option>
-                        <option value="المستقبل">المستقبل</option>
-                        <option value="الإسكندرية">الإسكندرية</option>
-                        <option value="الإسماعيلية">الإسماعيلية</option>
-                        <option value="السويس">السويس</option>
-                        <option value="بورسعيد">بورسعيد</option>
-                        <option value="الدقهلية">الدقهلية</option>
-                        <option value="ملوية">ملوية</option>
-                        <option value="الغربية">الغربية</option>
-                        <option value="الشرقية">الشرقية</option>
-                        <option value="دمياط">دمياط</option>
-                        <option value="كفر الشيخ">كفر الشيخ</option>
-                        <option value="البحيرة">البحيرة</option>
-                        <option value="المنوفية">المنوفية</option>
-                        <option value="الفيوم">الفيوم</option>
-                        <option value="بني سويف">بني سويف</option>
-                        <option value="أسيوط">أسيوط</option>
-                        <option value="سوهاج">سوهاج</option>
-                        <option value="قنا">قنا</option>
-                        <option value="الأقصر">الأقصر</option>
-                        <option value="أسوان">أسوان</option>
-                        <option value="المنيا">المنيا</option>
-                        <option value="مرسى مطروح">مرسى مطروح</option>
-                        <option value="الغردقة">الغردقة</option>
-                        <option value="الساحل الشمالي">الساحل الشمالي</option>
-                        <option value="العالمين">العالمين</option>
-                        <option value="سيدي عبدالرحمن">سيدي عبدالرحمن</option>
-                        <option value="مدينة الحمام">مدينة الحمام</option>
-                        <option value="شرم الشيخ">شرم الشيخ</option>
-                        <option value="سفاجا">سفاجا</option>
-                        <option value="مصر">مصر</option>
-                        <option value="رأس غارب">رأس غارب</option>
-                        <option value="مرسى علم">مرسى علم</option>
-                        <option value="خليج مكادي">خليج مكادي</option>
-                        <option value="دهب">دهب</option>
-                        <option value="الطور">الطور</option>
-                        <option value="جنوب سيناء">جنوب سيناء</option>
+                        <option value="">Select Governorate</option>
+                        <option value="Cairo">Cairo</option>
+                        <option value="Giza">Giza</option>
+                        <option value="El Marg">El Marg</option>
+                        <option value="El Khanka">El Khanka</option>
+                        <option value="El Khusus">El Khusus</option>
+                        <option value="Badrasheen">Badrasheen</option>
+                        <option value="October">October</option>
+                        <option value="Tagammu">Tagammu</option>
+                        <option value="Tamiya">Tamiya</option>
+                        <option value="Al Mokattam">Al Mokattam</option>
+                        <option value="Helwan">Helwan</option>
+                        <option value="Hadayek Al Ahram">Hadayek Al Ahram</option>
+                        <option value="El Salam">El Salam</option>
+                        <option value="Sheikh Zayed">Sheikh Zayed</option>
+                        <option value="El Hawamdeya">El Hawamdeya</option>
+                        <option value="El Rehab">El Rehab</option>
+                        <option value="Abu Zaabal">Abu Zaabal</option>
+                        <option value="Henshir">Henshir</option>
+                        <option value="Basioun">Basioun</option>
+                        <option value="Tama">Tama</option>
+                        <option value="El Mansouria">El Mansouria</option>
+                        <option value="Kerdasa">Kerdasa</option>
+                        <option value="El Zorar">El Zorar</option>
+                        <option value="Anwarasy">Anwarasy</option>
+                        <option value="Masa Fetar">Masa Fetar</option>
+                        <option value="El Maienb">El Maienb</option>
+                        <option value="Abu El Nomros">Abu El Nomros</option>
+                        <option value="Shramant">Shramant</option>
+                        <option value="Semnan">Semnan</option>
+                        <option value="Keilla">Keilla</option>
+                        <option value="El Athor">El Athor</option>
+                        <option value="Madinaty">Madinaty</option>
+                        <option value="El Shorouk">El Shorouk</option>
+                        <option value="Dar El Salam">Dar El Salam</option>
+                        <option value="Ramadan">Ramadan</option>
+                        <option value="El Ayat">El Ayat</option>
+                        <option value="El Saf">El Saf</option>
+                        <option value="Atfih">Atfih</option>
+                        <option value="New Heliopolis">New Heliopolis</option>
+                        <option value="El Mostaqbal">El Mostaqbal</option>
+                        <option value="Alexandria">Alexandria</option>
+                        <option value="Ismailia">Ismailia</option>
+                        <option value="Suez">Suez</option>
+                        <option value="Port Said">Port Said</option>
+                        <option value="Dakahlia">Dakahlia</option>
+                        <option value="Mallawi">Mallawi</option>
+                        <option value="Gharbia">Gharbia</option>
+                        <option value="Sharqia">Sharqia</option>
+                        <option value="Damietta">Damietta</option>
+                        <option value="Kafr El Sheikh">Kafr El Sheikh</option>
+                        <option value="Beheira">Beheira</option>
+                        <option value="Monufia">Monufia</option>
+                        <option value="Faiyum">Faiyum</option>
+                        <option value="Beni Suef">Beni Suef</option>
+                        <option value="Asyut">Asyut</option>
+                        <option value="Sohag">Sohag</option>
+                        <option value="Qena">Qena</option>
+                        <option value="Luxor">Luxor</option>
+                        <option value="Aswan">Aswan</option>
+                        <option value="Minya">Minya</option>
+                        <option value="Marsa Matrouh">Marsa Matrouh</option>
+                        <option value="Hurghada">Hurghada</option>
+                        <option value="North Coast">North Coast</option>
+                        <option value="El Alamein">El Alamein</option>
+                        <option value="Sidi Abdelrahman">Sidi Abdelrahman</option>
+                        <option value="Hammam City">Hammam City</option>
+                        <option value="Sharm El Sheikh">Sharm El Sheikh</option>
+                        <option value="Safaga">Safaga</option>
+                        <option value="Misr">Misr</option>
+                        <option value="Ras Ghareb">Ras Ghareb</option>
+                        <option value="Marsa Alam">Marsa Alam</option>
+                        <option value="Makadi Bay">Makadi Bay</option>
+                        <option value="Dahab">Dahab</option>
+                        <option value="El Tor">El Tor</option>
+                        <option value="South Sinai">South Sinai</option>
                     </select>
-                    <div class="error-message" id="governorate-error">الرجاء اختيار المحافظة</div>
+                    <div class="error-message" id="governorate-error">Please select a governorate</div>
                 </div>
             </div>
 
             <div class="payment-section">
-                <h2>طريقة الدفع</h2>
+                <h2>Payment Method</h2>
                 <div class="payment-options">
                     <div class="payment-option" onclick="selectPayment('cash')">
                         <input type="radio" id="cash-payment" name="payment" value="cash" checked>
-                        <label for="cash-payment">الدفع عند الاستلام</label>
+                        <label for="cash-payment">Cash on Delivery</label>
                     </div>
 
                     <div class="payment-option" onclick="selectPayment('vodafone')">
                         <input type="radio" id="vodafone-payment" name="payment" value="vodafone">
-                        <label for="vodafone-payment">فودافون كاش</label>
+                        <label for="vodafone-payment">Vodafone Cash</label>
                     </div>
                     <div class="payment-details" id="vodafone-details">
-                        <p>الرجاء التحويل إلى رقم فودافون كاش: 01012345678</p>
-                        <p>يرجى كتابة رقم الطلب في ملاحظات التحويل</p>
+                        <p>Please transfer to Vodafone Cash number: 01012345678</p>
+                        <p>Please write the order number in the transfer notes</p>
                     </div>
 
                     <div class="payment-option" onclick="selectPayment('instapay')">
                         <input type="radio" id="instapay-payment" name="payment" value="instapay">
-                        <label for="instapay-payment">إنستاباي</label>
+                        <label for="instapay-payment">InstaPay</label>
                     </div>
                     <div class="payment-details" id="instapay-details">
-                        <p>الرجاء التحويل إلى رقم إنستاباي: 01087654321</p>
-                        <p>يرجى كتابة رقم الطلب في ملاحظات التحويل</p>
+                        <p>Please transfer to InstaPay number: 01087654321</p>
+                        <p>Please write the order number in the transfer notes</p>
                     </div>
                 </div>
             </div>
@@ -695,22 +695,22 @@
 
         <div class="right-section">
             <div class="order-summary">
-                <h2>ملخص الطلب</h2>
+                <h2>Order Summary</h2>
                 <div id="order-items">
-                    <!-- سيتم ملؤها ديناميكيًا -->
+                    <!-- Will be filled dynamically -->
                 </div>
 
                 <div class="order-summary">
-                    <p>سعر المنتجات: <span id="subtotal">0.00</span> جنيه</p>
-                    <p>تكلفة الشحن: <span id="shipping">0.00</span> جنيه</p>
-                    <p>الخصم: <span id="discount">0.00</span> جنيه</p>
+                    <p>Product Price: <span id="subtotal">0.00</span> EGP</p>
+                    <p>Shipping Cost: <span id="shipping">0.00</span> EGP</p>
+                    <p>Discount: <span id="discount">0.00</span> EGP</p>
                     <p style="font-size: 18px; color: var(--primary-color); font-weight: 700; margin-top: 20px; padding-top: 15px; border-top: 1px dashed var(--accent-color);">
-                        الإجمالي النهائي: <span id="total">0.00</span> جنيه
+                        Final Total: <span id="total">0.00</span> EGP
                     </p>
                 </div>
 
                 <button class="checkout-button" onclick="submitOrder()">
-                    <i class="fas fa-lock"></i> تأكيد الطلب
+                    <i class="fas fa-lock"></i> Confirm Order
                 </button>
             </div>
         </div>
@@ -762,19 +762,21 @@
 
 // دالة لإضافة زر تعديل المحافظة
 function addGovernorateEditButton() {
-    const governorateContainer = document.querySelector('.input-group:has(#governorate)');
-        governorateContainer.innerHTML += `
-            <button onclick="enableGovernorateEdit()" 
-                    style="margin-top: 10px; padding: 8px 15px; 
-                           background: #F8E7F6; 
-                           border: 1px solid #4B164C; 
-                           border-radius: 12px;
-                           color: #4B164C; 
-                           cursor: pointer;
-                           transition: all 0.3s ease;">
-                <i class="fas fa-edit"></i> تغيير المحافظة
-            </button>
-        `;
+    const governorateContainer = document.getElementById('governorate').parentElement;
+    // إنشاء زر التعديل ديناميكيًا وإضافته بدون تعديل innerHTML
+    const editButton = document.createElement('button');
+    editButton.type = 'button';
+    editButton.onclick = enableGovernorateEdit;
+    editButton.style.marginTop = '10px';
+    editButton.style.padding = '8px 15px';
+    editButton.style.background = '#F8E7F6';
+    editButton.style.border = '1px solid #4B164C';
+    editButton.style.borderRadius = '12px';
+    editButton.style.color = '#4B164C';
+    editButton.style.cursor = 'pointer';
+    editButton.style.transition = 'all 0.3s ease';
+    editButton.innerHTML = '<i class="fas fa-edit"></i> تغيير المحافظة';
+    governorateContainer.appendChild(editButton);
     }
 
 

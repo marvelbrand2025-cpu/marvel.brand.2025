@@ -13,8 +13,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
     rel="stylesheet">
 
+        <link rel="icon" href="img/987.png">
+
+
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="css/owl.theme.default.min.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
     <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
@@ -24,190 +29,363 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 <style>
-  /* تنسيقات الهيدر العامة */
+   /* تنسيقات الهيدر الأساسية */
   .header {
-    background: #ece5c8;
+    background: #2c3782;
     padding: 15px 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
     z-index: 999;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .header.scrolled {
+    padding: 10px 0;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+    background: #2a2b74;
+  }
+
+  .header__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
   }
 
   .header__logo img {
-    max-height: 85px;
+    max-height: 60px;
+    transition: all 0.3s ease;
   }
 
-  /* تنسيقات نسخة الكمبيوتر */
-  .desktop-header {
-    display: block;
-  }
-
-  /* القائمة الرئيسية للكمبيوتر */
-  .header__menu ul {
+  /* تنسيقات القائمة */
+  .header__menu {
     display: flex;
-    gap: 20px;
-    list-style: none;
     margin: 0;
     padding: 0;
+    list-style: none;
   }
 
-  .header__menu ul li {
+  .header__menu li {
+    margin: 0 15px;
     position: relative;
   }
 
-  .header__menu ul li ul.dropdown {
-    display: none;
+  .header__menu li a {
+    color: #e1d5ca;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 8px 0;
+    position: relative;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    display: inline-block;
+  }
+
+  .header__menu li a::after {
+    content: '';
     position: absolute;
-    background: white;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #9d7f49, #ede7db);
+    transition: width 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
 
-  .header__menu ul li:hover ul.dropdown {
-    display: block;
+  .header__menu li a:hover::after,
+  .header__menu li.active a::after {
+    width: 100%;
   }
 
-  /* تنسيقات الكارت */
+  /* تنسيقات الأيقونات */
+  .header__icons {
+    display: flex;
+    align-items: center;
+  }
+
+  .header__search,
+  .header__account,
+  .header__cart {
+    margin-left: 25px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .header__search i,
+  .header__account i,
+  .header__cart i {
+    font-size: 22px;
+    color: #e1d5ca;
+    transition: all 0.3s ease;
+  }
+
+  .header__search:hover,
+  .header__account:hover,
+  .header__cart:hover {
+    transform: translateY(-3px);
+  }
+
+  .header__search:hover i,
+  .header__account:hover i,
+  .header__cart:hover i {
+    color: #e1be7c;
+  }
+
+  /* تأثيرات السلة */
   .cart-link {
     position: relative;
-    display: inline-block;
-    margin-right: 15px;
-  }
-
-  .cart-link img {
-    width: 20px;
-    height: auto;
+    display: block;
   }
 
   .cart-link span {
     position: absolute;
-    top: -10px;
-    right: -10px;
-    background: #111;
+    top: -8px;
+    right: -8px;
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
     color: white;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    width: 18px;
-    height: 18px;
     font-size: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: 700;
+    box-shadow: 0 2px 5px rgba(108, 92, 231, 0.3);
+    transition: all 0.3s ease;
   }
 
-  /* تنسيقات نسخة الموبايل */
-  .mobile-header {
-    display: none;
-    background: #ece5c8;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  .cart-link:hover span {
+    transform: scale(1.1);
   }
 
-  /* القائمة الجانبية للموبايل */
-  .mobile-nav {
+  /* زر القائمة الموبايل */
+  .header__mobile-toggle {
     display: none;
+    width: 30px;
+    height: 20px;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 25px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1002;
+  }
+
+  .header__mobile-toggle span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: #eacba6;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transform-origin: left center;
+  }
+
+  .header__mobile-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(1px, -1px);
+    background: #6c5ce7;
+  }
+
+  .header__mobile-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .header__mobile-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(1px, 1px);
+    background: #6c5ce7;
+  }
+
+  /* القائمة الجانبية للموبايل - تصميم كبطاقة */
+  .mobile-menu {
     position: fixed;
     top: 0;
-    left: 0;
-    width: 80%;
+    right: -320px;
+    width: 320px;
     height: 100%;
     background: white;
-    z-index: 1000;
-    padding: 20px;
+    z-index: 1001;
+    padding: 30px;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
     overflow-y: auto;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+    border-radius: 20px 0 0 20px;
+    transform-origin: right center;
   }
 
-  .mobile-nav.active {
-    transform: translateX(0);
+  .mobile-menu.active {
+    right: 0;
+    transform: scaleX(1);
   }
 
-  .mobile-nav ul {
+  .mobile-menu::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95));
+    z-index: -1;
+    border-radius: 20px 0 0 20px;
+  }
+
+  .mobile-menu__close {
+    text-align: right;
+    margin-bottom: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .mobile-menu__close:hover {
+    transform: rotate(90deg);
+  }
+
+  .mobile-menu__close i {
+    font-size: 24px;
+    color: #6c5ce7;
+  }
+
+  .mobile-menu__nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
   }
 
-  .mobile-nav li {
-    margin-bottom: 15px;
+  .mobile-menu__nav li {
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.4s ease;
   }
 
-  .mobile-nav li a {
-    text-decoration: none;
+  .mobile-menu.active .mobile-menu__nav li {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .mobile-menu__nav li:nth-child(1) { transition-delay: 0.1s; }
+  .mobile-menu__nav li:nth-child(2) { transition-delay: 0.2s; }
+  .mobile-menu__nav li:nth-child(3) { transition-delay: 0.3s; }
+  .mobile-menu__nav li:nth-child(4) { transition-delay: 0.4s; }
+
+  .mobile-menu__nav a {
     color: #333;
     font-size: 18px;
-  }
-
-  /* أضف ده في الـ CSS */
-.mobile-nav {
-  transform: translateX(-100%);
-  transition: transform 0.3s ease-in-out;
-  display: block; /* مهم جدًا! */
-}
-
-.mobile-nav.active {
-  transform: translateX(0);
-}
-
-.mobile-overlay.active {
-  display: block;
-}
-
-
-  /* زر القائمة الموبايل */
-  .menu-toggle {
-    width: 30px;
-    height: 22px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    cursor: pointer;
-  }
-
-  .menu-toggle span {
-    display: block;
-    height: 3px;
-    background: #111;
-    border-radius: 2px;
+    font-weight: 600;
+    text-decoration: none;
     transition: all 0.3s ease;
+    display: inline-block;
+    padding: 8px 0;
+    position: relative;
+  }
+
+  .mobile-menu__nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #6c5ce7, #a29bfe);
+    transition: width 0.3s ease;
+  }
+
+  .mobile-menu__nav a:hover::after {
+    width: 100%;
+  }
+
+  .mobile-menu__account {
+    margin-top: 40px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease 0.4s;
+  }
+
+  .mobile-menu.active .mobile-menu__account {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobile-menu__account a {
+    display: flex;
+    align-items: center;
+    color: #333;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .mobile-menu__account i {
+    margin-left: 10px;
+    font-size: 20px;
+    color: #6c5ce7;
   }
 
   /* الـ Overlay للقائمة الجانبية */
-  .mobile-overlay {
-    display: none;
+  .mobile-menu-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.5);
-    z-index: 999;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+    backdrop-filter: blur(5px);
   }
 
-  .mobile-overlay.active {
-    display: block;
+  .mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* تأثيرات عند التمرير */
+  @media (min-width: 992px) {
+    .header.scrolled .header__logo img {
+      max-height: 50px;
+    }
+    
+    .header.scrolled .header__menu li a {
+      padding: 5px 0;
+    }
   }
 
   /* ميديا كويريز */
   @media (max-width: 991px) {
-    .desktop-header {
+    .header__nav {
       display: none;
     }
     
-    .mobile-header {
-      display: block;
+    .header__mobile-toggle {
+      display: flex;
     }
-  }
-
-  @media (min-width: 768px) {
-    .menu-toggle {
+    
+    .header__icons {
+      margin-left: auto;
+    }
+    
+    .header__search,
+    .header__account {
       display: none;
     }
   }
-    * {
-    cursor: none !important;
+
+  @media (max-width: 575px) {
+    .header__logo img {
+      max-height: 50px;
+    }
+    
+    .mobile-menu {
+      width: 280px;
+      padding: 25px;
+    }
   }
+   
   
   .liquid-cursor {
     position: fixed;
@@ -230,201 +408,1063 @@
     75% { border-radius: 60% 40% 60% 40% / 60% 40% 60% 40%; }
     100% { border-radius: 40% 60% 40% 60% / 40% 60% 40% 60%; }
   }
+
+  
+/* Responsive */
+@media (max-width: 991px) {
+    .header__nav {
+        display: none;
+    }
+    
+    .header__mobile-toggle {
+        display: flex;
+    }
+    
+    .header__icons {
+        margin-left: 20px;
+    }
+}
+
+@media (max-width: 575px) {
+    .header__logo img {
+        max-height: 40px;
+    }
+    
+    .header__search,
+    .header__account {
+        display: none;
+    }
+}
+
+/* إضافة هذه الأنيميشنات إلى قسم الـ CSS */
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .header__logo img {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .header__cart:hover i {
+    animation: bounce 0.8s ease infinite;
+  }
+  
+  .mobile-menu {
+    animation: pulse 0.5s ease-out forwards;
+  }
+  
+  /* تأثيرات الظل للهيدر */
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .header.scrolled::after {
+    opacity: 1;
+  }
+
+/* Hero Section - Enhanced Version */
+.hero {
+    position: relative;
+    height: 100vh; /* ملء الشاشة بدون نقصان */
+    min-height: 700px;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+.categories {
+    margin-top: 0;
+    padding-top: 90px;
+}
+
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: transparent;
+    z-index: 3;
+}
+
+    
+
+.categories {
+    margin-top: 0;
+    padding-top: 0; /* إزالة الحشوة العلوية */
+    position: relative;
+    z-index: 2; /* للتأكد من ظهوره فوق أي عناصر */
+}
+
+
+.hero__item {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero__bg {
+    position: absolute;
+    top: 0;
+    left: -3px;
+    width: 107%;
+    height: 103%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+.hero__item:hover .hero__bg {
+    transform: scale(1.1);
+}
+
+.hero__content {
+    position: relative;
+    z-index: 8;
+    max-width: 678px;
+    background-color: rgb(212 215 239 / 44%);
+    padding: 58px;
+    backdrop-filter: blur(6px);
+    border-radius: 67px;
+    margin: 105px;
+    text-align: center;
+}
+
+/* إزالة أي هوامش أو حواشي غير ضرورية */
+.categories {
+    margin-top: 0;
+    padding-top: 60px; /* بداية القسم التالي مباشرة */
+}
+
+
+
+.hero__content h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: 25px;
+    color: #2c3782;
+    line-height: 1.2;
+    font-weight: 800;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    letter-spacing: -0.5px;
+}
+
+.hero__content p {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    margin-bottom: 35px;
+    color: #333;
+    line-height: 1.6;
+}
+
+.primary-btn {
+    display: inline-block;
+    padding: 15px 40px;
+    background-color: #2c3782;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    font-size: 1.1rem;
+    border: 2px solid transparent;
+    box-shadow: 0 5px 15px rgba(44, 55, 130, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.primary-btn:hover {
+    background-color: #3a4799;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(44, 55, 130, 0.4);
+}
+
+.primary-btn:active {
+    transform: translateY(-2px);
+}
+
+/* Hero Overlay */
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.1));
+    z-index: 2;
+}
+
+/* Hero Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero__content h1 {
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+.hero__content p {
+    animation: fadeInUp 0.8s ease-out 0.5s both;
+}
+
+.hero__content .primary-btn {
+    animation: fadeInUp 0.8s ease-out 0.7s both;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+    .hero {
+        height: 80vh;
+        min-height: 500px;
+    }
+    
+    .hero__content {
+        max-width: 90%;
+        padding: 40px;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero {
+        height: 70vh;
+        min-height: 400px;
+    }
+    
+    .hero__content {
+        padding: 30px;
+        margin: 15px;
+    }
+    
+    .hero__content h1 {
+        font-size: 2.2rem;
+    }
+    
+    .primary-btn {
+        padding: 12px 30px;
+    }
+}
+
+@media (max-width: 575px) {
+    .hero {
+        height: 60vh;
+        min-height: 300px;
+    }
+    
+    .hero__content {
+        padding: 25px 20px;
+        backdrop-filter: blur(5px);
+    }
+    
+    .hero__content h1 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+    
+    .hero__content p {
+        font-size: 1rem;
+        margin-bottom: 25px;
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+    .hero {
+        height: 80vh;
+        min-height: 500px;
+    }
+    
+    .hero__content {
+        max-width: 80%;
+        padding: 30px;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero {
+        height: 70vh;
+        min-height: 400px;
+    }
+    
+    .hero__content {
+        max-width: 90%;
+        padding: 25px;
+        margin: 10px;
+    }
+    
+    .hero__content h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .hero {
+        height: 60vh;
+        min-height: 300px;
+    }
+    
+    .hero__content {
+        padding: 20px;
+        text-align: center;
+    }
+    
+    .primary-btn {
+        padding: 10px 25px;
+    }
+}
+
+/* Featured Products */
+.featured-products {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+}
+
+.products__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+.product__item {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.product__item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.product__image {
+    position: relative;
+    overflow: hidden;
+}
+
+.product__image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: all 0.5s ease;
+}
+
+.product__item:hover .product__image img {
+    transform: scale(1.05);
+}
+
+.product__actions {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.product__item:hover .product__actions {
+    opacity: 1;
+}
+
+.product__actions a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.product__actions a:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.product__info {
+    padding: 20px;
+    text-align: center;
+}
+
+.product__info h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.product__info h3 a {
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.product__info h3 a:hover {
+    color: #000;
+}
+
+.product__price {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .products__grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    .hero__content h1 {
+        font-size: 36px;
+    }
+    
+    .categories__grid,
+    .products__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 575px) {
+    .hero {
+        height: 60vh;
+    }
+    
+    .hero__content {
+        padding: 61px;
+    }
+    
+    .hero__content h1 {
+        font-size: 28px;
+    }
+    
+    .categories__grid,
+    .products__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+/* تنسيقات الأزرار كما في الصورة */
+.header__auth {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.language-switcher {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.language-switcher i {
+    margin-left: 5px;
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
+
+.language-switcher:hover i {
+    transform: rotate(180deg);
+}
+
+.signin-btn, .cart-btn {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.signin-btn {
+    background-color: #2e2271;
+    color: #eacba6;
+    border: 1px solid #9ea6eb;
+}
+
+.signin-btn:hover {
+    background-color: #3733a8;
+    box-shadow: 0 2px 8px rgba(61, 55, 55, 0.144);
+    transform: translateY(-1px);
+}
+
+.signin-btn i {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.cart-btn {
+    background-color: #4837c4;
+    color: #eacba6;
+    position: relative;
+}
+
+.cart-btn:hover {
+    background-color: #5649c0;
+    box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+    transform: translateY(-1px);
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #110a73;
+    color: #eacba6;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(19, 4, 162, 0.447);
+    transition: all 0.3s ease;
+}
+
+.cart-btn:hover .cart-count {
+    transform: scale(1.1);
+}
+
+/* تأثيرات للهواتف */
+@media (max-width: 768px) {
+    .header__auth {
+        gap: 10px;
+    }
+    
+    .signin-btn, .cart-btn {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+    
+    .signin-btn span, .language-switcher {
+        display: none;
+    }
+    
+    .signin-btn {
+        padding: 8px;
+        border-radius: 50%;
+    }
+    
+    .signin-btn i {
+        margin-right: 0;
+    }
+}
+
+/* إضافة هذه الأنيميشنات إلى CSS */
+@keyframes pulse {
+    0% { transform: translateY(-1px) scale(1); }
+    50% { transform: translateY(-1px) scale(1.05); }
+    100% { transform: translateY(-1px) scale(1); }
+}
+
+.pulse {
+    animation: pulse 0.5s ease;
+}
+
+/* تأثيرات الظل */
+.signin-btn::after, .cart-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    opacity: 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.3s ease;
+}
+
+.signin-btn:hover::after, .cart-btn:hover::after {
+    opacity: 0.3;
+}
+
+/* تأثيرات الانتقال */
+.signin-btn i, .cart-btn i {
+    transition: transform 0.3s ease;
+}
+
+.signin-btn:hover i, .cart-btn:hover i {
+    transform: translateX(2px);
+}
+
+
+/* تنسيق زر الترحيب */
+.welcome-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 15px;
+    border-radius: 20px;
+    background-color: #2e2271;
+    color: #eacba6;
+    font-size: 14px;
+    font-weight: 500;
+    margin-right: 10px;
+    border: 1px solid #9ea6eb;
+    transition: all 0.3s ease;
+}
+
+.welcome-btn:hover {
+    background-color: #3733a8;
+    box-shadow: 0 2px 8px rgba(61, 55, 55, 0.144);
+    transform: translateY(-1px);
+}
+
+/* إزالة تأثيرات زر الخروج */
+#logout-btn {
+    display: none !important;
+}
+
+
+
+.hero-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.5)"/><circle cx="30" cy="70" r="0.8" fill="rgba(255,255,255,0.5)"/><circle cx="80" cy="20" r="0.6" fill="rgba(255,255,255,0.5)"/><circle cx="90" cy="90" r="0.8" fill="rgba(255,255,255,0.5)"/></svg>');
+    background-size: 200px 200px;
+    opacity: 0.3;
+    animation: particlesMove 20s linear infinite;
+}
+
+@keyframes particlesMove {
+    from { background-position: 0 0; }
+    to { background-position: 200px 200px; }
+}
+
+.logout-icon {
+    margin-left: 8px;
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.welcome-btn:hover .logout-icon {
+    transform: translateX(3px);
+    color: #ff6b6b;
+}
+
+.logout-confirmation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.confirmation-box {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.confirmation-box p {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.confirm-btn, .cancel-btn {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.confirm-btn {
+    background: #ff6b6b;
+    color: white;
+}
+
+.cancel-btn {
+    background: #ddd;
+}
+
+/* Welcome Modal Styles */
+.welcome-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(10px);
+    z-index: 99999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.welcome-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.welcome-card {
+    background: linear-gradient(135deg, #2c3782 0%, #6c5ce7 100%);
+    width: 90%;
+    max-width: 500px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+    transform: scale(0.8);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.welcome-modal.active .welcome-card {
+    transform: scale(1);
+}
+
+.welcome-header {
+    padding: 30px;
+    text-align: center;
+    background: rgba(255,255,255,0.1);
+}
+
+.welcome-header img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 15px;
+    animation: float 6s ease-in-out infinite;
+}
+
+.welcome-header h2 {
+    color: white;
+    font-size: 28px;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+.welcome-header p {
+    color: rgba(255,255,255,0.8);
+    font-size: 16px;
+}
+
+.welcome-body {
+    padding: 30px;
+    text-align: center;
+}
+
+.welcome-body p {
+    color: white;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.welcome-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.welcome-btn {
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.welcome-btn.primary {
+    background: white;
+    color: #2c3782;
+    box-shadow: 0 5px 15px rgba(255,255,255,0.3);
+}
+
+.welcome-btn.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255,255,255,0.4);
+}
+
+.welcome-btn.secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255,255,255,0.3);
+}
+
+.welcome-btn.secondary:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.5);
+}
+
+.welcome-features {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.welcome-feature {
+    text-align: center;
+    color: white;
+    font-size: 14px;
+}
+
+.welcome-feature i {
+    display: block;
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #a29bfe;
+}
+
+/* Particles effect */
+.welcome-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.3;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.5)"/><circle cx="30" cy="70" r="0.8" fill="rgba(255,255,255,0.5)"/><circle cx="80" cy="20" r="0.6" fill="rgba(255,255,255,0.5)"/><circle cx="90" cy="90" r="0.8" fill="rgba(255,255,255,0.5)"/></svg>');
+    background-size: 200px 200px;
+    animation: particlesMove 20s linear infinite;
+}
+
+@keyframes particlesMove {
+    from { background-position: 0 0; }
+    to { background-position: 200px 200px; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 575px) {
+    .welcome-card {
+        width: 95%;
+    }
+    
+    .welcome-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .welcome-btn {
+        width: 100%;
+    }
+}
+
 </style>
 
     
 
 
 <body>
+
+
+
+
  <!-- Header Section Begin -->
-<header class="header desktop-header">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Logo -->
-                <div class="col-6 col-md-3">
-                    <div class="header__logo">
-                        <a href="index.html"><img src="img/987.png" alt="Logo"></a>
-                    </div>
-                </div>
-
-                <div class="liquid-cursor"></div>
-
-
-                <!-- Navigation -->
-                <div class="col-6 col-md-6 d-none d-md-block">
-                    <nav class="header__menu">
-                        <ul class="d-flex justify-content-center gap-4 list-unstyled mb-0">
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="./shop.html">Shop</a></li>
-                            
-                                
-                            
-                            <li><a href="./contact.html">Contact</a></li>
-                        </ul>
-                    </nav>
-                </div>
-
-                <!-- Cart -->
-                <div class="col-6 col-md-3 d-flex justify-content-end align-items-center">
-                    <a href="cart.html" class="cart-link position-relative me-3">
-                        <img src="img/icon/cart.png" alt="Cart" style="width: 22px;">
-                        <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark text-white">0</span>
-                    </a>
-                </div>
+<!-- Header Section Begin -->
+<header class="header">
+    <div class="container">
+        <div class="header__wrapper">
+            <!-- Logo -->
+            <div class="header__logo">
+                <a href="index.html"><img src="img/987.png" alt="Logo"></a>
             </div>
-        </div>
-    </header>
 
-    <!-- نسخة الموبايل -->
-    <header class="mobile-header">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-6">
-                    <div class="header__logo">
-                        <a href="index.html"><img src="img/987.png" alt="Logo"></a>
-                    </div>
-                </div>
-                <div class="col-6 d-flex justify-content-end">
-                    <a href="cart.html" class="cart-link position-relative me-3">
-                        <img src="img/icon/cart.png" alt="Cart" style="width: 22px;">
-                        <span id="mobile-cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark text-white">0</span>
-                    </a>
-                    <!-- Toggle Button (Hamburger) -->
-<div class="menu-toggle d-md-none" id="mobile-menu-toggle">
-  <span></span>
-  <span></span>
-  <span></span>
+            <!-- Main Navigation -->
+            <nav class="header__nav">
+                <ul class="header__menu">
+                    <li class="active"><a href="./index.html">Home</a></li>
+                    <li><a href="./shop.html">Shop</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header__icons">
+    <div id="auth-buttons">
+        <a href="sign up.html" class="signin-btn">
+            <i class="icon_profile"></i>
+            <span>Sign Up</span>
+        </a>
+        <a href="cart.html" class="cart-btn">
+            <i class="icon_bag_alt"></i>
+            <span class="cart-count">0</span>
+        </a>
+    </div>
+    <div id="user-greeting" style="display: none;">
+        <span class="welcome-btn">
+            Welcome, <span id="username-display"></span>
+        </span>
+        <a href="cart.html" class="cart-btn">
+            <i class="icon_bag_alt"></i>
+            <span class="cart-count">0</span>
+        </a>
+    </div>
 </div>
 
+                <div class="header__mobile-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </div>
         </div>
-    </header>
+    </div>
+</header>
 
-    <div class="mobile-overlay" id="mobile-overlay"></div>
-<nav class="mobile-nav" id="mobile-nav">
-    <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="shop.html">Shop</a></li>
-        <li class="has-submenu">
-            
-        </li>
-        <li><a href="./contact.html">Contact</a></li>
-    </ul>
-</nav>
+<!-- Mobile Menu -->
+<div class="mobile-menu">
+    <div class="mobile-menu__close">
+        <i class="icon_close"></i>
+    </div>
+    <nav class="mobile-menu__nav">
+        <ul>
+            <li class="active"><a href="./index.html">Home</a></li>
+            <li><a href="./shop.html">Shop</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="mobile-menu__account">
+        <a href="#"><i class="icon_profile"></i> My Account</a>
+    </div>
+</div>
+<div class="mobile-menu-overlay"></div>
+<!-- Header Section End -->
 
 
-    <!-- Header Section End -->
-
-    <!-- Hero Section Begin -->
-    <section class="hero">
-        <div class="hero__slider owl-carousel">
-            <div class="hero__items set-bg" data-setbg="img/hero/hero-1.png">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-5 col-lg-7 col-md-8">
-                            <div class="hero__text">
-                                <h6>Summer Collection</h6>
-                                <h2>The best women's clothing models for the year 2025</h2>
-                                <p></p>
-                                <a href="girl.html" class="primary-btn">Shop now <span class="arrow_right"></span></a>
-                                <div class="hero__social">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="hero__items set-bg" data-setbg="img/hero/hero-1.jpg">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-5 col-lg-7 col-md-8">
-                            <div class="hero__text">
-                                <h6>Summer Collection</h6>
-                                <h2>The best men's clothing models for the year 2025</h2>
-                                <p></p>
-                                <a href="men.html" class="primary-btn">Shop now <span class="arrow_right"></span></a>
-                                <div class="hero__social">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="hero__items set-bg" data-setbg="img/hero/hero-2.png">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-5 col-lg-7 col-md-8">
-                            <div class="hero__text">
-                                <h6>Summer Collection</h6>
-                                <h2>The best kids clothing models for the year 2025</h2>
-                                <p></p>
-                                <a href="child.html" class="primary-btn">Shop now <span class="arrow_right"></span></a>
-                                <div class="hero__social">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+   
+<!-- Hero Section -->
+<!-- Hero Section -->
+ 
+<section class="hero">
+    <div class="hero__slider owl-carousel">
+        <!-- الشريحة الأولى (الأصلية) -->
+        <div class="hero__item">
+            <div class="hero__bg" style="background-image: url('img/hero/hero-1.jpg')"></div>
+            <div class="container">
+                <div class="hero__content">
+                    <h1>New Collection 2025</h1>
+                    <p>Discover our latest fashion trends with exclusive designs for the modern individual</p>
+                    <a href="shop.html" class="primary-btn">SHOP NOW</a>
                 </div>
             </div>
         </div>
-        
-    </section>
-    <!-- Hero Section End -->
 
-
-    <!-- Banner Section Begin -->
-    <section class="banner spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7 offset-lg-4">
-                    <div class="banner__item">
-                        <div class="banner__item__pic">
-                            <img src="img\1 (2).jpg" alt="">
-                        </div>
-                        <div class="banner__item__text">
-                            <h2>Men's clothing</h2>
-                            <a href="men.html">Shop now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5">
-                    <div class="banner__item banner__item--middle">
-                        <div class="banner__item__pic">
-                            <img src="img\1 (1).jpg" alt="">
-                        </div>
-                        <div class="banner__item__text">
-                            <h2>Women's clothing</h2>
-                            <a href="girl.html">Shop now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-7">
-                    <div class="banner__item banner__item--last">
-                        <div class="banner__item__pic">
-                            <img src="img\1 (3).jpg" alt="">
-                        </div>
-                        <div class="banner__item__text">
-                            <h2>Children's clothing</h2>
-                            <a href="child.html">Shop now</a>
-                        </div>
-                    </div>
+        <!-- الشريحة الثانية -->
+        <div class="hero__item">
+            <div class="hero__bg" style="background-image: url('img/hero/hero-1.png')"></div>
+            <div class="container">
+                <div class="hero__content">
+                    <h1>Summer Sale 2025</h1>
+                    <p>Get up to 50% off on selected items. Limited time offer!</p>
+                    <a href="shop.html" class="primary-btn">SHOP SALE</a>
                 </div>
             </div>
         </div>
-    </section>
+
+        <!-- الشريحة الثالثة -->
+        <div class="hero__item">
+            <div class="hero__bg" style="background-image: url('img/hero/hero-2.png')"></div>
+            <div class="container">
+                <div class="hero__content">
+                    <h1>Premium Quality</h1>
+                    <p>Experience the finest materials and craftsmanship in our premium collection</p>
+                    <a href="shop.html" class="primary-btn">EXPLORE PREMIUM</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- القسم التالي يبدأ مباشرة -->
+<section class="categories">
+    <!-- محتوى قسم الفئات -->
+</section>
+
+<!-- Categories Section -->
+<section class="categories">
+    <div class="container">
+        <div class="section-title">
+            <h2>Shop by Category</h2>
+        </div>
+        <div class="categories__grid">
+            <div class="category__item">
+                <a href="men.html">
+                    <img src="img\1 (2).jpg" alt="Men">
+                    <h3>Men</h3>
+                </a>
+            </div>
+            <div class="category__item">
+                <a href="girl.html">
+                    <img src="img\1 (1).jpg" alt="Women">
+                    <h3>Women</h3>
+                </a>
+            </div>
+            <div class="category__item">
+                <a href="child.html">
+                    <img src="img\1 (3).jpg" alt="Kids">
+                    <h3>Kids</h3>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
     <!-- Banner Section End -->
 
     <!-- Product Section Begin -->
@@ -770,10 +1810,9 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="instagram__text">
-                        <h2>Instagram</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
-                        <h3>#Male_Fashion</h3>
+                        <h2>The vision</h2>
+                        <p>Our vision is to delight our customers and provide affordable service for all ages.</p>
+                        <h3>#Marvel_Fashion</h3>
                     </div>
                 </div>
             </div>
@@ -835,7 +1874,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__logo">
-                            <a href="#"><img src="img/footer-logo.png" alt=""></a>
+                            <a href="#"><img src="img/987.png" alt=""></a>
                         </div>
                         <p>The customer is at the heart of our unique business model, which includes design.</p>
                         <a href="#"><img src="img/payment.png" alt=""></a>
@@ -906,44 +1945,134 @@
     <!-- Search End -->
 
     <script>
-
-
+// متغيرات عامة
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let discount = 0;
 let shippingCost = 0;
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Mobile Menu Toggle
-    const mobileMenuToggle = document.querySelector('.canvas__open');
-    const mobileMenuClose = document.querySelector('.mobile-menu-close');
-    const mobileMenuWrapper = document.querySelector('.mobile-menu-wrapper');
-    const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
-    
-    if (mobileMenuToggle) {
-        mobileMenuToggle.addEventListener('click', function() {
-            mobileMenuWrapper.classList.add('show');
-            mobileMenuOverlay.classList.add('show');
-            document.body.style.overflow = 'hidden';
+    // --------------------------
+    // تأثيرات الهيدر عند التمرير
+    // --------------------------
+    const header = document.querySelector('.header');
+    if (header) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
         });
     }
+
+    // Welcome Modal Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const welcomeModal = document.getElementById('welcomeModal');
+    const closeBtn = document.getElementById('closeWelcome');
     
-    if (mobileMenuClose) {
-        mobileMenuClose.addEventListener('click', function() {
-            mobileMenuWrapper.classList.remove('show');
-            mobileMenuOverlay.classList.remove('show');
-            document.body.style.overflow = '';
-        });
+    // Check if user is new (hasn't seen the modal before and isn't logged in)
+    const hasSeenWelcome = localStorage.getItem('hasSeenWelcome');
+    const isLoggedIn = localStorage.getItem('loggedInUser');
+    
+    if (!hasSeenWelcome && !isLoggedIn) {
+        // Show modal after 3 seconds
+        setTimeout(() => {
+            welcomeModal.classList.add('active');
+        }, 3000);
     }
     
-    if (mobileMenuOverlay) {
-        mobileMenuOverlay.addEventListener('click', function() {
-            mobileMenuWrapper.classList.remove('show');
-            mobileMenuOverlay.classList.remove('show');
-            document.body.style.overflow = '';
-        });
+    // Close button functionality
+    closeBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        welcomeModal.classList.remove('active');
+        localStorage.setItem('hasSeenWelcome', 'true');
+    });
+    
+    // Close when clicking outside the card
+    welcomeModal.addEventListener('click', function(e) {
+        if (e.target === welcomeModal) {
+            welcomeModal.classList.remove('active');
+            localStorage.setItem('hasSeenWelcome', 'true');
+        }
+    });
+    
+    // Don't show again if user signs up or logs in
+    document.querySelector('.welcome-btn.primary').addEventListener('click', function() {
+        localStorage.setItem('hasSeenWelcome', 'true');
+    });
+});
+
+    function showLogoutConfirmation() {
+    const confirmation = document.createElement('div');
+    confirmation.className = 'logout-confirmation';
+    confirmation.innerHTML = `
+        <div class="confirmation-box">
+            <p>هل أنت متأكد من تسجيل الخروج؟</p>
+            <div class="buttons">
+                <button class="confirm-btn">نعم</button>
+                <button class="cancel-btn">لا</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(confirmation);
+    
+    confirmation.querySelector('.confirm-btn').addEventListener('click', () => {
+        // تنظيف الجلسة
+        localStorage.removeItem('loggedInUser');
+        localStorage.removeItem('userData');
+        document.cookie = 'userSession=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        window.location.href = 'index.html';
+    });
+    
+    confirmation.querySelector('.cancel-btn').addEventListener('click', () => {
+        confirmation.remove();
+    });
+}
+
+    // --------------------------
+    // إدارة القائمة الجانبية للموبايل
+    // --------------------------
+    const mobileToggle = document.querySelector('.header__mobile-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const mobileClose = document.querySelector('.mobile-menu__close');
+    const mobileOverlay = document.querySelector('.mobile-menu-overlay');
+    
+    function toggleMobileMenu() {
+        mobileToggle.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        mobileOverlay.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
     }
     
-    // Initialize Slicknav for mobile menu
+    if (mobileToggle) mobileToggle.addEventListener('click', toggleMobileMenu);
+    if (mobileClose) mobileClose.addEventListener('click', toggleMobileMenu);
+    if (mobileOverlay) mobileOverlay.addEventListener('click', toggleMobileMenu);
+
+    // --------------------------
+    // إدارة القائمة القديمة (إذا كانت موجودة)
+    // --------------------------
+    const oldMobileToggle = document.querySelector('.canvas__open');
+    const oldMobileMenu = document.querySelector('.mobile-menu-wrapper, .offcanvas-menu-wrapper');
+    const oldMobileOverlay = document.querySelector('.mobile-menu-overlay, .offcanvas-menu-overlay');
+    const oldMobileClose = document.querySelector('.mobile-menu-close, .offcanvas-menu-close');
+    
+    if (oldMobileToggle && oldMobileMenu && oldMobileOverlay) {
+        function toggleOldMobileMenu() {
+            oldMobileMenu.classList.toggle('show');
+            oldMobileMenu.classList.toggle('active');
+            oldMobileOverlay.classList.toggle('show');
+            oldMobileOverlay.classList.toggle('active');
+            document.body.style.overflow = oldMobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+        
+        oldMobileToggle.addEventListener('click', toggleOldMobileMenu);
+        if (oldMobileClose) oldMobileClose.addEventListener('click', toggleOldMobileMenu);
+        oldMobileOverlay.addEventListener('click', toggleOldMobileMenu);
+    }
+
+    // --------------------------
+    // تهيئة Slicknav للقائمة المتنقلة
+    // --------------------------
     if (typeof $.fn.slicknav !== 'undefined') {
         $('.header__menu').slicknav({
             prependTo: '.mobile-menu',
@@ -952,115 +2081,273 @@ document.addEventListener('DOMContentLoaded', function() {
             closeOnClick: true
         });
     }
+
+    // --------------------------
+// وظائف عربة التسوق المحسنة
+// --------------------------
+const CartManager = {
+    cart: JSON.parse(localStorage.getItem('cart')) || [],
     
-    // Cart functionality
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    // تحديث بيانات السلة في localStorage
+    updateStorage: function() {
+        localStorage.setItem('cart', JSON.stringify(this.cart));
+    },
     
-    function updateCartSummary() {
-        const cartCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-        const cartTotal = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+    // حساب إجمالي الكمية
+    getTotalQuantity: function() {
+        return this.cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    },
+    
+    // حساب الإجمالي المالي
+    getTotalPrice: function() {
+        return this.cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+    },
+    
+    // تحديث واجهة المستخدم
+    updateUI: function() {
+    const cartCount = this.getTotalQuantity();
+    const cartTotal = this.getTotalPrice();
         
-        // Update counters
-        document.querySelectorAll('#cart-count, #mobile-cart-count').forEach(el => {
-            if (el) el.textContent = cartCount;
+        // تحديث العداد في كل الأماكن
+        document.querySelectorAll('.cart-count, #cart-count, #mobile-cart-count').forEach(el => {
+        if (el) {
+            el.textContent = cartCount;
+
+            // خلي العنصر يظهر دايمًا
+            el.style.display = 'flex';
+
+            // لو عايز تميّز لما تكون السلة فاضية بلون رمادي مثلاً:
+            el.style.opacity = cartCount > 0 ? '1' : '0.5';
+        }
+    });
+        
+        // تحديث السعر الإجمالي
+        const priceElements = document.querySelectorAll('.cart-total, #cart-total');
+    priceElements.forEach(el => {
+        if (el) el.textContent = `LE ${cartTotal.toFixed(2)}`;
+    });
+        
+        // تأثير مرئي عند التحديث
+        if (cartCount > 0) {
+            this.animateCartIcon();
+        }
+    },
+    
+    // تأثير حركة لأيقونة السلة
+    animateCartIcon: function() {
+        const cartIcons = document.querySelectorAll('.header__cart i, .cart-btn i');
+        cartIcons.forEach(icon => {
+            if (icon) {
+                icon.style.animation = 'bounce 0.5s';
+                setTimeout(() => {
+                    icon.style.animation = '';
+                }, 500);
+            }
         });
-        
-        // Update total price
-        const priceDiv = document.getElementById('cart-total');
-        if (priceDiv) priceDiv.textContent = `LE ${cartTotal.toFixed(2)}`;
-    }
+    },
     
-    // Add to cart function
-    window.addToCart = function(product) {
-        const existingItem = cart.find(item => item.id === product.id);
+    // إضافة منتج للسلة
+    addItem: function(product) {
+        const existingItem = this.cart.find(item => item.id === product.id);
         
         if (existingItem) {
             existingItem.quantity = (existingItem.quantity || 1) + 1;
         } else {
             product.quantity = 1;
-            cart.push(product);
+            this.cart.push(product);
         }
         
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartSummary();
-        
-        // Optional: Show added to cart message
-        alert('تمت إضافة المنتج إلى السلة');
-    };
+        this.updateStorage();
+        this.updateUI();
+        this.showNotification('تمت إضافة المنتج إلى السلة');
+    },
     
-    // Initial cart update
-    updateCartSummary();
+    // إشعار مرئي
+    showNotification: function(message) {
+        // إزالة أي إشعارات سابقة
+        const oldNotification = document.querySelector('.cart-notification');
+        if (oldNotification) oldNotification.remove();
+        
+        // إنشاء إشعار جديد
+        const notification = document.createElement('div');
+        notification.className = 'cart-notification';
+        
+        // إضافة أيقونة للسلة
+        notification.innerHTML = `
+            <i class="icon_bag_alt"></i>
+            <span>${message}</span>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // إظهار الإشعار
+        setTimeout(() => {
+            notification.classList.add('show');
+        }, 10);
+        
+        // إخفاء الإشعار بعد 3 ثواني
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+        }, 3000);
+    },
+    
+    // تهيئة عند تحميل الصفحة
+    init: function() {
+        this.updateUI();
+        
+        // يمكنك إضافة مستمعين للأحداث هنا إذا لزم الأمر
+        document.addEventListener('cartUpdated', () => {
+            this.updateUI();
+        });
+    }
+};
+
+// تهيئة مدير السلة عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', () => {
+    CartManager.init();
 });
 
+// جعل الدالة متاحة عالمياً
+window.addToCart = function(product) {
+    CartManager.addItem(product);
+};
+
+// --------------------------
+// أنيميشنات CSS الإضافية
+// --------------------------
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+    }
+    
+    .cart-notification {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background: rgba(0, 0, 0, 0.9);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 30px;
+        font-size: 14px;
+        z-index: 9999;
+        opacity: 0;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .cart-notification.show {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+    
+    .cart-notification i {
+        font-size: 16px;
+    }
+    
+    .cart-count {
+        transition: all 0.3s ease;
+    }
+    
+    .cart-count.highlight {
+        animation: pulse 0.5s ease;
+        transform: scale(1.2);
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.3); }
+        100% { transform: scale(1); }
+    }
+`;
+document.head.appendChild(style);
+
+    // --------------------------
+    // تأثيرات التحويم على العناصر
+    // --------------------------
+    const menuItems = document.querySelectorAll('.header__menu li a');
+    menuItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-3px)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+
+    const icons = document.querySelectorAll('.header__search, .header__account, .header__cart');
+    icons.forEach(icon => {
+        icon.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-3px) scale(1.05)';
+        });
+        
+        icon.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+
+    // تأثيرات الشعار
+    const logo = document.querySelector('.header__logo img');
+    if (logo) {
+        logo.addEventListener('mouseenter', function() {
+            this.style.transform = 'rotate(-5deg) scale(1.05)';
+        });
+        
+        logo.addEventListener('mouseleave', function() {
+            this.style.transform = 'rotate(0) scale(1)';
+        });
+    }
+});
+
+// --------------------------
+// تأثيرات المؤشر السائل
+// --------------------------
 const cursor = document.querySelector('.liquid-cursor');
-  
-  document.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-  });
-  
-  // تأثير عند النقر
-  document.addEventListener('mousedown', () => {
-    cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
-    cursor.style.background = 'linear-gradient(45deg, #fd79a8, #e84393)';
-  });
-  
-  document.addEventListener('mouseup', () => {
-    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-    cursor.style.background = 'linear-gradient(45deg, #6c5ce7, #a29bfe)';
-  });
-</script>
-
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const toggleBtn = document.getElementById('mobile-menu-toggle');
-    const mobileNav = document.getElementById('mobile-nav');
-    const overlay = document.getElementById('mobile-overlay');
-
-    toggleBtn.addEventListener('click', function () {
-      mobileNav.classList.toggle('active');
-      overlay.classList.toggle('active');
-      document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+if (cursor) {
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
     });
-
-    overlay.addEventListener('click', function () {
-      mobileNav.classList.remove('active');
-      overlay.classList.remove('active');
-      document.body.style.overflow = '';
+    
+    // تأثير عند النقر
+    document.addEventListener('mousedown', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
+        cursor.style.background = 'linear-gradient(45deg, #fd79a8, #e84393)';
     });
-  });
-</script>
-
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const toggle = document.querySelector('.canvas__open');
-    const closeBtn = document.querySelector('.mobile-menu-close');
-    const menu = document.querySelector('.mobile-menu-wrapper');
-    const overlay = document.querySelector('.mobile-menu-overlay');
-
-    toggle.addEventListener('click', () => {
-      menu.classList.add('show');
-      overlay.classList.add('show');
-      document.body.style.overflow = 'hidden';
+    
+    document.addEventListener('mouseup', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+        cursor.style.background = 'linear-gradient(45deg, #6c5ce7, #a29bfe)';
     });
+    
+    // تأثير عند التحويم على العناصر القابلة للنقر
+    const clickableItems = document.querySelectorAll('a, button, .header__menu li, .header__search, .header__account, .header__cart');
+    clickableItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+            cursor.style.background = 'linear-gradient(45deg, #fd79a8, #e84393)';
+        });
+        
+        item.addEventListener('mouseleave', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+            cursor.style.background = 'linear-gradient(45deg, #6c5ce7, #a29bfe)';
+        });
+    });
+}
 
-    const closeMenu = () => {
-      menu.classList.remove('show');
-      overlay.classList.remove('show');
-      document.body.style.overflow = '';
-    };
-
-    closeBtn.addEventListener('click', closeMenu);
-    overlay.addEventListener('click', closeMenu);
-  });
-</script>
-
-
-
-<script>
+// --------------------------
+// تهيئة jQuery (إذا كانت مستخدمة)
+// --------------------------
+if (typeof $ !== 'undefined') {
     $(document).ready(function(){
         // تهيئة القائمة المتنقلة
         $('.header__menu').slicknav({
@@ -1069,60 +2356,7 @@ const cursor = document.querySelector('.liquid-cursor');
             allowParentLinks: true
         });
 
-        function updateCartSummary() {
-    const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-    const cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    
-    // تحديث العداد والسعر في الـ header
-    document.querySelectorAll('#cart-count, #mobile-cart-count').forEach(el => {
-        el.textContent = cartCount;
-    });
-    
-    const priceDiv = document.querySelector('.header__nav__option .price');
-    if (priceDiv) priceDiv.textContent = `LE ${cartTotal.toFixed(2)}`;
-}
-
-// تأكد من أن هذا الكود موجود في ملف JavaScript الخاص بك
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-function updateCartSummary() {
-    const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-    const cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    
-    // تحديث العداد في كل من نسخة الكمبيوتر والموبايل
-    document.querySelectorAll('#cart-count, #mobile-cart-count').forEach(el => {
-        el.textContent = cartCount;
-    });
-    
-    // تحديث السعر في نسخة الكمبيوتر
-    const priceDiv = document.getElementById('cart-total');
-    if (priceDiv) {
-        priceDiv.textContent = `LE ${cartTotal.toFixed(2)}`;
-    }
-}
-
-// تحديث حالة الكارت عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', function() {
-    updateCartSummary();
-});
-
-// دالة إضافة منتج إلى السلة
-function addToCart(product) {
-    // البحث إذا كان المنتج موجود بالفعل في السلة
-    const existingItem = cart.find(item => item.id === product.id);
-    
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        product.quantity = 1;
-        cart.push(product);
-    }
-    
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartSummary();
-}
-
-        // فتح/إغلاق القائمة الجانبية عند الضغط على الأيقونة
+        // فتح/إغلاق القائمة الجانبية القديمة
         $('.canvas__open').on('click', function() {
             $('.offcanvas-menu-wrapper').addClass('active');
             $('.offcanvas-menu-overlay').addClass('active');
@@ -1133,16 +2367,466 @@ function addToCart(product) {
             $('.offcanvas-menu-overlay').removeClass('active');
         });
     });
+}
+</script>
+
+
+<script>
+    // Welcome Modal Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const welcomeModal = document.getElementById('welcomeModal');
+    const closeBtn = document.getElementById('closeWelcome');
+    
+    // Check if user is new (hasn't seen the modal before and isn't logged in)
+    const hasSeenWelcome = localStorage.getItem('hasSeenWelcome');
+    const isLoggedIn = localStorage.getItem('loggedInUser');
+    
+    if (!hasSeenWelcome && !isLoggedIn) {
+        // Show modal after 3 seconds
+        setTimeout(() => {
+            welcomeModal.classList.add('active');
+        }, 3000);
+    }
+    
+    // Close button functionality
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            welcomeModal.classList.remove('active');
+            localStorage.setItem('hasSeenWelcome', 'true');
+        });
+    }
+    
+    // Close when clicking outside the card
+    welcomeModal.addEventListener('click', function(e) {
+        if (e.target === welcomeModal) {
+            welcomeModal.classList.remove('active');
+            localStorage.setItem('hasSeenWelcome', 'true');
+        }
+    });
+    
+    // Don't show again if user signs up or logs in
+    const signUpBtn = document.querySelector('.welcome-btn.primary');
+    if (signUpBtn) {
+        signUpBtn.addEventListener('click', function() {
+            localStorage.setItem('hasSeenWelcome', 'true');
+        });
+    }
+});
+    </script>
+
+<style>
+/* إضافة أنيميشنات وتأثيرات إضافية */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.cart-notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 14px;
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.cart-notification.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.header__cart:hover i {
+    animation: bounce 0.8s ease infinite;
+}
+</style>
+
+<script>
+
+
+
+const CartManager = {
+    cart: JSON.parse(localStorage.getItem('cart')) || [],
+    
+    updateStorage: function() {
+        localStorage.setItem('cart', JSON.stringify(this.cart));
+    },
+    
+    getTotalQuantity: function() {
+        return this.cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    },
+    
+    getTotalPrice: function() {
+        return this.cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+    },
+    
+    updateUI: function() {
+        const cartCount = this.getTotalQuantity();
+        const cartTotal = this.getTotalPrice();
+        
+        document.querySelectorAll('.cart-count, #cart-count, #mobile-cart-count').forEach(el => {
+            if (el) {
+                el.textContent = cartCount;
+                el.style.display = 'inline-block'; // تأكد إنه ظاهر
+            }
+        });
+
+        const priceElements = document.querySelectorAll('.cart-total, #cart-total');
+        priceElements.forEach(el => {
+            if (el) el.textContent = `LE ${cartTotal.toFixed(2)}`;
+        });
+
+        if (cartCount > 0) {
+            this.animateCartIcon();
+        }
+    },
+    
+    animateCartIcon: function() {
+        const cartIcons = document.querySelectorAll('.header__cart i, .cart-btn i');
+        cartIcons.forEach(icon => {
+            if (icon) {
+                icon.style.animation = 'bounce 0.5s';
+                setTimeout(() => {
+                    icon.style.animation = '';
+                }, 500);
+            }
+        });
+    },
+    
+    init: function() {
+        this.updateUI();
+    }
+};
+
+
+
+// تشغيل عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', () => {
+    CartManager.init();
+});
+</script>
+
+
+<script>
+$(document).ready(function(){
+    // Initialize Hero Slider with Enhanced Settings
+    $('.hero__slider').owlCarousel({
+        items: 1,
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 7000,
+        autoplayHoverPause: true,
+        smartSpeed: 1000,
+        nav: true,
+        dots: false,
+        animateOut: 'fadeOut',
+        animateIn: 'fadeIn',
+        navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>']
+    });
+    
+    // Parallax Effect on Scroll
+    $(window).scroll(function() {
+        var scrollPosition = $(this).scrollTop();
+        $('.hero__bg').css({
+            'transform': 'scale(' + (1 + scrollPosition/2000) + ')'
+        });
+    });
+    
+    // Smooth Scroll to Next Section
+    $('.hero .primary-btn').on('click', function(e) {
+        if($(this).attr('href') === '#') {
+            e.preventDefault();
+            $('html, body').animate({
+                scrollTop: $('.categories').offset().top
+            }, 1000);
+        }
+    });
+});
 </script>
 
 <script>
+function adjustHeroHeight() {
+    const headerHeight = document.querySelector('.header').offsetHeight;
+    const hero = document.querySelector('.hero');
+    hero.style.height = `calc(100vh - ${headerHeight}px)`;
+}
+
+// Check if user is logged in
+document.addEventListener('DOMContentLoaded', function() {
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    const authButtons = document.getElementById('auth-buttons');
+    const userGreeting = document.getElementById('user-greeting');
+    const usernameDisplay = document.getElementById('username-display');
+
+    if (loggedInUser) {
+        authButtons.style.display = 'none';
+        userGreeting.style.display = 'flex';
+        usernameDisplay.textContent = loggedInUser;
+        
+        // تعديل حدث النقر ليكون أكثر دقة
+        userGreeting.addEventListener('click', function(e) {
+            // منع التنفيذ إذا تم النقر على أيقونة السلة
+            if (e.target.closest('.cart-btn')) return;
+            
+            // عرض نافذة تأكيد
+            const confirmLogout = confirm('هل تريد تسجيل الخروج؟');
+            if (confirmLogout) {
+                // تنظيف كامل لبيانات الجلسة
+                localStorage.removeItem('loggedInUser');
+                localStorage.removeItem('userData');
+                
+                // تنظيف الكوكيز
+                document.cookie = 'userSession=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                
+                // إعادة تحميل الصفحة
+                window.location.href = 'index.html';
+            }
+        });
+    }
+});
+
+// في الصفحة الرئيسية للتحقق من الجلسة
+// Function to validate user session
+function validateSession() {
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    if (!userData) return false;
+    
+    // Check session expiration (30 days)
+    const sessionAge = (new Date().getTime() - userData.loginTime) / (1000 * 60 * 60 * 24);
+    if (sessionAge > 30) {
+        localStorage.removeItem('loggedInUser');
+        localStorage.removeItem('userData');
+        document.cookie = 'userSession=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        return false;
+    }
+    
+    // Check cookie session
+    const cookies = document.cookie.split(';').map(c => c.trim());
+    const sessionCookie = cookies.find(c => c.startsWith('userSession='));
+    if (!sessionCookie) return false;
+    
+    return sessionCookie.split('=')[1] === userData.sessionId;
+}
+
+// Main DOMContentLoaded function
+document.addEventListener('DOMContentLoaded', function() {
+  const isLoggedIn = localStorage.getItem('isLoggedIn');
+  const username = localStorage.getItem('loggedInUser');
+  
+  if (isLoggedIn === 'true' && username) {
+    document.getElementById('auth-buttons').style.display = 'none';
+    document.getElementById('user-greeting').style.display = 'flex';
+    document.getElementById('username-display').textContent = username;
+  }
+});
+        
+        // Add click event for logout
+        userGreeting.addEventListener('click', function(e) {
+            if (e.target === usernameDisplay || e.target.closest('.welcome-btn')) {
+                localStorage.removeItem('loggedInUser');
+                localStorage.removeItem('userData');
+                document.cookie = 'userSession=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                window.location.href = 'index.html';
+            }
+        });
+    
+    
+    // Initialize cart manager
+    CartManager.init();
+
+
+window.addEventListener('load', adjustHeroHeight);
+window.addEventListener('resize', adjustHeroHeight);
+
+
+$('.hero__slider').owlCarousel({
+    items: 1,
+    loop: true,
+    autoplay: true,
+    autoplayTimeout: 4000, // تغيير من 7000 إلى 4000 ميلي ثانية (4 ثواني)
+    autoplayHoverPause: true,
+    smartSpeed: 1000,
+    nav: true,
+    dots: false,
+    animateOut: 'fadeOut',
+    animateIn: 'fadeIn',
+    navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>']
+});
+
+
+
+function adjustHeroHeight() {
+    const headerHeight = document.querySelector('.header').offsetHeight;
+    const hero = document.querySelector('.hero');
+    const viewportHeight = window.innerHeight;
+    hero.style.height = `calc(${viewportHeight}px - ${headerHeight}px)`;
+    
+    document.querySelector('.categories').style.marginTop = '0';
+}
+
+window.addEventListener('load', adjustHeroHeight);
+window.addEventListener('resize', adjustHeroHeight);
+</script>
+
+<script src="js/owl.carousel.min.js"></script>
+
+<script>
+    // Check if user is logged in
     document.addEventListener('DOMContentLoaded', function() {
-        // فتح القائمة الجانبية
-        document.querySelector('.canvas__open').addEventListener('click', function() {
-            document.querySelector('.header__menu').classList.toggle('active');
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        const authButtons = document.getElementById('auth-buttons');
+        const userGreeting = document.getElementById('user-greeting');
+        const usernameDisplay = document.getElementById('username-display');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        if (loggedInUser) {
+            authButtons.style.display = 'none';
+            userGreeting.style.display = 'flex';
+            usernameDisplay.textContent = loggedInUser;
+        }
+
+        // Logout functionality
+        logoutBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('loggedInUser');
+            window.location.href = 'index.html';
         });
     });
 </script>
+
+<!-- Welcome Modal -->
+<div class="welcome-modal" id="welcomeModal">
+    <div class="welcome-card">
+        <div class="welcome-particles"></div>
+        <div class="welcome-header">
+            <img src="img/987.png" alt="Marvil Logo">
+            <h2>Welcome to Marvil!</h2>
+            <p>Your premium fashion destination</p>
+        </div>
+        <div class="welcome-body">
+            <p>Discover exclusive collections, personalized recommendations, and special member-only discounts when you join our fashion community.</p>
+            
+            <div class="welcome-buttons">
+                <a href="sign up.html" class="welcome-btn primary">Sign Up Now</a>
+                <a href="#" class="welcome-btn secondary" id="closeWelcome">Maybe Later</a>
+            </div>
+            
+            <div class="welcome-features">
+                <div class="welcome-feature">
+                    <i class="icon_tag_alt"></i>
+                    Exclusive Offers
+                </div>
+                <div class="welcome-feature">
+                    <i class="icon_heart_alt"></i>
+                    Wishlist
+                </div>
+                <div class="welcome-feature">
+                    <i class="icon_clock_alt"></i>
+                    Fast Delivery
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- أضف هذا الكود قبل </body> -->
+<script>
+$(document).ready(function(){
+    // تهيئة سلايدر البانر الرئيسي
+    $('.hero__slider').owlCarousel({
+        items: 1,
+        loop: true,
+        rtl: true, // للغة العربية
+        autoplay: true,
+        autoplayTimeout: 4000, // 4 ثواني
+        autoplayHoverPause: true,
+        smartSpeed: 800,
+        nav: true,
+        dots: false,
+        animateOut: 'fadeOut',
+        animateIn: 'fadeIn',
+        navText: ['<i class="fa fa-angle-right"></i>', '<i class="fa fa-angle-left"></i>']
+    });
+
+    // ضبط ارتفاع قسم الهيرو
+    function adjustHeroHeight() {
+        const headerHeight = $('.header').outerHeight();
+        $('.hero').css('height', `calc(100vh - ${headerHeight}px)`);
+    }
+
+    // تنفيذ عند التحميل وعند تغيير حجم النافذة
+    $(window).on('load resize', adjustHeroHeight);
+});
+</script>
+
+<style>
+/* تحسينات لسلايدر البانر */
+.hero__slider {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero__item {
+    position: relative;
+    height: 100%;
+}
+
+.hero__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
+}
+
+.owl-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.owl-prev, 
+.owl-next {
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.3) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    color: #fff !important;
+    font-size: 24px !important;
+    margin: 0 15px;
+}
+
+.owl-prev:hover, 
+.owl-next:hover {
+    background: rgba(255,255,255,0.5) !important;
+}
+</style>
+
+
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init();</script>
 
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>

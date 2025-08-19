@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="zxx">
 
 <head>
     <meta charset="UTF-8">
@@ -8,6 +8,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>marvil</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
     <style>
         :root {
             --primary-color: hsl(239, 44%, 58%);
@@ -39,6 +54,363 @@
             line-height: 1.6;
             direction: rtl;
         }
+
+         /* تنسيقات الهيدر الأساسية */
+  .header {
+    background: #2c3782;
+    padding: 15px 0;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .header.scrolled {
+    padding: 10px 0;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+    background: #2a2b74;
+  }
+
+  .header__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  .header__logo img {
+    max-height: 60px;
+    transition: all 0.3s ease;
+  }
+
+  /* تنسيقات القائمة */
+  .header__menu {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .header__menu li {
+    margin: 0 15px;
+    position: relative;
+  }
+
+  .header__menu li a {
+    color: #e1d5ca;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 8px 0;
+    position: relative;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    display: inline-block;
+  }
+
+  .header__menu li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #9d7f49, #ede7db);
+    transition: width 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .header__menu li a:hover::after,
+  .header__menu li.active a::after {
+    width: 100%;
+  }
+
+  /* تنسيقات الأيقونات */
+  .header__icons {
+    display: flex;
+    align-items: center;
+  }
+
+  .header__search,
+  .header__account,
+  .header__cart {
+    margin-left: 25px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .header__search i,
+  .header__account i,
+  .header__cart i {
+    font-size: 22px;
+    color: #e1d5ca;
+    transition: all 0.3s ease;
+  }
+
+  .header__search:hover,
+  .header__account:hover,
+  .header__cart:hover {
+    transform: translateY(-3px);
+  }
+
+  .header__search:hover i,
+  .header__account:hover i,
+  .header__cart:hover i {
+    color: #e1be7c;
+  }
+
+  /* تأثيرات السلة */
+  .cart-link {
+    position: relative;
+    display: block;
+  }
+
+  .cart-link span {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    box-shadow: 0 2px 5px rgba(108, 92, 231, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .cart-link:hover span {
+    transform: scale(1.1);
+  }
+
+  /* زر القائمة الموبايل */
+  .header__mobile-toggle {
+    display: none;
+    width: 30px;
+    height: 20px;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 25px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1002;
+  }
+
+  .header__mobile-toggle span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: #eacba6;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transform-origin: left center;
+  }
+
+  .header__mobile-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(1px, -1px);
+    background: #6c5ce7;
+  }
+
+  .header__mobile-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .header__mobile-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(1px, 1px);
+    background: #6c5ce7;
+  }
+
+  /* القائمة الجانبية للموبايل - تصميم كبطاقة */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 320px;
+    height: 100%;
+    background: white;
+    z-index: 1001;
+    padding: 30px;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    overflow-y: auto;
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+    border-radius: 20px 0 0 20px;
+    transform-origin: right center;
+  }
+
+  .mobile-menu.active {
+    right: 0;
+    transform: scaleX(1);
+  }
+
+  .mobile-menu::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95));
+    z-index: -1;
+    border-radius: 20px 0 0 20px;
+  }
+
+  .mobile-menu__close {
+    text-align: right;
+    margin-bottom: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .mobile-menu__close:hover {
+    transform: rotate(90deg);
+  }
+
+  .mobile-menu__close i {
+    font-size: 24px;
+    color: #6c5ce7;
+  }
+
+  .mobile-menu__nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .mobile-menu__nav li {
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.4s ease;
+  }
+
+  .mobile-menu.active .mobile-menu__nav li {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .mobile-menu__nav li:nth-child(1) { transition-delay: 0.1s; }
+  .mobile-menu__nav li:nth-child(2) { transition-delay: 0.2s; }
+  .mobile-menu__nav li:nth-child(3) { transition-delay: 0.3s; }
+  .mobile-menu__nav li:nth-child(4) { transition-delay: 0.4s; }
+
+  .mobile-menu__nav a {
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    padding: 8px 0;
+    position: relative;
+  }
+
+  .mobile-menu__nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #6c5ce7, #a29bfe);
+    transition: width 0.3s ease;
+  }
+
+  .mobile-menu__nav a:hover::after {
+    width: 100%;
+  }
+
+  .mobile-menu__account {
+    margin-top: 40px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease 0.4s;
+  }
+
+  .mobile-menu.active .mobile-menu__account {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobile-menu__account a {
+    display: flex;
+    align-items: center;
+    color: #333;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .mobile-menu__account i {
+    margin-left: 10px;
+    font-size: 20px;
+    color: #6c5ce7;
+  }
+
+  /* الـ Overlay للقائمة الجانبية */
+  .mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+    backdrop-filter: blur(5px);
+  }
+
+  .mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* تأثيرات عند التمرير */
+  @media (min-width: 992px) {
+    .header.scrolled .header__logo img {
+      max-height: 50px;
+    }
+    
+    .header.scrolled .header__menu li a {
+      padding: 5px 0;
+    }
+  }
+
+  /* ميديا كويريز */
+  @media (max-width: 991px) {
+    .header__nav {
+      display: none;
+    }
+    
+    .header__mobile-toggle {
+      display: flex;
+    }
+    
+    .header__icons {
+      margin-left: auto;
+    }
+    
+    .header__search,
+    .header__account {
+      display: none;
+    }
+  }
+
+  @media (max-width: 575px) {
+    .header__logo img {
+      max-height: 50px;
+    }
+    
+    .mobile-menu {
+      width: 280px;
+      padding: 25px;
+    }
+  }
 
         .shop-header {
             background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
@@ -749,194 +1121,462 @@
         }
 
 
-
-
-
-
-
-          /* تنسيقات الهيدر العامة */
-  .header {
-    background: #fff;
-    padding: 15px 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 999;
-  }
-
-  .header__logo img {
-    max-height: 85px;
-  }
-
-  /* تنسيقات نسخة الكمبيوتر */
-  .desktop-header {
-    display: block;
-  }
-
-  /* القائمة الرئيسية للكمبيوتر */
-  .header__menu ul {
-    display: flex;
-    gap: 20px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .header__menu ul li {
-    position: relative;
-  }
-
-  .header__menu ul li ul.dropdown {
-    display: none;
-    position: absolute;
-    background: white;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-
-  .header__menu ul li:hover ul.dropdown {
-    display: block;
-  }
-
-  /* تنسيقات الكارت */
-  .cart-link {
-    position: relative;
-    display: inline-block;
-    margin-right: 15px;
-  }
-
-  .cart-link img {
-    width: 20px;
-    height: auto;
-  }
-
-  .cart-link span {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    background: #111;
-    color: white;
+        /* تنسيقات الأزرار الطائرة */
+/* تنسيقات الأزرار الطائرة المعدلة */
+.floating-btn {
+    position: fixed;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    width: 18px;
-    height: 18px;
-    font-size: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  /* تنسيقات نسخة الموبايل */
-  .mobile-header {
-    display: none;
-    background: #ece5c8;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  }
-
-  /* القائمة الجانبية للموبايل */
-  .mobile-nav {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 80%;
-    height: 100%;
-    background: white;
-    z-index: 1000;
-    padding: 20px;
-    overflow-y: auto;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-  }
-
-  .mobile-nav.active {
-    transform: translateX(0);
-  }
-
-  .mobile-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .mobile-nav li {
-    margin-bottom: 15px;
-  }
-
-  .mobile-nav li a {
-    text-decoration: none;
-    color: #333;
-    font-size: 18px;
-  }
-
-  /* أضف ده في الـ CSS */
-.mobile-nav {
-  transform: translateX(-100%);
-  transition: transform 0.3s ease-in-out;
-  display: block; /* مهم جدًا! */
-}
-
-.mobile-nav.active {
-  transform: translateX(0);
-}
-
-.mobile-overlay.active {
-  display: block;
-}
-
-
-  /* زر القائمة الموبايل */
-  .menu-toggle {
-    width: 30px;
-    height: 22px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     cursor: pointer;
-  }
+    z-index: 1000;
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    font-size: 24px;
+    color: white;
+    background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    animation: floating 3s ease-in-out infinite;
+    /* التأكد من ظهور الزر كاملاً */
+    overflow: visible;
+    /* إزالة أي حواف مخفية */
+    clip-path: none;
+    -webkit-clip-path: none;
+}
 
-  .menu-toggle span {
-    display: block;
-    height: 3px;
-    background: #111;
-    border-radius: 2px;
-    transition: all 0.3s ease;
-  }
+/* زر السلة */
+.cart-btn {
+    bottom: 00px;
+    left: 30px;
+    /* إضافة تأثير مميز للسلة */
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+}
 
-  /* الـ Overlay للقائمة الجانبية */
-  .mobile-overlay {
-    display: none;
+/* زر الرجوع المحسن */
+.back-btn {
+    bottom: 0px;
+    right: 30px;
+    background: linear-gradient(135deg, #e84393, #fd79a8);
+    /* إضافة أيقونة داخلية */
+    position: relative;
+}
+
+
+/* التأكد من أن الهيدر لا يحجب الأزرار */
+.header {
+    z-index: 999;
+}
+
+/* التأكد من أن الأزرار فوق كل العناصر */
+.floating-btn {
+    z-index: 1001;
+}
+
+/* التأكد من عدم وجود حواف مقطوعة */
+body {
+    overflow-x: hidden;
+}
+
+
+/* Welcome Modal Styles */
+.welcome-modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.5);
-    z-index: 999;
-  }
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(10px);
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
-  .mobile-overlay.active {
+.welcome-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.welcome-card {
+    background: linear-gradient(135deg, #2c3782 0%, #6c5ce7 100%);
+    width: 90%;
+    max-width: 500px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+    transform: scale(0.8);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.welcome-modal.active .welcome-card {
+    transform: scale(1);
+}
+
+.welcome-header {
+    padding: 30px;
+    text-align: center;
+    background: rgba(255,255,255,0.1);
+}
+
+.welcome-header img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 15px;
+    animation: float 6s ease-in-out infinite;
+}
+
+.welcome-header h2 {
+    color: white;
+    font-size: 28px;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+.welcome-header p {
+    color: rgba(255,255,255,0.8);
+    font-size: 16px;
+}
+
+.welcome-body {
+    padding: 30px;
+    text-align: center;
+}
+
+.welcome-body p {
+    color: white;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.welcome-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.welcome-btn {
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.welcome-btn.primary {
+    background: white;
+    color: #2c3782;
+    box-shadow: 0 5px 15px rgba(255,255,255,0.3);
+}
+
+.welcome-btn.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255,255,255,0.4);
+}
+
+.welcome-btn.secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255,255,255,0.3);
+}
+
+.welcome-btn.secondary:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.5);
+}
+
+.welcome-features {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.welcome-feature {
+    text-align: center;
+    color: white;
+    font-size: 14px;
+}
+
+.welcome-feature i {
     display: block;
-  }
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #a29bfe;
+}
 
-  /* ميديا كويريز */
-  @media (max-width: 991px) {
-    .desktop-header {
-      display: none;
+/* Particles effect */
+.welcome-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.3;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.5)"/><circle cx="30" cy="70" r="0.8" fill="rgba(255,255,255,0.5)"/><circle cx="80" cy="20" r="0.6" fill="rgba(255,255,255,0.5)"/><circle cx="90" cy="90" r="0.8" fill="rgba(255,255,255,0.5)"/></svg>');
+    background-size: 200px 200px;
+    animation: particlesMove 20s linear infinite;
+}
+
+@keyframes particlesMove {
+    from { background-position: 0 0; }
+    to { background-position: 200px 200px; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 575px) {
+    .welcome-card {
+        width: 95%;
     }
     
-    .mobile-header {
-      display: block;
+    .welcome-buttons {
+        flex-direction: column;
+        gap: 10px;
     }
-  }
-
-  @media (min-width: 768px) {
-    .menu-toggle {
-      display: none;
+    
+    .welcome-btn {
+        width: 100%;
     }
-  }
+}
 
-   
+
+/* تأثير إضافي لزر الرجوع */
+.back-btn::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 50%;
+    border: 2px dashed rgba(255, 255, 255, 0.4);
+    animation: rotate 20s linear infinite;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.back-btn:hover::before {
+    opacity: 1;
+}
+
+/* تأثير اللمعان عند التحويم */
+.back-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.back-btn:hover::after {
+    opacity: 1;
+}
+
+/* عداد السلة المعدل */
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--error-color);
+    color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: 2px solid white;
+    animation: pulse 2s infinite;
+    /* تأكد من ظهوره دائمًا */
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* تأثيرات الحركة المعدلة */
+@keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.7); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 59, 48, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 59, 48, 0); }
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* تأثير المادة (Material) */
+.floating-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, transparent 0%, rgba(255,255,255,0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.floating-btn:hover::before {
+    opacity: 1;
+}
+
+/* تأثير اللمسة النهائية */
+.floating-btn::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 50%;
+    border: 2px dashed rgba(255, 255, 255, 0.4);
+    animation: rotate 20s linear infinite;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.floating-btn:hover::after {
+    opacity: 1;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* التجاوب مع الشاشات الصغيرة */
+@media (max-width: 768px) {
+    .floating-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+    
+    .cart-btn {
+     bottom: 0px;
+     left: 20px;
+    }
+    
+    .back-btn {
+        bottom: 0px;
+        right: 20px;
+    }
+    
+    .cart-count {
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .floating-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+}
+
+.header {
+    background: transparent;
+    padding: 15px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    transition: all 0.4s ease;
+}
+
+.header.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.header__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__logo img {
+    max-height: 50px;
+    transition: all 0.3s ease;
+}
+
+.header.scrolled .header__logo img {
+    max-height: 40px;
+}
+
+/* تأثير اهتزاز عند النقر */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+
+.floating-btn:active {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+/* تأثير تغيير اللون عند التمرير */
+.header.scrolled .floating-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* تأثيرات خاصة عند وجود عناصر في السلة */
+.floating-btn.has-items {
+    position: relative;
+}
+
+.floating-btn.has-items::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    border: 2px solid var(--error-color);
+    animation: pulse-border 2s infinite;
+}
+
+@keyframes pulse-border {
+    0% { transform: scale(1); opacity: 0.7; }
+    70% { transform: scale(1.1); opacity: 0.3; }
+    100% { transform: scale(1.2); opacity: 0; }
+}   
+
     </style>
 
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -955,320 +1595,266 @@
 </head>
 
 <body>
-  
- <!-- Header Section Begin -->
-<header class="header desktop-header">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Logo -->
-                <div class="col-6 col-md-3">
-                    <div class="header__logo">
-                        <a href="index.html"><img src="img/987.png" alt="Logo"></a>
-                    </div>
-                </div>
-
-                <!-- Navigation -->
-                <div class="col-6 col-md-6 d-none d-md-block">
-                    <nav class="header__menu">
-                        
-                        </ul>
-                    </nav>
-                </div>
-
-                <!-- Cart -->
-                <div class="col-6 col-md-3 d-flex justify-content-end align-items-center">
-                    <a href="cart.html" class="cart-link position-relative me-3">
-                        <img src="img/icon/cart.png" alt="Cart" style="width: 22px;">
-                        <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark text-white">0</span>
-                    </a>
-                </div>
+<header class="header">
+    <div class="container">
+        <div class="header__wrapper">
+            <!-- زر الرجوع الطائر -->
+            <div class="floating-btn back-btn">
+                <i class="fas fa-arrow-left"></i>
+            </div>
+            
+            <!-- الشعار -->
+            <div class="header__logo">
+                <a href="index.html"><img src="img/987.png" alt="Logo"></a>
+            </div>
+            
+            <!-- زر السلة الطائر -->
+            <div class="floating-btn cart-btn">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-count">0</span>
             </div>
         </div>
-    </header>
+    </div>
+</header>
+<!-- Header Section End -->
 
-    <!-- نسخة الموبايل -->
-    <header class="mobile-header">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-6">
-                    <div class="header__logo">
-                        <a href="index.html"><img src="img/987.png" alt="Logo"></a>
-                    </div>
-                </div>
-                <div class="col-6 d-flex justify-content-end">
-                    <a href="cart.html" class="cart-link position-relative me-3">
-                        <img src="img/icon/cart.png" alt="Cart" style="width: 22px;">
-                        <span id="mobile-cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark text-white">0</span>
-                    </a>
-                    <!-- Toggle Button (Hamburger) -->
+   <!-- Header Section -->
+<header class="shop-header">
+    <h1>Store</h1>
+    <p>Discover the latest fashion trends and styles with us</p>
+</header>
 
-
-                </div>
-            </div>
+<!-- Main Shop Content -->
+<div class="shop-container">
+    <!-- Filter Section -->
+    <div class="filter-section">
+        <div class="filter-group">
+            
         </div>
-    </header>
 
-    <div class="mobile-overlay" id="mobile-overlay"></div>
-<nav class="mobile-nav" id="mobile-nav">
-    <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="shop.html">Shop</a></li>
-        <li class="has-submenu">
-            <a href="#">Pages <i class="fas fa-chevron-down"></i></a>
-            <ul class="submenu">
-                <li><a href="./about.html">About Us</a></li>
-                <li><a href="./shop-details.html">Shop Details</a></li>
-                <li><a href="cart.html">Shopping Cart</a></li>
-                <li><a href="./checkout.html">Check Out</a></li>
-            </ul>
-        </li>
-        <li><a href="./contact.html">Contact</a></li>
-    </ul>
-</nav>
+        <div class="view-options">
+            <button class="view-btn active" data-view="grid"><i class="fas fa-th-large"></i></button>
+            <button class="view-btn" data-view="list"><i class="fas fa-list"></i></button>
+        </div>
+    </div>
 
-    <!-- Header Section -->
-    <header class="shop-header">
-        <h1>متجر الأزياء </h1>
-        <p>اكتشف أحدث صيحات الموضة والأزياء  لدينا</p>
-    </header>
-
-    <!-- Main Shop Content -->
-    <div class="shop-container">
-        <!-- Filter Section -->
-        <div class="filter-section">
-            <div class="filter-group">
-                
-
-                
+    <!-- Products Grid -->
+    <div class="products-grid" id="products-grid">
+        <!-- Product Card 1 -->
+        <div class="product-card" style="--order: 0">
+            <span class="product-badge sale">Sale</span>
+            <div class="product-image-container">
+                <a href="products.html" class="product-image-link">
+                    <img src="img/product/product-1.jpg" class="product-image" alt="Piqué Biker Jacket">
+                </a>
+                <div class="product-actions-overlay">
+                    <button class="quick-view-btn" data-product-id="1"><i class="fas fa-eye"></i></button>
+                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                </div>
             </div>
-
-            <div class="view-options">
-                <button class="view-btn active" data-view="grid"><i class="fas fa-th-large"></i></button>
-                <button class="view-btn" data-view="list"><i class="fas fa-list"></i></button>
+            <div class="product-info">
+                <span class="product-category">Men's Jacket</span>
+                <h3 class="product-title">
+                    <a href="shop-details.html">Biker Jacket</a>
+                </h3>
+                <div class="product-price">
+                    <span class="current-price">LE 59.99</span>
+                    <span class="old-price">LE 89.99</span>
+                </div>
+                <button class="add-to-cart" data-product-id="1">
+                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                </button>
             </div>
         </div>
 
-        <!-- Products Grid -->
-        <div class="products-grid" id="products-grid">
-            <!-- Product Card 1 -->
-            <!-- مثال على تعديل بطاقة المنتج الأولى -->
-<div class="product-card" style="--order: 0">
-    <span class="product-badge sale">خصم</span>
-    <div class="product-image-container">
-        <a href="products.html" class="product-image-link">
-            <img src="img/product/product-1.jpg" class="product-image" alt="Piqué Biker Jacket">
-        </a>
-        <div class="product-actions-overlay">
-            <button class="quick-view-btn" data-product-id="1"><i class="fas fa-eye"></i></button>
-            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+        <!-- Product Card 2 -->
+        <div class="product-card" style="--order: 0">
+            <span class="product-badge sale">Sale</span>
+            <div class="product-image-container">
+                <a href="products.html" class="product-image-link">
+                    <img src="img/product/product-1.jpg" class="product-image" alt="Piqué Biker Jacket">
+                </a>
+                <div class="product-actions-overlay">
+                    <button class="quick-view-btn" data-product-id="1"><i class="fas fa-eye"></i></button>
+                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                </div>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Men's Jacket</span>
+                <h3 class="product-title">
+                    <a href="shop-details.html">Biker Jacket</a>
+                </h3>
+                <div class="product-price">
+                    <span class="current-price">LE 59.99</span>
+                    <span class="old-price">LE 89.99</span>
+                </div>
+                <button class="add-to-cart" data-product-id="1">
+                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                </button>
+            </div>
         </div>
-    </div>
-    <div class="product-info">
-        <span class="product-category">سترة رجالي</span>
-        <h3 class="product-title">
-            <a href="shop-details.html">سترة دراجات نارية</a>
-        </h3>
-        <div class="product-price">
-            <span class="current-price">LE 59.99</span>
-            <span class="old-price">LE 89.99</span>
-        </div>
-        <button class="add-to-cart" data-product-id="1">
-            <i class="fas fa-shopping-cart"></i> أضف إلى السلة
-        </button>
-    </div>
-</div>
 
-            <!-- Product Card 2 -->
-            <div class="product-card" style="--order: 0">
-    <span class="product-badge sale">خصم</span>
-    <div class="product-image-container">
-        <a href="products.html" class="product-image-link">
-            <img src="img/product/product-1.jpg" class="product-image" alt="Piqué Biker Jacket">
-        </a>
-        <div class="product-actions-overlay">
-            <button class="quick-view-btn" data-product-id="1"><i class="fas fa-eye"></i></button>
-            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+        <!-- Product Card 3 -->
+        <div class="product-card" style="--order: 0">
+            <span class="product-badge sale">Sale</span>
+            <div class="product-image-container">
+                <a href="products.html" class="product-image-link">
+                    <img src="img/product/product-1.jpg" class="product-image" alt="Piqué Biker Jacket">
+                </a>
+                <div class="product-actions-overlay">
+                    <button class="quick-view-btn" data-product-id="1"><i class="fas fa-eye"></i></button>
+                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                </div>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Men's Jacket</span>
+                <h3 class="product-title">
+                    <a href="shop-details.html">Biker Jacket</a>
+                </h3>
+                <div class="product-price">
+                    <span class="current-price">LE 59.99</span>
+                    <span class="old-price">LE 89.99</span>
+                </div>
+                <button class="add-to-cart" data-product-id="1">
+                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                </button>
+            </div>
         </div>
-    </div>
-    <div class="product-info">
-        <span class="product-category">سترة رجالي</span>
-        <h3 class="product-title">
-            <a href="shop-details.html">سترة دراجات نارية</a>
-        </h3>
-        <div class="product-price">
-            <span class="current-price">LE 59.99</span>
-            <span class="old-price">LE 89.99</span>
-        </div>
-        <button class="add-to-cart" data-product-id="1">
-            <i class="fas fa-shopping-cart"></i> أضف إلى السلة
-        </button>
-    </div>
-</div>
 
-            <!-- Product Card 3 -->
-            <div class="product-card" style="--order: 0">
-    <span class="product-badge sale">خصم</span>
-    <div class="product-image-container">
-        <a href="products.html" class="product-image-link">
-            <img src="img/product/product-1.jpg" class="product-image" alt="Piqué Biker Jacket">
-        </a>
-        <div class="product-actions-overlay">
-            <button class="quick-view-btn" data-product-id="1"><i class="fas fa-eye"></i></button>
-            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+        <!-- Product Card 4 -->
+        <div class="product-card" style="--order: 0">
+            <span class="product-badge sale">Sale</span>
+            <div class="product-image-container">
+                <a href="products.html" class="product-image-link">
+                    <img src="img/product/product-1.jpg" class="product-image" alt="Piqué Biker Jacket">
+                </a>
+                <div class="product-actions-overlay">
+                    <button class="quick-view-btn" data-product-id="1"><i class="fas fa-eye"></i></button>
+                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                </div>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Men's Jacket</span>
+                <h3 class="product-title">
+                    <a href="shop-details.html">Biker Jacket</a>
+                </h3>
+                <div class="product-price">
+                    <span class="current-price">LE 59.99</span>
+                    <span class="old-price">LE 89.99</span>
+                </div>
+                <button class="add-to-cart" data-product-id="1">
+                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                </button>
+            </div>
         </div>
-    </div>
-    <div class="product-info">
-        <span class="product-category">سترة رجالي</span>
-        <h3 class="product-title">
-            <a href="shop-details.html">سترة دراجات نارية</a>
-        </h3>
-        <div class="product-price">
-            <span class="current-price">LE 59.99</span>
-            <span class="old-price">LE 89.99</span>
-        </div>
-        <button class="add-to-cart" data-product-id="1">
-            <i class="fas fa-shopping-cart"></i> أضف إلى السلة
-        </button>
-    </div>
-</div>
 
-            <!-- Product Card 4 -->
-            <div class="product-card" style="--order: 0">
-    <span class="product-badge sale">خصم</span>
-    <div class="product-image-container">
-        <a href="products.html" class="product-image-link">
-            <img src="img/product/product-1.jpg" class="product-image" alt="Piqué Biker Jacket">
-        </a>
-        <div class="product-actions-overlay">
-            <button class="quick-view-btn" data-product-id="1"><i class="fas fa-eye"></i></button>
-            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+        <!-- Product Card 5 -->
+        <div class="product-card" style="--order: 0">
+            <span class="product-badge sale">Sale</span>
+            <div class="product-image-container">
+                <a href="products.html" class="product-image-link">
+                    <img src="img/product/product-1.jpg" class="product-image" alt="Piqué Biker Jacket">
+                </a>
+                <div class="product-actions-overlay">
+                    <button class="quick-view-btn" data-product-id="1"><i class="fas fa-eye"></i></button>
+                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                </div>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Men's Jacket</span>
+                <h3 class="product-title">
+                    <a href="shop-details.html">Biker Jacket</a>
+                </h3>
+                <div class="product-price">
+                    <span class="current-price">LE 59.99</span>
+                    <span class="old-price">LE 89.99</span>
+                </div>
+                <button class="add-to-cart" data-product-id="1">
+                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                </button>
+            </div>
         </div>
-    </div>
-    <div class="product-info">
-        <span class="product-category">سترة رجالي</span>
-        <h3 class="product-title">
-            <a href="shop-details.html">سترة دراجات نارية</a>
-        </h3>
-        <div class="product-price">
-            <span class="current-price">LE 59.99</span>
-            <span class="old-price">LE 89.99</span>
-        </div>
-        <button class="add-to-cart" data-product-id="1">
-            <i class="fas fa-shopping-cart"></i> أضف إلى السلة
-        </button>
-    </div>
-</div>
 
+        <!-- Product Card 6 -->
+        <div class="product-card" style="--order: 0">
+            <span class="product-badge sale">Sale</span>
+            <div class="product-image-container">
+                <a href="products.html" class="product-image-link">
+                    <img src="img/product/product-1.jpg" class="product-image" alt="Piqué Biker Jacket">
+                </a>
+                <div class="product-actions-overlay">
+                    <button class="quick-view-btn" data-product-id="1"><i class="fas fa-eye"></i></button>
+                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                </div>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Men's Jacket</span>
+                <h3 class="product-title">
+                    <a href="shop-details.html">Biker Jacket</a>
+                </h3>
+                <div class="product-price">
+                    <span class="current-price">LE 59.99</span>
+                    <span class="old-price">LE 89.99</span>
+                </div>
+                <button class="add-to-cart" data-product-id="1">
+                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                </button>
+            </div>
+        </div>
 
-            <!-- Product Card 5 -->
-            <div class="product-card" style="--order: 0">
-    <span class="product-badge sale">خصم</span>
-    <div class="product-image-container">
-        <a href="products.html" class="product-image-link">
-            <img src="img/product/product-1.jpg" class="product-image" alt="Piqué Biker Jacket">
-        </a>
-        <div class="product-actions-overlay">
-            <button class="quick-view-btn" data-product-id="1"><i class="fas fa-eye"></i></button>
-            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+        <!-- Product Card 7 -->
+        <div class="product-card" style="--order: 0">
+            <span class="product-badge sale">Sale</span>
+            <div class="product-image-container">
+                <a href="products.html" class="product-image-link">
+                    <img src="img/product/product-1.jpg" class="product-image" alt="Piqué Biker Jacket">
+                </a>
+                <div class="product-actions-overlay">
+                    <button class="quick-view-btn" data-product-id="1"><i class="fas fa-eye"></i></button>
+                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                </div>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Men's Jacket</span>
+                <h3 class="product-title">
+                    <a href="shop-details.html">Biker Jacket</a>
+                </h3>
+                <div class="product-price">
+                    <span class="current-price">LE 59.99</span>
+                    <span class="old-price">LE 89.99</span>
+                </div>
+                <button class="add-to-cart" data-product-id="1">
+                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                </button>
+            </div>
         </div>
-    </div>
-    <div class="product-info">
-        <span class="product-category">سترة رجالي</span>
-        <h3 class="product-title">
-            <a href="shop-details.html">سترة دراجات نارية</a>
-        </h3>
-        <div class="product-price">
-            <span class="current-price">LE 59.99</span>
-            <span class="old-price">LE 89.99</span>
-        </div>
-        <button class="add-to-cart" data-product-id="1">
-            <i class="fas fa-shopping-cart"></i> أضف إلى السلة
-        </button>
-    </div>
-</div>
 
-            <!-- Product Card 6 -->
-            <div class="product-card" style="--order: 0">
-    <span class="product-badge sale">خصم</span>
-    <div class="product-image-container">
-        <a href="products.html" class="product-image-link">
-            <img src="img/product/product-1.jpg" class="product-image" alt="Piqué Biker Jacket">
-        </a>
-        <div class="product-actions-overlay">
-            <button class="quick-view-btn" data-product-id="1"><i class="fas fa-eye"></i></button>
-            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+        <!-- Product Card 8 -->
+        <div class="product-card" style="--order: 0">
+            <span class="product-badge sale">Sale</span>
+            <div class="product-image-container">
+                <a href="products.html" class="product-image-link">
+                    <img src="img/product/product-1.jpg" class="product-image" alt="Piqué Biker Jacket">
+                </a>
+                <div class="product-actions-overlay">
+                    <button class="quick-view-btn" data-product-id="1"><i class="fas fa-eye"></i></button>
+                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                </div>
+            </div>
+            <div class="product-info">
+                <span class="product-category">Men's Jacket</span>
+                <h3 class="product-title">
+                    <a href="shop-details.html">Biker Jacket</a>
+                </h3>
+                <div class="product-price">
+                    <span class="current-price">LE 59.99</span>
+                    <span class="old-price">LE 89.99</span>
+                </div>
+                <button class="add-to-cart" data-product-id="1">
+                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                </button>
+            </div>
         </div>
-    </div>
-    <div class="product-info">
-        <span class="product-category">سترة رجالي</span>
-        <h3 class="product-title">
-            <a href="shop-details.html">سترة دراجات نارية</a>
-        </h3>
-        <div class="product-price">
-            <span class="current-price">LE 59.99</span>
-            <span class="old-price">LE 89.99</span>
-        </div>
-        <button class="add-to-cart" data-product-id="1">
-            <i class="fas fa-shopping-cart"></i> أضف إلى السلة
-        </button>
-    </div>
-</div>
-
-            <!-- Product Card 7 -->
-            <div class="product-card" style="--order: 0">
-    <span class="product-badge sale">خصم</span>
-    <div class="product-image-container">
-        <a href="products.html" class="product-image-link">
-            <img src="img/product/product-1.jpg" class="product-image" alt="Piqué Biker Jacket">
-        </a>
-        <div class="product-actions-overlay">
-            <button class="quick-view-btn" data-product-id="1"><i class="fas fa-eye"></i></button>
-            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-        </div>
-    </div>
-    <div class="product-info">
-        <span class="product-category">سترة رجالي</span>
-        <h3 class="product-title">
-            <a href="shop-details.html">سترة دراجات نارية</a>
-        </h3>
-        <div class="product-price">
-            <span class="current-price">LE 59.99</span>
-            <span class="old-price">LE 89.99</span>
-        </div>
-        <button class="add-to-cart" data-product-id="1">
-            <i class="fas fa-shopping-cart"></i> أضف إلى السلة
-        </button>
-    </div>
-</div>
-
-            <!-- Product Card 8 -->
-            <div class="product-card" style="--order: 0">
-    <span class="product-badge sale">خصم</span>
-    <div class="product-image-container">
-        <a href="products.html" class="product-image-link">
-            <img src="img/product/product-1.jpg" class="product-image" alt="Piqué Biker Jacket">
-        </a>
-        <div class="product-actions-overlay">
-            <button class="quick-view-btn" data-product-id="1"><i class="fas fa-eye"></i></button>
-            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-        </div>
-    </div>
-    <div class="product-info">
-        <span class="product-category">سترة رجالي</span>
-        <h3 class="product-title">
-            <a href="shop-details.html">سترة دراجات نارية</a>
-        </h3>
-        <div class="product-price">
-            <span class="current-price">LE 59.99</span>
-            <span class="old-price">LE 89.99</span>
-        </div>
-        <button class="add-to-cart" data-product-id="1">
-            <i class="fas fa-shopping-cart"></i> أضف إلى السلة
-        </button>
-    </div>
-</div>
-
-        
 
     <!-- Quick View Modal -->
     <div class="quick-view-modal" id="quick-view-modal">
@@ -1286,12 +1872,12 @@
                 <h2 class="quick-view-title" id="quick-view-title">Piqué Biker Jacket</h2>
                 <div class="quick-view-price" id="quick-view-price">LE 59.99</div>
                 <div class="quick-view-desc" id="quick-view-desc">
-                    سترة دراجات نارية عالية الجودة مصممة بأناقة وأسلوب جريء. يناسب تمامًا أي مظهر ومتاح بعدة ألوان عصرية.
-                    مصنوع من الجلد الإيكولوجي ومواد بطانة متينة. يوفر الراحة والأناقة في نفس الوقت.
+                    High-quality biker jacket designed with elegance and bold style. Perfectly suits any look and comes in several trendy colors.
+                    Made from eco-leather and durable lining materials. Provides both comfort and elegance.
                 </div>
                 <div class="quick-view-actions">
                     <button class="add-to-cart" id="quick-view-add-to-cart">
-                        <i class="fas fa-shopping-cart"></i> أضف إلى السلة
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
                     </button>
                     <button class="wishlist-btn">
                         <i class="far fa-heart"></i>
@@ -1304,8 +1890,9 @@
     <!-- Notification -->
     <div class="notification" id="notification">
         <i class="fas fa-check-circle"></i>
-        <span id="notification-message">تمت إضافة المنتج إلى السلة بنجاح!</span>
+        <span id="notification-message">Product has been added to cart successfully!</span>
     </div>
+</div>
 
     <!-- Audio Elements -->
     <audio id="cart-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3" preload="auto"></audio>
@@ -1366,6 +1953,61 @@
             });
         }
     });
+
+
+    
+
+
+    // تهيئة الأزرار الطائرة
+document.addEventListener('DOMContentLoaded', function() {
+    // زر السلة
+    const cartBtn = document.querySelector('.cart-btn');
+    if (cartBtn) {
+        cartBtn.addEventListener('click', function() {
+            window.location.href = 'cart.html';
+        });
+    }
+    
+    // زر الرجوع
+    const backBtn = document.querySelector('.back-btn');
+    if (backBtn) {
+        backBtn.addEventListener('click', function() {
+            window.history.back();
+        });
+    }
+    
+    // تحديث عداد السلة
+    updateCartCounter();
+});
+
+// تحديث عداد السلة
+function updateCartCounter() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    
+    const counterElements = document.querySelectorAll('.cart-count');
+    counterElements.forEach(el => {
+        el.textContent = cartCount;
+        if (cartCount > 0) {
+            el.style.display = 'flex';
+            el.parentElement.classList.add('has-items');
+        } else {
+            el.style.display = 'none';
+            el.parentElement.classList.remove('has-items');
+        }
+    });
+    
+    // تأثير عند وجود عناصر في السلة
+    if (cartCount > 0) {
+        const cartBtn = document.querySelector('.cart-btn');
+        cartBtn.style.animation = 'bounce 0.5s';
+        setTimeout(() => {
+            cartBtn.style.animation = '';
+        }, 500);
+    }
+}
+
+// يمكنك استدعاء updateCartCounter() عند أي تغيير في السلة
 
     const cursor = document.querySelector('.liquid-cursor');
   
@@ -1571,17 +2213,475 @@
 </script>
 
 
+  <script>
+// متغيرات عامة
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let discount = 0;
+let shippingCost = 0;
+
+document.addEventListener('DOMContentLoaded', function() {
+    // --------------------------
+    // تأثيرات الهيدر عند التمرير
+    // --------------------------
+    const header = document.querySelector('.header');
+    if (header) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    }
+
+    // --------------------------
+    // إدارة القائمة الجانبية للموبايل
+    // --------------------------
+    const mobileToggle = document.querySelector('.header__mobile-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const mobileClose = document.querySelector('.mobile-menu__close');
+    const mobileOverlay = document.querySelector('.mobile-menu-overlay');
     
-  <!-- Js Plugins -->
-  <script src="js/jquery-3.3.1.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.nice-select.min.js"></script>
-  <script src="js/jquery.nicescroll.min.js"></script>
-  <script src="js/jquery.magnific-popup.min.js"></script>
-  <script src="js/jquery.countdown.min.js"></script>
-  <script src="js/jquery.slicknav.js"></script>
-  <script src="js/mixitup.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/main.js"></script>
+    function toggleMobileMenu() {
+        mobileToggle.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        mobileOverlay.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    }
+    
+    if (mobileToggle) mobileToggle.addEventListener('click', toggleMobileMenu);
+    if (mobileClose) mobileClose.addEventListener('click', toggleMobileMenu);
+    if (mobileOverlay) mobileOverlay.addEventListener('click', toggleMobileMenu);
+
+    // --------------------------
+    // إدارة القائمة القديمة (إذا كانت موجودة)
+    // --------------------------
+    const oldMobileToggle = document.querySelector('.canvas__open');
+    const oldMobileMenu = document.querySelector('.mobile-menu-wrapper, .offcanvas-menu-wrapper');
+    const oldMobileOverlay = document.querySelector('.mobile-menu-overlay, .offcanvas-menu-overlay');
+    const oldMobileClose = document.querySelector('.mobile-menu-close, .offcanvas-menu-close');
+    
+    if (oldMobileToggle && oldMobileMenu && oldMobileOverlay) {
+        function toggleOldMobileMenu() {
+            oldMobileMenu.classList.toggle('show');
+            oldMobileMenu.classList.toggle('active');
+            oldMobileOverlay.classList.toggle('show');
+            oldMobileOverlay.classList.toggle('active');
+            document.body.style.overflow = oldMobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+        
+        oldMobileToggle.addEventListener('click', toggleOldMobileMenu);
+        if (oldMobileClose) oldMobileClose.addEventListener('click', toggleOldMobileMenu);
+        oldMobileOverlay.addEventListener('click', toggleOldMobileMenu);
+    }
+
+    // --------------------------
+    // تهيئة Slicknav للقائمة المتنقلة
+    // --------------------------
+    if (typeof $.fn.slicknav !== 'undefined') {
+        $('.header__menu').slicknav({
+            prependTo: '.mobile-menu',
+            label: '',
+            allowParentLinks: true,
+            closeOnClick: true
+        });
+    }
+
+    // --------------------------
+// وظائف عربة التسوق المحسنة
+// --------------------------
+const CartManager = {
+    cart: JSON.parse(localStorage.getItem('cart')) || [],
+    
+    // تحديث بيانات السلة في localStorage
+    updateStorage: function() {
+        localStorage.setItem('cart', JSON.stringify(this.cart));
+    },
+    
+    // حساب إجمالي الكمية
+    getTotalQuantity: function() {
+        return this.cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    },
+    
+    // حساب الإجمالي المالي
+    getTotalPrice: function() {
+        return this.cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+    },
+    
+    // تحديث واجهة المستخدم
+    updateUI: function() {
+    const cartCount = this.getTotalQuantity();
+    const cartTotal = this.getTotalPrice();
+        
+        // تحديث العداد في كل الأماكن
+        document.querySelectorAll('.cart-count, #cart-count, #mobile-cart-count').forEach(el => {
+        if (el) {
+            el.textContent = cartCount;
+
+            // خلي العنصر يظهر دايمًا
+            el.style.display = 'flex';
+
+            // لو عايز تميّز لما تكون السلة فاضية بلون رمادي مثلاً:
+            el.style.opacity = cartCount > 0 ? '1' : '0.5';
+        }
+    });
+        
+        // تحديث السعر الإجمالي
+        const priceElements = document.querySelectorAll('.cart-total, #cart-total');
+    priceElements.forEach(el => {
+        if (el) el.textContent = `LE ${cartTotal.toFixed(2)}`;
+    });
+        
+        // تأثير مرئي عند التحديث
+        if (cartCount > 0) {
+            this.animateCartIcon();
+        }
+    },
+    
+    // تأثير حركة لأيقونة السلة
+    animateCartIcon: function() {
+        const cartIcons = document.querySelectorAll('.header__cart i, .cart-btn i');
+        cartIcons.forEach(icon => {
+            if (icon) {
+                icon.style.animation = 'bounce 0.5s';
+                setTimeout(() => {
+                    icon.style.animation = '';
+                }, 500);
+            }
+        });
+    },
+    
+    // إضافة منتج للسلة
+    addItem: function(product) {
+        const existingItem = this.cart.find(item => item.id === product.id);
+        
+        if (existingItem) {
+            existingItem.quantity = (existingItem.quantity || 1) + 1;
+        } else {
+            product.quantity = 1;
+            this.cart.push(product);
+        }
+        
+        this.updateStorage();
+        this.updateUI();
+        this.showNotification('تمت إضافة المنتج إلى السلة');
+    },
+    
+    // إشعار مرئي
+    showNotification: function(message) {
+        // إزالة أي إشعارات سابقة
+        const oldNotification = document.querySelector('.cart-notification');
+        if (oldNotification) oldNotification.remove();
+        
+        // إنشاء إشعار جديد
+        const notification = document.createElement('div');
+        notification.className = 'cart-notification';
+        
+        // إضافة أيقونة للسلة
+        notification.innerHTML = `
+            <i class="icon_bag_alt"></i>
+            <span>${message}</span>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // إظهار الإشعار
+        setTimeout(() => {
+            notification.classList.add('show');
+        }, 10);
+        
+        // إخفاء الإشعار بعد 3 ثواني
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+        }, 3000);
+    },
+    
+    // تهيئة عند تحميل الصفحة
+    init: function() {
+        this.updateUI();
+        
+        // يمكنك إضافة مستمعين للأحداث هنا إذا لزم الأمر
+        document.addEventListener('cartUpdated', () => {
+            this.updateUI();
+        });
+    }
+};
+
+// تهيئة مدير السلة عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', () => {
+    CartManager.init();
+});
+
+// جعل الدالة متاحة عالمياً
+window.addToCart = function(product) {
+    CartManager.addItem(product);
+};
+
+// --------------------------
+// أنيميشنات CSS الإضافية
+// --------------------------
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+    }
+    
+    .cart-notification {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background: rgba(0, 0, 0, 0.9);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 30px;
+        font-size: 14px;
+        z-index: 9999;
+        opacity: 0;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .cart-notification.show {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+    
+    .cart-notification i {
+        font-size: 16px;
+    }
+    
+    .cart-count {
+        transition: all 0.3s ease;
+    }
+    
+    .cart-count.highlight {
+        animation: pulse 0.5s ease;
+        transform: scale(1.2);
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.3); }
+        100% { transform: scale(1); }
+    }
+`;
+document.head.appendChild(style);
+
+    // --------------------------
+    // تأثيرات التحويم على العناصر
+    // --------------------------
+    const menuItems = document.querySelectorAll('.header__menu li a');
+    menuItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-3px)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+
+    const icons = document.querySelectorAll('.header__search, .header__account, .header__cart');
+    icons.forEach(icon => {
+        icon.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-3px) scale(1.05)';
+        });
+        
+        icon.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+
+    // تأثيرات الشعار
+    const logo = document.querySelector('.header__logo img');
+    if (logo) {
+        logo.addEventListener('mouseenter', function() {
+            this.style.transform = 'rotate(-5deg) scale(1.05)';
+        });
+        
+        logo.addEventListener('mouseleave', function() {
+            this.style.transform = 'rotate(0) scale(1)';
+        });
+    }
+});
+
+// --------------------------
+// تأثيرات المؤشر السائل
+// --------------------------
+
+    
+    // تأثير عند النقر
+    document.addEventListener('mousedown', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
+        cursor.style.background = 'linear-gradient(45deg, #fd79a8, #e84393)';
+    });
+    
+    document.addEventListener('mouseup', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+        cursor.style.background = 'linear-gradient(45deg, #6c5ce7, #a29bfe)';
+    });
+    
+    // تأثير عند التحويم على العناصر القابلة للنقر
+    const clickableItems = document.querySelectorAll('a, button, .header__menu li, .header__search, .header__account, .header__cart');
+    clickableItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+            cursor.style.background = 'linear-gradient(45deg, #fd79a8, #e84393)';
+        });
+        
+        item.addEventListener('mouseleave', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+            cursor.style.background = 'linear-gradient(45deg, #6c5ce7, #a29bfe)';
+        });
+    });
+
+
+// --------------------------
+// تهيئة jQuery (إذا كانت مستخدمة)
+// --------------------------
+if (typeof $ !== 'undefined') {
+    $(document).ready(function(){
+        // تهيئة القائمة المتنقلة
+        $('.header__menu').slicknav({
+            prependTo: '.header',
+            label: '',
+            allowParentLinks: true
+        });
+
+        // فتح/إغلاق القائمة الجانبية القديمة
+        $('.canvas__open').on('click', function() {
+            $('.offcanvas-menu-wrapper').addClass('active');
+            $('.offcanvas-menu-overlay').addClass('active');
+        });
+
+        $('.offcanvas-menu-overlay, .offcanvas-menu-close').on('click', function() {
+            $('.offcanvas-menu-wrapper').removeClass('active');
+            $('.offcanvas-menu-overlay').removeClass('active');
+        });
+    });
+}
+</script>
+
+<style>
+/* إضافة أنيميشنات وتأثيرات إضافية */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.cart-notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 14px;
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.cart-notification.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.header__cart:hover i {
+    animation: bounce 0.8s ease infinite;
+}
+</style>
+
+<script>
+const CartManager = {
+    cart: JSON.parse(localStorage.getItem('cart')) || [],
+    
+    updateStorage: function() {
+        localStorage.setItem('cart', JSON.stringify(this.cart));
+    },
+    
+    getTotalQuantity: function() {
+        return this.cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    },
+    
+    getTotalPrice: function() {
+        return this.cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+    },
+    
+    updateUI: function() {
+        const cartCount = this.getTotalQuantity();
+        const cartTotal = this.getTotalPrice();
+        
+        document.querySelectorAll('.cart-count, #cart-count, #mobile-cart-count').forEach(el => {
+            if (el) {
+                el.textContent = cartCount;
+                el.style.display = 'inline-block'; // تأكد إنه ظاهر
+            }
+        });
+
+        const priceElements = document.querySelectorAll('.cart-total, #cart-total');
+        priceElements.forEach(el => {
+            if (el) el.textContent = `LE ${cartTotal.toFixed(2)}`;
+        });
+
+        if (cartCount > 0) {
+            this.animateCartIcon();
+        }
+    },
+    
+    animateCartIcon: function() {
+        const cartIcons = document.querySelectorAll('.header__cart i, .cart-btn i');
+        cartIcons.forEach(icon => {
+            if (icon) {
+                icon.style.animation = 'bounce 0.5s';
+                setTimeout(() => {
+                    icon.style.animation = '';
+                }, 500);
+            }
+        });
+    },
+    
+    init: function() {
+        this.updateUI();
+    }
+};
+
+// تشغيل عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', () => {
+    CartManager.init();
+});
+</script>
+
+
+
+
+    <!-- Js Plugins -->
+    <!-- Js Plugins -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.nice-select.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.slicknav.js"></script>
+<script src="js/mixitup.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/main.js"></script>
+
 </body>
+
 </html>

@@ -872,9 +872,7 @@
         to { opacity: 0; transform: translateY(20px); }
     }
 
-      * {
-    cursor: none !important;
-  }
+
   
   .liquid-cursor {
     position: fixed;
@@ -898,19 +896,15 @@
     100% { border-radius: 40% 60% 40% 60% / 40% 60% 40% 60%; }
   }
     </style>
-
-    <!-- Google Font -->
+<!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<div class="liquid-cursor"></div>
-
-
 <body>
     <button class="back-button" onclick="window.history.back()">
-        <i class="fas fa-arrow-left"></i> رجوع
+        <i class="fas fa-arrow-left"></i> Back
     </button>
 
     <div class="product-container">
@@ -928,23 +922,23 @@
             
             <div class="price-container">
                 <div class="price">LE 6.24</div>
-                <div class="total-price">الإجمالي: LE <span id="total-price">6.24</span></div>
+                <div class="total-price">Total: LE <span id="total-price">6.24</span></div>
             </div>
 
             <div class="option-section">
                 <div class="option-title">
                     <i class="fas fa-palette"></i>
-                    <span>الألوان <small>(المتاح: <span id="available-count">3</span>)</small></span>
+                    <span>Colors <small>(Available: <span id="available-count">3</span>)</small></span>
                 </div>
                 <div class="color-circles">
                     <div class="color-circle active" style="background:#404a47" data-img="img/product/product-1.jpg" data-stock="5">
-                        <span class="stock-info">5 متبقي</span>
+                        <span class="stock-info">5 left</span>
                     </div>
                     <div class="color-circle" style="background:#d5a667" data-img="img/product/product-2.jpg" data-stock="2">
-                        <span class="stock-info">2 متبقي</span>
+                        <span class="stock-info">2 left</span>
                     </div>
                     <div class="color-circle out-of-stock" style="background:#5e64d1" data-img="img/product/product-3.jpg" data-stock="0">
-                        <span class="stock-info">نفذ من المخزن</span>
+                        <span class="stock-info">Out of stock</span>
                     </div>
                 </div>
             </div>
@@ -952,7 +946,7 @@
             <div class="option-section">
                 <div class="option-title">
                     <i class="fas fa-ruler-combined"></i>
-                    <span>المقاسات</span>
+                    <span>Sizes</span>
                 </div>
                 <div class="size-options">
                     <div class="size-option" data-size="S">S</div>
@@ -966,7 +960,7 @@
             <div class="quantity-selector">
                 <div class="option-title">
                     <i class="fas fa-calculator"></i>
-                    <span>الكمية</span>
+                    <span>Quantity</span>
                 </div>
                 <div class="quantity-control">
                     <button class="quantity-btn" onclick="decreaseQuantity()">
@@ -980,52 +974,52 @@
             </div>
 
             <button class="add-btn" id="add-to-cart" onclick="addToCart()">
-                <span>أضف إلى السلة</span>
+                <span>Add to Cart</span>
                 <i class="fas fa-shopping-cart"></i>
             </button>
 
             <div class="desc">
-                <h3><i class="fas fa-info-circle" style="color: var(--primary-color);"></i> وصف المنتج</h3>
+                <h3><i class="fas fa-info-circle" style="color: var(--primary-color);"></i> Product Description</h3>
                 <p>
-                    سترة دراجات نارية عالية الجودة مصممة بأناقة وأسلوب جريء. يناسب تمامًا أي مظهر ومتاح بعدة ألوان عصرية.
-                    مصنوع من الجلد الإيكولوجي ومواد بطانة متينة. يوفر الراحة والأناقة في نفس الوقت.
+                    High-quality biker jacket designed with elegance and bold style. Perfectly fits any look and available in several trendy colors.
+                    Made from ecological leather and durable lining materials. Provides comfort and style at the same time.
                 </p>
             </div>
         </div>
     </div>
 
-   <div class="confirmation-overlay" id="confirmation-overlay"></div>
-<div class="cart-confirmation" id="cart-confirmation">
-    <h3>
-        <i class="fas fa-check-circle"></i>
-        تمت الإضافة بنجاح!
-    </h3>
-    <p>تمت إضافة المنتج إلى سلة التسوق الخاصة بك. هل ترغب في مواصلة التسوق أو عرض السلة؟</p>
-    
-    <div class="confirmation-buttons">
-        <button class="confirmation-btn continue-btn" id="continue-shopping">
-            <i class="fas fa-shopping-bag"></i>
-            مواصلة التسوق
-        </button>
-        <button class="confirmation-btn view-cart-btn" id="view-cart">
-            <i class="fas fa-shopping-cart"></i>
-            عرض السلة
-        </button>
+    <div class="confirmation-overlay" id="confirmation-overlay"></div>
+    <div class="cart-confirmation" id="cart-confirmation">
+        <h3>
+            <i class="fas fa-check-circle"></i>
+            Successfully Added!
+        </h3>
+        <p>The product has been added to your shopping cart. Would you like to continue shopping or view your cart?</p>
+        
+        <div class="confirmation-buttons">
+            <button class="confirmation-btn continue-btn" id="continue-shopping">
+                <i class="fas fa-shopping-bag"></i>
+                Continue Shopping
+            </button>
+            <button class="confirmation-btn view-cart-btn" id="view-cart">
+                <i class="fas fa-shopping-cart"></i>
+                View Cart
+            </button>
+        </div>
+        
+        <div class="confirmation-timer">
+            <div class="timer-progress" id="timer-progress"></div>
+        </div>
+        <div id="confetti-container"></div>
     </div>
-    
-    <div class="confirmation-timer">
-        <div class="timer-progress" id="timer-progress"></div>
-    </div>
-    <div id="confetti-container"></div>
-</div>
 
-    <!-- عنصر تكبير الصورة -->
+    <!-- Image zoom element -->
     <div class="zoom-overlay" id="zoom-overlay" onclick="closeZoom()">
         <span class="close-zoom"><i class="fas fa-times"></i></span>
         <img class="zoomed-img" id="zoomed-img" src="" alt="Zoomed Product Image"/>
     </div>
 
-    <!-- صوت إضافة إلى السلة -->
+    <!-- Add to cart sound -->
     <audio id="cart-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3" preload="auto"></audio>
 
     <script>
