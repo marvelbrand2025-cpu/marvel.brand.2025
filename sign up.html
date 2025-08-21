@@ -253,8 +253,6 @@
             to { transform: rotate(360deg); }
         }
 
-        
-
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: scale(0.95); }
@@ -302,15 +300,7 @@
             <p>Join us to start your shopping journey</p>
         </div>
 
-        <!-- استبدل YOUR_EMAIL@gmail.com ببريدك الإلكتروني -->
-        <form id="registerForm" action="https://formsubmit.co/marvel.brand.2025@gmail.com" method="POST">
-            <!-- إضافة الحقول المخفية لتحسين تجربة Formsubmit -->
-            <input type="hidden" name="_next" value="thank you.html">
-            <input type="hidden" name="_subject" value="New Registration - Marvil">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="text" name="_honey" style="display:none">
-            
+        <form id="registerForm">
             <div class="form-group">
                 <i class="fas fa-user input-icon"></i>
                 <input type="text" class="input-field" id="firstName" name="firstName" placeholder="First Name" required>
@@ -378,16 +368,6 @@
     </div>
 
     <script>
-        // Liquid cursor effect
-        const cursor = document.createElement('div');
-        cursor.className = 'liquid-cursor';
-        document.body.appendChild(cursor);
-        
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-
         // Form elements
         const registerForm = document.getElementById('registerForm');
         const firstNameInput = document.getElementById('firstName');
@@ -437,8 +417,8 @@
             }
         });
 
-        // Form validation
-        registerForm.addEventListener('submit', function(e) {
+        // Form validation and submission
+        registerForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             let isValid = true;
 
@@ -509,29 +489,63 @@
                 loadingSpinner.style.display = 'block';
                 submitBtn.disabled = true;
                 
-                // تخزين بيانات المستخدم
-                const userData = {
+                // جمع بيانات النموذج
+                const formData = {
                     firstName: firstNameInput.value.trim(),
                     lastName: lastNameInput.value.trim(),
                     phone: phoneInput.value.trim(),
                     email: emailInput.value.trim(),
-                    sessionId: Math.random().toString(36).substring(2, 15),
-                    loginTime: new Date().getTime()
+                    password: passwordInput.value,
+                    _subject: "New Registration - Marvil",
+                    _autoresponse: "Thank you for registering with Marvil! We're excited to have you on board."
                 };
                 
-                localStorage.setItem('userData', JSON.stringify(userData));
-                localStorage.setItem('loggedInUser', userData.firstName);
-                
-                // تعيين الكوكيز
-                const expirationDate = new Date();
-                expirationDate.setDate(expirationDate.getDate() + 30);
-                document.cookie = `userSession=${userData.sessionId}; expires=${expirationDate.toUTCString()}; path=/`;
-                
-                // إرسال النموذج (سيتم إرساله إلى FormSubmit)
-                this.submit();
-                
-                // إظهار إشعار النجاح
-                successNotification.classList.add('show');
+                try {
+                    // إرسال البيانات إلى Usebasin
+                    const response = await fetch('https://usebasin.com/f/17edb076291b', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    });
+                    
+                    if (response.ok) {
+                        // تخزين بيانات المستخدم محلياً
+                        const userData = {
+                            firstName: firstNameInput.value.trim(),
+                            lastName: lastNameInput.value.trim(),
+                            phone: phoneInput.value.trim(),
+                            email: emailInput.value.trim(),
+                            sessionId: Math.random().toString(36).substring(2, 15),
+                            loginTime: new Date().getTime()
+                        };
+                        
+                        localStorage.setItem('userData', JSON.stringify(userData));
+                        localStorage.setItem('loggedInUser', userData.firstName);
+                        
+                        // تعيين الكوكيز
+                        const expirationDate = new Date();
+                        expirationDate.setDate(expirationDate.getDate() + 30);
+                        document.cookie = `userSession=${userData.sessionId}; expires=${expirationDate.toUTCString()}; path=/`;
+                        
+                        // إظهار إشعار النجاح
+                        successNotification.classList.add('show');
+                        
+                        // التوجيه إلى صفحة thank you.html بعد ثانيتين
+                        setTimeout(() => {
+                            window.location.href = 'thank you.html';
+                        }, 2000);
+                    } else {
+                        throw new Error('Network response was not ok');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('There was an error submitting the form. Please try again.');
+                    loadingSpinner.style.display = 'none';
+                    submitBtn.disabled = false;
+                }
             }
         });
 
