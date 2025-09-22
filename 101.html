@@ -145,19 +145,32 @@
         .main-img-container {
             position: relative;
             width: 100%;
-            height: 500px;
+            height: 710px;
             overflow: hidden;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
         }
 
         .main-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-            cursor: zoom-in;
-        }
+           max-width: 100%;
+    height: auto;
+    width: auto;
+    object-fit: contain; /* للحفاظ على نسبة العرض للارتفاع */
+}
+.thumbs img {
+    max-width: 100%;
+    max-height: 100px; /* تحديد أقصى ارتفاع للصور المصغرة */
+    height: auto;
+    width: auto;
+    object-fit: cover;
+}
+.thumbs img {
+    max-width: 100%;
+    max-height: 100px; /* تحديد أقصى ارتفاع للصور المصغرة */
+    height: auto;
+    width: auto;
+    object-fit: cover;
+}
 
         .main-img:hover {
             transform: scale(1.02);
@@ -552,7 +565,7 @@
             }
 
             .main-img-container {
-                height: 300px;
+                height: 538px;
             }
 
             .thumbs {
@@ -937,6 +950,8 @@
     animation: liquid 4s infinite alternate;
   }
   
+  
+  
   @keyframes liquid {
     0% { border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; }
     25% { border-radius: 50% 50% 40% 60% / 60% 40% 60% 40%; }
@@ -959,7 +974,7 @@
     <div class="product-container">
         <div class="product-gallery">
             <div class="main-img-container" id="main-img-container">
-                <img id="mainImg" class="main-img" src="img/product/product-1.jpg" alt="Main Product Image" onclick="zoomImage(this.src)"/>
+                <img id="mainImg" class="main-img" src="ip/3.png" alt="Main Product Image" onclick="zoomImage(this.src)"/>
                 <button class="nav-btn prev-btn" onclick="navigateImage(-1)">
                     <i class="fas fa-chevron-right"></i>
                 </button>
@@ -968,18 +983,23 @@
                 </button>
             </div>
             <div class="thumbs">
-                <img src="img/product/product-1.jpg" class="active" onclick="setImage(this)"/>
-                <img src="img/product/product-2.jpg" onclick="setImage(this)"/>
-                <img src="img/product/product-3.jpg" onclick="setImage(this)"/>
+                <img src="ip/3.png" class="active" onclick="setImage(this)"/>
+                <img src="ip/33.png" onclick="setImage(this)"/>
+                <img src="ip/333.png" onclick="setImage(this)"/>
+                <img src="ip/3333.png" onclick="setImage(this)"/>\
+                <img src="ip/33333.png" onclick="setImage(this)"/>
+                <img src="ip/333333.png" onclick="setImage(this)"/>
+                
+                
             </div>
         </div>
 
         <div class="product-details-section">
-            <h1>Piqué Biker Jacket</h1>
+            <h1> 101 ترنج  Fly girl </h1>
             
             <div class="price-container">
-                <div class="price">LE 6.24</div>
-                <div class="total-price">Total: LE <span id="total-price">6.24</span></div>
+                <div class="price">LE 475</div>
+                <div class="total-price">Total: LE <span id="total-price">475</span></div>
             </div>
 
             <div class="option-section">
@@ -988,15 +1008,11 @@
                     <span>Colors <small>(Available: <span id="available-count">3</span>)</small></span>
                 </div>
                 <div class="color-circles">
-                    <div class="color-circle active" style="background:#404a47" data-img="img/product/product-1.jpg" data-stock="5">
-                        <span class="stock-info">5 left</span>
+                    <div class="color-circle active" style="background:#8F99BB" data-img="ip/3.png" data-stock="100">
                     </div>
-                    <div class="color-circle" style="background:#d5a667" data-img="img/product/product-2.jpg" data-stock="2">
-                        <span class="stock-info">2 left</span>
+                    <div class="color-circle" style="background:#ff0000" data-img="ip/333333.png" data-stock="100">
                     </div>
-                    <div class="color-circle out-of-stock" style="background:#5e64d1" data-img="img/product/product-3.jpg" data-stock="0">
-                        <span class="stock-info">Out of stock</span>
-                    </div>
+                    
                 </div>
             </div>
 
@@ -1006,11 +1022,10 @@
                     <span>Sizes</span>
                 </div>
                 <div class="size-options">
-                    <div class="size-option" data-size="S">S</div>
-                    <div class="size-option active" data-size="M">M</div>
-                    <div class="size-option" data-size="L">L</div>
-                    <div class="size-option" data-size="XL">XL</div>
-                    <div class="size-option out-of-stock" data-size="XXL">XXL</div>
+                    <div class="size-option" data-size="8">8</div>
+                    <div class="size-option active" data-size="10">10</div>
+                    <div class="size-option" data-size="12">12</div>
+
                 </div>
             </div>
 
@@ -1038,8 +1053,7 @@
             <div class="desc">
                 <h3><i class="fas fa-info-circle" style="color: var(--primary-color);"></i> Product Description</h3>
                 <p>
-                    High-quality biker jacket designed with elegance and bold style. Perfectly fits any look and available in several trendy colors.
-                    Made from ecological leather and durable lining materials. Provides comfort and style at the same time.
+                    الخامة ميلتون قطن 100% - خامة ممتازة مش بتلمع ولا بتغير لونها مع الغسيل 
                 </p>
             </div>
         </div>
@@ -1073,56 +1087,41 @@
     <!-- Image zoom element -->
     <div class="zoom-overlay" id="zoom-overlay" onclick="closeZoom()">
         <span class="close-zoom"><i class="fas fa-times"></i></span>
-        <img class="zoomed-img" id="zoomed-img" src="" alt="Zoomed Image">
+        <img class="zoomed-img" id="zoomed-img" src="" alt="Zoomed Product Image"/>
     </div>
 
-    <script>
+    <!-- Add to cart sound -->
+    <audio id="cart-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3" preload="auto"></audio>
+
+         <script>
+        // العناصر الأساسية
+        const mainImg = document.getElementById('mainImg');
+        const thumbs = document.querySelectorAll('.thumbs img');
+        const colors = document.querySelectorAll('.color-circle');
+        const sizes = document.querySelectorAll('.size-option');
+        const quantityInput = document.getElementById('quantity');
+        const priceElement = document.querySelector('.price');
+        const totalPriceElement = document.getElementById('total-price');
+        const addToCartBtn = document.getElementById('add-to-cart');
+        const cartSound = document.getElementById('cart-sound');
+        const zoomOverlay = document.getElementById('zoom-overlay');
+        const zoomedImg = document.getElementById('zoomed-img');
+
         // متغيرات لتخزين حالة السحب
         let startX = 0;
         let currentX = 0;
         let isSwiping = false;
         let currentImageIndex = 0;
         const images = [
-            "img/product/product-1.jpg",
-            "img/product/product-2.jpg",
-            "img/product/product-3.jpg"
-        ];
+            "ip/3.png",
+            "ip/33.png",
+            "ip/333.png",
+            "ip/3333.png",
+            "ip/33333.png",
+            "ip/333333.png",
 
-        // تهيئة الأحداث عند تحميل الصفحة
-        document.addEventListener('DOMContentLoaded', function() {
-            // إضافة مستمعات الأحداث للسحب
-            const mainImgContainer = document.getElementById('main-img-container');
-            const mainImg = document.getElementById('mainImg');
-            
-            // بداية السحب
-            mainImgContainer.addEventListener('touchstart', handleTouchStart, false);
-            mainImgContainer.addEventListener('mousedown', handleMouseStart, false);
-            
-            // أثناء السحب
-            mainImgContainer.addEventListener('touchmove', handleTouchMove, false);
-            mainImgContainer.addEventListener('mousemove', handleMouseMove, false);
-            
-            // نهاية السحب
-            mainImgContainer.addEventListener('touchend', handleTouchEnd, false);
-            mainImgContainer.addEventListener('mouseup', handleMouseEnd, false);
-            mainImgContainer.addEventListener('mouseleave', handleMouseEnd, false);
-            
-            // تحديث السعر عند تغيير الكمية
-            document.getElementById('quantity').addEventListener('input', updateTotalPrice);
-            
-            // تحديث الألوان المتاحة
-            updateAvailableColors();
-            
-            // إعداد أزرار التأكيد
-            document.getElementById('continue-shopping').addEventListener('click', function() {
-                hideConfirmation();
-            });
-            
-            document.getElementById('view-cart').addEventListener('click', function() {
-                alert('سيتم نقلك إلى صفحة سلة التسوق!');
-                hideConfirmation();
-            });
-        });
+
+        ];        const mainImgContainer = document.getElementById('main-img-container');
 
         // معالجة بداية السحب (لمس)
         function handleTouchStart(evt) {
@@ -1228,235 +1227,425 @@
             });
         }
 
-        // تعيين الصورة عند النقر على صورة مصغرة
-        function setImage(element) {
-            const mainImg = document.getElementById('mainImg');
-            mainImg.src = element.src;
-            
-            // تحديث الفهرس الحالي
-            const thumbs = document.querySelectorAll('.thumbs img');
-            thumbs.forEach((thumb, index) => {
-                if (thumb === element) {
-                    thumb.classList.add('active');
-                    currentImageIndex = index;
-                } else {
-                    thumb.classList.remove('active');
-                }
-            });
-            
-            // تحديث اللون النشط إذا كانت الصورة مرتبطة بلون
-            updateActiveColorByImage(element.src);
+        // المتغيرات
+        let current = 0;
+        let autoSwitchInterval;
+        let unitPrice = 475;
+        let currentQuantity = 1;
+
+        // بدء التبديل التلقائي
+        startAutoSwitch();
+
+        const cursor = document.querySelector('.liquid-cursor');
+  
+  document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  
+  // تأثير عند النقر
+  document.addEventListener('mousedown', () => {
+    cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
+    cursor.style.background = 'linear-gradient(45deg, #fd79a8, #e84393)';
+  });
+  
+  document.addEventListener('mouseup', () => {
+    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+    cursor.style.background = 'linear-gradient(45deg, #6c5ce7, #a29bfe)';
+  });
+
+        // تحديث السعر الإجمالي
+        function updateTotalPrice() {
+            const totalPrice = (unitPrice * currentQuantity).toFixed(2);
+            totalPriceElement.textContent = totalPrice;
         }
 
-        // تحديث اللون النشط
-        function setActiveColor(element) {
-            const colorCircles = document.querySelectorAll('.color-circle');
-            colorCircles.forEach(circle => {
-                circle.classList.remove('active');
-            });
-            element.classList.add('active');
-            
-            // تحديث الصورة الرئيسية إذا كان هناك صورة مرتبطة باللون
-            const imgSrc = element.getAttribute('data-img');
-            if (imgSrc) {
-                const mainImg = document.getElementById('mainImg');
-                mainImg.src = imgSrc;
+        // تعيين الصورة
+        function setImage(el) {
+            thumbs.forEach(img => img.classList.remove('active'));
+            el.classList.add('active');
+            mainImg.src = el.src;
+            stopAutoSwitch();
+        }
+
+        // تكبير الصورة
+        function zoomImage(src) {
+            zoomedImg.src = src;
+            zoomOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // إغلاق تكبير الصورة
+        function closeZoom() {
+            zoomOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // الألوان
+        colors.forEach(circle => {
+            circle.addEventListener('click', function() {
+                if (this.classList.contains('out-of-stock')) return;
                 
-                // تحديث الصور المصغرة النشطة
-                const thumbs = document.querySelectorAll('.thumbs img');
-                thumbs.forEach(thumb => {
-                    if (thumb.src.includes(imgSrc)) {
-                        thumb.classList.add('active');
-                    } else {
-                        thumb.classList.remove('active');
-                    }
-                });
-            }
-            
-            // تحديث المخزون المتاح
-            updateAvailableColors();
-        }
-
-        // تحديث عدد الألوان المتاحة
-        function updateAvailableColors() {
-            const colorCircles = document.querySelectorAll('.color-circle');
-            let availableCount = 0;
-            
-            colorCircles.forEach(circle => {
-                const stock = parseInt(circle.getAttribute('data-stock'));
-                if (stock > 0) {
-                    availableCount++;
-                }
+                colors.forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                mainImg.src = this.dataset.img;
+                updateAvailableCount();
+                stopAutoSwitch();
             });
+        });
+
+        // المقاسات
+        sizes.forEach(size => {
+            size.addEventListener('click', function() {
+                if (this.classList.contains('out-of-stock')) return;
+                
+                sizes.forEach(s => s.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // تحديث العدد المتاح
+        function updateAvailableCount() {
+            const activeColor = document.querySelector('.color-circle.active');
+            const availableCount = document.getElementById('available-count');
+            availableCount.textContent = activeColor.dataset.stock;
             
-            document.getElementById('available-count').textContent = availableCount;
+            // تحديث الكمية القصوى المسموح بها
+            const maxQuantity = parseInt(activeColor.dataset.stock);
+            quantityInput.max = maxQuantity;
+            if (currentQuantity > maxQuantity) {
+                currentQuantity = maxQuantity;
+                quantityInput.value = currentQuantity;
+                updateTotalPrice();
+            }
         }
 
         // زيادة الكمية
         function increaseQuantity() {
-            const quantityInput = document.getElementById('quantity');
-            let quantity = parseInt(quantityInput.value);
-            
-            // الحصول على المخزون الحالي للون المحدد
-            const activeColor = document.querySelector('.color-circle.active');
-            const stock = activeColor ? parseInt(activeColor.getAttribute('data-stock')) : 10;
-            
-            if (quantity < stock) {
-                quantityInput.value = quantity + 1;
+            const maxQuantity = parseInt(quantityInput.max);
+            if (currentQuantity < maxQuantity) {
+                currentQuantity++;
+                quantityInput.value = currentQuantity;
                 updateTotalPrice();
-            } else {
-                // تأثير الاهتزاز عند الوصول للحد الأقصى
-                quantityInput.classList.add('shake');
+                
+                // تأثير حركي
+                quantityInput.style.transform = 'scale(1.1)';
                 setTimeout(() => {
-                    quantityInput.classList.remove('shake');
-                }, 500);
+                    quantityInput.style.transform = 'scale(1)';
+                }, 200);
             }
         }
 
         // تقليل الكمية
         function decreaseQuantity() {
-            const quantityInput = document.getElementById('quantity');
-            let quantity = parseInt(quantityInput.value);
-            
-            if (quantity > 1) {
-                quantityInput.value = quantity - 1;
+            if (currentQuantity > 1) {
+                currentQuantity--;
+                quantityInput.value = currentQuantity;
                 updateTotalPrice();
+                
+                // تأثير حركي
+                quantityInput.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    quantityInput.style.transform = 'scale(1)';
+                }, 200);
             }
         }
 
-        // تحديث السعر الإجمالي
-        function updateTotalPrice() {
-            const quantity = parseInt(document.getElementById('quantity').value);
-            const price = 6.24;
-            const totalPrice = (quantity * price).toFixed(2);
+        // تغيير الكمية يدويًا
+        quantityInput.addEventListener('change', function() {
+            const value = parseInt(this.value);
+            const maxQuantity = parseInt(this.max);
             
-            document.getElementById('total-price').textContent = totalPrice;
-        }
+            if (isNaN(value)) {
+                this.value = currentQuantity;
+                return;
+            }
 
-        // تكبير الصورة
-        function zoomImage(src) {
-            const zoomOverlay = document.getElementById('zoom-overlay');
-            const zoomedImg = document.getElementById('zoomed-img');
+            if (value < 1) {
+                currentQuantity = 1;
+            } else if (value > maxQuantity) {
+                currentQuantity = maxQuantity;
+            } else {
+                currentQuantity = value;
+            }
             
-            zoomedImg.src = src;
-            zoomOverlay.classList.add('active');
-            
-            // منع التمرير عند التكبير
-            document.body.style.overflow = 'hidden';
-        }
-
-        // إغلاق وضع التكبير
-        function closeZoom() {
-            const zoomOverlay = document.getElementById('zoom-overlay');
-            zoomOverlay.classList.remove('active');
-            
-            // إعادة التمرير
-            document.body.style.overflow = 'auto';
-        }
+            this.value = currentQuantity;
+            updateTotalPrice();
+        });
 
         // إضافة إلى السلة
         function addToCart() {
-            const addButton = document.getElementById('add-to-cart');
+            // تشغيل صوت الإضافة
+            cartSound.currentTime = 0;
+            cartSound.play();
             
-            // تأثير النقر
-            addButton.classList.add('added');
-            addButton.innerHTML = '<span>Added to Cart</span> <i class="fas fa-check"></i>';
+            // تأثير مرئي
+            addToCartBtn.classList.add('added');
+            addToCartBtn.innerHTML = '<span>تمت الإضافة!</span> <i class="fas fa-check"></i>';
             
-            // إظهار رسالة التأكيد بعد تأخير بسيط
             setTimeout(() => {
-                showConfirmation();
-            }, 600);
+                addToCartBtn.classList.remove('added');
+                addToCartBtn.innerHTML = '<span>أضف إلى السلة</span> <i class="fas fa-shopping-cart"></i>';
+            }, 2000);
             
-            // إعادة الزر إلى حالته الأصلية بعد ثواني
+            // جمع بيانات المنتج
+            const selectedColor = document.querySelector('.color-circle.active').style.backgroundColor;
+            const selectedSize = document.querySelector('.size-option.active').dataset.size;
+            const quantity = parseInt(quantityInput.value);
+            const productName = document.querySelector('h1').textContent;
+            const productPrice = unitPrice;
+            const productImage = mainImg.src;
+            
+            const product = {
+                id: 'product-1', // يجب استبدالها بمعرف المنتج الفعلي
+                name: productName,
+                price: productPrice,
+                color: selectedColor,
+                size: selectedSize,
+                quantity: quantity,
+                image: productImage
+            };
+            
+            // إضافة إلى السلة
+            addToCartToStorage(product);
+            
+            // عرض تنبيه
+            showNotification('تمت إضافة المنتج إلى السلة بنجاح!', 'success');
+        }
+
+        // إضافة المنتج إلى localStorage
+        function addToCartToStorage(product) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // البحث إذا كان المنتج موجود بالفعل بنفس اللون والمقاس
+            const existingItemIndex = cart.findIndex(item => 
+                item.id === product.id && 
+                item.color === product.color && 
+                item.size === product.size
+            );
+            
+            if (existingItemIndex >= 0) {
+                // زيادة الكمية إذا كان المنتج موجود
+                cart[existingItemIndex].quantity += product.quantity;
+            } else {
+                // إضافة منتج جديد
+                cart.push(product);
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        // عرض تنبيه
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.style.backgroundColor = type === 'success' ? 'var(--success-color)' : 'var(--error-color)';
+            
+            notification.innerHTML = `
+                <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(notification);
+            
             setTimeout(() => {
-                addButton.classList.remove('added');
-                addButton.innerHTML = '<span>Add to Cart</span> <i class="fas fa-shopping-cart"></i>';
+                notification.remove();
             }, 3000);
         }
 
-        // إظهار رسالة التأكيد
-        function showConfirmation() {
-            const confirmation = document.getElementById('cart-confirmation');
-            const overlay = document.getElementById('confirmation-overlay');
-            
-            confirmation.classList.add('active');
-            overlay.classList.add('active');
-            
-            // بدء المؤقت التلقائي للإغلاق (5 ثواني)
-            let timeLeft = 100;
-            const timerProgress = document.getElementById('timer-progress');
-            const timerInterval = setInterval(() => {
-                timeLeft--;
-                timerProgress.style.width = timeLeft + '%';
-                
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    hideConfirmation();
-                }
-            }, 50);
-            
-            // حفظ معرف المؤقت لإمكانية إيقافه
-            confirmation.dataset.timerInterval = timerInterval;
+        // التبديل التلقائي
+        function startAutoSwitch() {
+            autoSwitchInterval = setInterval(() => {
+                current = (current + 1) % thumbs.length;
+                setImage(thumbs[current]);
+            }, 3000);
         }
 
-        // إخفاء رسالة التأكيد
-        function hideConfirmation() {
-            const confirmation = document.getElementById('cart-confirmation');
-            const overlay = document.getElementById('confirmation-overlay');
+        function stopAutoSwitch() {
+            clearInterval(autoSwitchInterval);
+        }
+
+        // التهيئة الأولية
+        updateAvailableCount();
+        updateTotalPrice();
+    </script>
+
+
+<script>
+    // العناصر الجديدة
+    const cartConfirmation = document.getElementById('cart-confirmation');
+    const confirmationOverlay = document.getElementById('confirmation-overlay');
+    const continueShoppingBtn = document.getElementById('continue-shopping');
+    const viewCartBtn = document.getElementById('view-cart');
+    const timerProgress = document.getElementById('timer-progress');
+    const confettiContainer = document.getElementById('confetti-container');
+    
+    let confirmationTimer;
+    let timeLeft = 15; // 15 ثانية للاختيار
+    let confettiInterval;
+
+    // دالة عرض تأكيد السلة
+    function showCartConfirmation() {
+        cartConfirmation.classList.add('active');
+        confirmationOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // بدء العد التنازلي
+        startConfirmationTimer();
+        
+        // إطلاق الألعاب النارية
+        startConfetti();
+        
+        // تشغيل صوت التأثير
+        playSuccessSound();
+    }
+
+    // دالة إخفاء تأكيد السلة
+    function hideCartConfirmation() {
+        cartConfirmation.classList.remove('active');
+        confirmationOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+        clearInterval(confirmationTimer);
+        clearInterval(confettiInterval);
+        confettiContainer.innerHTML = '';
+    }
+
+    // بدء العد التنازلي
+    function startConfirmationTimer() {
+        timeLeft = 15;
+        updateTimerDisplay();
+        
+        confirmationTimer = setInterval(() => {
+            timeLeft--;
+            updateTimerDisplay();
             
-            // إيقاف المؤقت إذا كان لا يزال يعمل
-            if (confirmation.dataset.timerInterval) {
-                clearInterval(parseInt(confirmation.dataset.timerInterval));
+            if (timeLeft <= 0) {
+                hideCartConfirmation();
             }
-            
-            confirmation.classList.remove('active');
-            overlay.classList.remove('active');
+        }, 1000);
+    }
+
+    // تحديث شريط التقدم
+    function updateTimerDisplay() {
+        const percentage = (timeLeft / 15) * 100;
+        timerProgress.style.width = `${percentage}%`;
+        
+        // تغيير لون الشريط حسب الوقت المتبقي
+        if (timeLeft < 5) {
+            timerProgress.style.background = 'linear-gradient(90deg, #ff6b6b, #ff0000)';
+            timerProgress.style.boxShadow = '0 0 10px rgba(255,0,0,0.5)';
+        } else if (timeLeft < 10) {
+            timerProgress.style.background = 'linear-gradient(90deg, #ffd166, #ff6b6b)';
         }
+    }
 
-        // إضافة تأثير الاهتزاز للعناصر
-        document.addEventListener('DOMContentLoaded', function() {
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes shake {
-                    0%, 100% { transform: translateX(0); }
-                    20%, 60% { transform: translateX(-5px); }
-                    40%, 80% { transform: translateX(5px); }
+    // تأثير الألعاب النارية
+    function startConfetti() {
+        const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+        
+        confettiInterval = setInterval(() => {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.top = -10 + 'px';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.width = Math.random() * 10 + 5 + 'px';
+            confetti.style.height = confetti.style.width;
+            confetti.style.opacity = Math.random() + 0.5;
+            confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+            
+            confettiContainer.appendChild(confetti);
+            
+            // حركة القطع
+            let pos = -10;
+            let angle = Math.random() * 360;
+            let speed = Math.random() * 3 + 2;
+            let spin = Math.random() > 0.5 ? 1 : -1;
+            
+            const confettiMove = setInterval(() => {
+                pos += 2;
+                angle += spin;
+                
+                confetti.style.top = pos + 'px';
+                confetti.style.left = parseFloat(confetti.style.left) + Math.sin(angle * Math.PI / 180) * 2 + 'px';
+                confetti.style.transform = 'rotate(' + angle + 'deg)';
+                
+                if (pos > window.innerHeight) {
+                    clearInterval(confettiMove);
+                    confetti.remove();
                 }
-                .shake {
-                    animation: shake 0.5s;
-                }
-            `;
-            document.head.appendChild(style);
-        });
+            }, 20);
+            
+            // إزالة القطع بعد فترة
+            setTimeout(() => {
+                confetti.style.transition = 'opacity 1s';
+                confetti.style.opacity = '0';
+                setTimeout(() => confetti.remove(), 1000);
+            }, 3000);
+        }, 100);
+    }
 
-        // إضافة تأثيرات تفاعلية للألوان والمقاسات
-        document.querySelectorAll('.color-circle:not(.out-of-stock)').forEach(circle => {
-            circle.addEventListener('click', function() {
-                if (!this.classList.contains('out-of-stock')) {
-                    setActiveColor(this);
-                }
-            });
-        });
+    // تشغيل صوت التأثير
+    function playSuccessSound() {
+        const successSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3');
+        successSound.play();
+    }
 
-        document.querySelectorAll('.size-option:not(.out-of-stock)').forEach(size => {
-            size.addEventListener('click', function() {
-                if (!this.classList.contains('out-of-stock')) {
-                    document.querySelectorAll('.size-option').forEach(s => {
-                        s.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                }
-            });
-        });
+    // أحداث الأزرار
+    continueShoppingBtn.addEventListener('click', function() {
+        hideCartConfirmation();
+        // تأثير النقر
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => this.style.transform = 'scale(1)', 200);
+    });
 
-        // إغلاق رسالة التأكيد بالنقر خارجها
-        document.getElementById('confirmation-overlay').addEventListener('click', hideConfirmation);
+    viewCartBtn.addEventListener('click', function() {
+        hideCartConfirmation();
+        // تأثير النقر
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            this.style.transform = 'scale(1)';
+            window.location.href = 'cart.html';
+        }, 200);
+    });
 
-        // منع إغلاق رسالة التأكيد عند النقر عليها
-        document.getElementById('cart-confirmation').addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
+    // إخفاء التأكيد عند النقر خارج الصندوق
+    confirmationOverlay.addEventListener('click', hideCartConfirmation);
+
+    // تعديل دالة addToCart لاستدعاء عرض التأكيد
+    function addToCart() {
+        // الكود الأصلي لإضافة المنتج إلى السلة
+        const selectedColor = document.querySelector('.color-circle.active').style.backgroundColor;
+        const selectedSize = document.querySelector('.size-option.active').dataset.size;
+        const quantity = parseInt(quantityInput.value);
+        const productName = document.querySelector('h1').textContent;
+        const productPrice = unitPrice;
+        const productImage = mainImg.src;
+        
+        const product = {
+            id: 'product-1',
+            name: productName,
+            price: productPrice,
+            color: selectedColor,
+            size: selectedSize,
+            quantity: quantity,
+            image: productImage
+        };
+        
+        addToCartToStorage(product);
+        
+        // تأثير الزر
+        addToCartBtn.classList.add('added');
+        addToCartBtn.innerHTML = '<span>تمت الإضافة!</span> <i class="fas fa-check"></i>';
+        
+        setTimeout(() => {
+            addToCartBtn.classList.remove('added');
+            addToCartBtn.innerHTML = '<span>أضف إلى السلة</span> <i class="fas fa-shopping-cart"></i>';
+        }, 2000);
+        
+        // عرض رسالة التأكيد الجديدة
+        showCartConfirmation();
+    }
     </script>
 </body>
-
 </html>
