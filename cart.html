@@ -243,6 +243,34 @@
             overflow: hidden;
         }
 
+         /* إضافة هذا الكود لحل مشكلة الموبايل */
+        @media (max-width: 992px) {
+            /* منع تأثيرات hover في الموبايل */
+            .product-details:hover {
+                transform: none !important;
+                box-shadow: var(--box-shadow) !important;
+            }
+            
+            .product-details:hover img {
+                transform: none !important;
+            }
+            
+            /* تحسين زر الحذف للموبايل */
+            .delete-product {
+                width: 44px !important;
+                height: 44px !important;
+                font-size: 22px !important;
+                background-color: rgba(255, 77, 77, 0.2) !important;
+            }
+            
+            /* تأثير النقر بدل الـ hover */
+            .delete-product:active {
+                color: white !important;
+                background-color: #ff4d4d !important;
+                transform: scale(0.9) !important;
+            }
+        }
+
         .product-details:hover {
             transform: translateY(-5px);
             box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
@@ -250,7 +278,6 @@
 
         .product-details img {
             width: 120px;
-            height: 120px;
             border-radius: var(--border-radius);
             object-fit: cover;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -791,21 +818,71 @@
     let couponCode = localStorage.getItem('couponCode') || '';
 
     document.addEventListener('DOMContentLoaded', function() {
-    // تحقق من أن السلة موجودة وصالحة
-    try {
-        cart = JSON.parse(localStorage.getItem('cart')) || [];
-        if (!Array.isArray(cart)) {
+        // تحقق من أن السلة موجودة وصالحة
+        try {
+            cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (!Array.isArray(cart)) {
+                cart = [];
+                localStorage.setItem('cart', JSON.stringify(cart));
+            }
+        } catch (e) {
             cart = [];
             localStorage.setItem('cart', JSON.stringify(cart));
         }
-    } catch (e) {
-        cart = [];
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }
-    
-    displayCartItems();
-    updateCartSummary();
-});
+        
+        displayCartItems();
+        updateCartSummary();
+    });
+
+    // دالة الحذف المعدلة
+        function removeProduct(index) {
+            // التأكد من صحة الفهرس
+            if (index < 0 || index >= cart.length) return;
+            
+            // إزالة المنتج مباشرة بدون تأثيرات معقدة
+            cart.splice(index, 1);
+            saveCart();
+            displayCartItems();
+            updateCartSummary();
+            
+            // إظهار رسالة نجاح بسيطة
+            showMessage('تم حذف المنتج بنجاح', 'success');
+        }
+
+        // دالة لعرض رسائل بسيطة
+        function showMessage(text, type) {
+            const message = document.createElement('div');
+            message.textContent = text;
+            message.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: ${type === 'success' ? '#4CAF50' : '#F44336'};
+                color: white;
+                padding: 12px 20px;
+                border-radius: 5px;
+                z-index: 1000;
+                font-size: 14px;
+            `;
+            
+            document.body.appendChild(message);
+            
+            setTimeout(() => {
+                message.remove();
+            }, 2000);
+        }
+
+        // التأكد من تحميل DOM بالكامل
+        document.addEventListener('DOMContentLoaded', function() {
+            // إعادة تعيين أي تأثيرات hover للموبايل
+            if (window.innerWidth <= 992) {
+                document.querySelectorAll('.product-details').forEach(item => {
+                    item.style.transform = 'none';
+                    item.style.boxShadow = 'var(--box-shadow)';
+                });
+            }
+        });
 
     // عرض عناصر السلة
     function displayCartItems() {
@@ -879,21 +956,21 @@
 
     const cursor = document.querySelector('.liquid-cursor');
   
-  document.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-  });
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
   
-  // تأثير عند النقر
-  document.addEventListener('mousedown', () => {
-    cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
-    cursor.style.background = 'linear-gradient(45deg, #fd79a8, #e84393)';
-  });
+    // تأثير عند النقر
+    document.addEventListener('mousedown', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
+        cursor.style.background = 'linear-gradient(45deg, #fd79a8, #e84393)';
+    });
   
-  document.addEventListener('mouseup', () => {
-    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-    cursor.style.background = 'linear-gradient(45deg, #6c5ce7, #a29bfe)';
-  });
+    document.addEventListener('mouseup', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+        cursor.style.background = 'linear-gradient(45deg, #6c5ce7, #a29bfe)';
+    });
 
     // تطبيق الخصم المعدل
     function applyDiscount() {
@@ -971,11 +1048,19 @@
         }
     }
 
-    // إزالة منتج من السلة
+    // إزالة منتج من السلة - الإصلاح الرئيسي
     function removeProduct(index) {
+        // التأكد من أن الفهرس صحيح
+        if (index < 0 || index >= cart.length) {
+            console.error('Invalid product index:', index);
+            return;
+        }
+        
         // تأثير للحذف
-        const productElement = document.querySelectorAll('.product-details')[index];
-        productElement.style.animation = 'fadeOut 0.3s ease-out forwards';
+        const productElements = document.querySelectorAll('.product-details');
+        if (productElements[index]) {
+            productElements[index].style.animation = 'fadeOut 0.3s ease-out forwards';
+        }
         
         setTimeout(() => {
             cart.splice(index, 1);
@@ -991,44 +1076,32 @@
         }, 300);
     }
 
-    // زيادة كمية المنتج
+    // زيادة الكمية
     function increaseQuantity(index) {
-    if (index >= 0 && index < cart.length) {
-        cart[index].quantity++;
-        saveCart();
-        updateCartDisplay();
-    }
-}
-
-function decreaseQuantity(index) {
-    if (index >= 0 && index < cart.length && cart[index].quantity > 1) {
-        cart[index].quantity--;
-        saveCart();
-        updateCartDisplay();
-    }
-}
-
-function updateCartDisplay() {
-    displayCartItems();
-    updateCartSummary();
-    updateHeaderCart();
-}
-
-    // تقليل كمية المنتج
-    function decreaseQuantity(index) {
-        if (cart[index].quantity > 1) {
-            cart[index].quantity--;
+        if (index >= 0 && index < cart.length) {
+            cart[index].quantity += 1;
             saveCart();
             displayCartItems();
             updateCartSummary();
             updateHeaderCart();
-            
-            // تأثير للنقصان
-            const input = document.getElementById(`quantity-${index}`);
-            input.style.transform = 'scale(0.8)';
-            setTimeout(() => {
-                input.style.transform = 'scale(1)';
-            }, 200);
+        }
+    }
+
+    // تقليل الكمية
+    function decreaseQuantity(index) {
+        if (index >= 0 && index < cart.length) {
+            if (cart[index].quantity > 1) {
+                cart[index].quantity -= 1;
+                saveCart();
+                displayCartItems();
+                updateCartSummary();
+                updateHeaderCart();
+            } else {
+                // إذا كانت الكمية 1، عرض رسالة تأكيد للحذف
+                if (confirm('هل تريد حذف هذا المنتج من السلة؟')) {
+                    removeProduct(index);
+                }
+            }
         }
     }
 
@@ -1037,144 +1110,51 @@ function updateCartDisplay() {
         localStorage.setItem('cart', JSON.stringify(cart));
     }
 
-    // التوجيه إلى صفحة الدفع
+    // إعادة التوجيه إلى صفحة الدفع
     function redirectToCheckout() {
         if (cart.length === 0) {
-            // تأثير للتنبيه
-            const emptyCart = document.getElementById('empty-cart-message');
-            emptyCart.style.animation = 'none';
-            setTimeout(() => {
-                emptyCart.style.animation = 'pulse 0.5s';
-            }, 10);
-            
-            // إنشاء عنصر تنبيه
-            const alert = document.createElement('div');
-            alert.innerHTML = `
-                <div style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); 
-                            background-color: var(--error-color); color: white; padding: 15px 25px; 
-                            border-radius: var(--border-radius); box-shadow: var(--box-shadow); 
-                            z-index: 1000; display: flex; align-items: center; gap: 10px;">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <span>سلة التسوق الخاصة بك فارغة!</span>
-                </div>
-            `;
-            document.body.appendChild(alert);
-            
-            setTimeout(() => {
-                alert.remove();
-            }, 3000);
-            
+            alert('عربة التسوق فارغة. أضف بعض المنتجات أولاً.');
             return;
         }
         
-        const shippingSelect = document.getElementById('shipping-slider');
-        if (!shippingSelect.value || shippingSelect.selectedIndex === 0) {
-            // تأثير اهتزاز لاختيار الشحن
-            shippingSelect.style.animation = 'none';
-            setTimeout(() => {
-                shippingSelect.style.animation = 'shake 0.5s';
-            }, 10);
-            
-            // إنشاء عنصر تنبيه
-            const alert = document.createElement('div');
-            alert.innerHTML = `
-                <div style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); 
-                            background-color: var(--warning-color); color: white; padding: 15px 25px; 
-                            border-radius: var(--border-radius); box-shadow: var(--box-shadow); 
-                            z-index: 1000; display: flex; align-items: center; gap: 10px;">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <span>الرجاء اختيار المحافظة للتوصيل</span>
-                </div>
-            `;
-            document.body.appendChild(alert);
-            
-            setTimeout(() => {
-                alert.remove();
-            }, 3000);
-            
-            return;
-        }
-        
-        const checkoutData = {
-            items: cart,
+        // حفظ بيانات الطلب
+        const orderData = {
+            cart: cart,
             shippingCost: shippingCost - shippingDiscount,
             discount: discount,
             couponCode: couponCode,
-            subtotal: parseFloat(document.getElementById('order-total').textContent),
-            total: parseFloat(document.getElementById('final-total').textContent)
+            total: document.getElementById('final-total').textContent
         };
         
-        localStorage.setItem('checkoutData', JSON.stringify(checkoutData));
+        localStorage.setItem('orderData', JSON.stringify(orderData));
         
-        // تأثير الانتقال
-        document.querySelector('.checkout-button').innerHTML = `
-            <i class="fas fa-spinner fa-spin"></i> جارٍ التوجيه...
-        `;
-        
-        setTimeout(() => {
-            window.location.href = 'checkout.html';
-        }, 1000);
+        // الانتقال إلى صفحة الدفع
+        window.location.href = 'checkout.html';
     }
 
-    // الانتقال إلى صفحة التسوق
+    // الذهاب إلى التسوق
     function goToShopping() {
-        window.location.href = 'shop.html';
+        window.location.href = 'products.html';
     }
 
-    // دالة إضافة إلى السلة (يتم استدعاؤها من صفحة المنتج)
-    function addToCart(product) {
-        const existingItemIndex = cart.findIndex(item => 
-            item.id === product.id && 
-            item.color === product.color && 
-            item.size === product.size
-        );
-        
-        if (existingItemIndex >= 0) {
-            cart[existingItemIndex].quantity += product.quantity;
-        } else {
-            cart.push(product);
+    // تهيئة الشحن عند تحميل الصفحة
+    window.onload = function() {
+        // استعادة كود الخصم إذا كان موجودًا
+        if (couponCode) {
+            document.getElementById('discount-code').value = couponCode;
+            applyDiscount();
         }
         
-        saveCart();
-        updateHeaderCart();
+        // استعادة تكلفة الشحن إذا كانت محفوظة
+        const savedShippingCost = localStorage.getItem('shippingCost');
+        if (savedShippingCost) {
+            shippingCost = parseFloat(savedShippingCost);
+            document.getElementById('shipping-cost').textContent = shippingCost.toFixed(2);
+            document.getElementById('shipping-total').textContent = shippingCost.toFixed(2);
+        }
         
-        // عرض رسالة نجاح
-        const alert = document.createElement('div');
-        alert.innerHTML = `
-            <div style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); 
-                        background-color: var(--success-color); color: white; padding: 15px 25px; 
-                        border-radius: var(--border-radius); box-shadow: var(--box-shadow); 
-                        z-index: 1000; display: flex; align-items: center; gap: 10px;">
-                <i class="fas fa-check-circle"></i>
-                <span>تمت إضافة المنتج إلى سلة التسوق بنجاح!</span>
-            </div>
-        `;
-        document.body.appendChild(alert);
-        
-        setTimeout(() => {
-            alert.remove();
-        }, 3000);
-    }
-</script>
-
-<script>
-    const firebaseConfig = {
-        apiKey: "YOUR_API_KEY",
-        authDomain: "YOUR_PROJECT.firebaseapp.com",
-        databaseURL: "https://YOUR_PROJECT.firebaseio.com",
-        projectId: "YOUR_PROJECT_ID",
-        storageBucket: "YOUR_PROJECT.appspot.com",
-        messagingSenderId: "SENDER_ID",
-        appId: "APP_ID"
+        updateCartSummary();
     };
-
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-</script>
-
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
-
+    </script>
 </body>
 </html>
